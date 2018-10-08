@@ -1,0 +1,46 @@
+{
+    "auth": {
+        "login": "Log in",
+        "loginWithGoogle": "Log in with Google",
+        "loginWithFacebook": "Log in with Facebook",
+        "signup": "Sign up",
+        "logout": "Log out",
+        "forgotPassword": "Forgot password?",
+        "resetPassword": "Reset password",
+        "passwordResetSent": "Please check your email. A password reset link has been sent to you.",
+        "noAccountSignUp": "Don't have an account? Sign Up!",
+        "haveAccountLogIn": "Already have an account? Log in!",
+        "enterName": "Enter your name",
+        "enterEmail": "Enter your email",
+        "enterPass": "Enter your password",
+        "offline": "Please check your Internet connection"
+    },
+    "common": {
+        "home": "Home",
+        "goBack": "Go Back",
+        "enterCurrentPass": "Enter your current password",
+        "enterNewPass": "Enter your new password",
+        "updateProfile": "Update profile",
+        "editProfile": "Edit profile",
+        "backToLogin": "Back to Login",
+        "search": "search",
+        "loadMore": "Load more",
+        "changePassword": "Change password",
+        "confirmPass": "Confirm your password"
+    },
+    "location": {
+        "androidEmulatorTryDevice": "Oops, this will not work on Sketch in an Android emulator. Try it on your device!",
+        "permissionDenied": "Permission to access location was denied"
+    },
+    "notifications" : {
+        "notificationsHeader": "Notifications",
+        "notificationSettingsHeader": "Notification Settings",
+        "showAll": "Show all notifications",
+        "showType1":"Show type1 notifications",
+        "showType2":"Show type2 notifications",
+        "searchNotifications": "Enter Search Query"
+    },
+    "errors": {
+        "unexpected": "Ooops, an unexpected error occurred. Please try again later."
+    }
+}

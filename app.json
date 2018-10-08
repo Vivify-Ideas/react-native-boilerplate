@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "sdkVersion": "27.0.0",
+    "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#2C69CC"
+    },
+    "hooks": {
+        "postPublish": [
+            {
+                "file": "sentry-expo/upload-sourcemaps",
+                "config": {
+                    "organization": "Vivify Ideas",
+                    "project": "your project short name here",
+                    "authToken": "your auth token here"
+                }
+            }
+        ]
+    }
+  }
+}
