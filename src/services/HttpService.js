@@ -1,5 +1,7 @@
+import * as Sentry from '@sentry/react-native';
 import axios from 'axios';
 import config from '../config';
+import asyncStorageService from './AsyncStorageService';
 
 class HttpService {
   constructor(options = {}) {
@@ -20,19 +22,27 @@ class HttpService {
     return response;
   }
 
-  handleErrorResponse(error) {
-    const { status } = error.response;
+  handleErrorResponse = async error => {
+    try {
+      const { status } = error.response;
 
-    switch (status) {
-    case 401:
-      this.unauthorizedCallback();
-      break;
-    default:
-      break;
+      Sentry.captureException(error);
+
+      switch (status) {
+      case 401:
+        await asyncStorageService.clear();
+        this.unauthorizedCallback();
+
+        break;
+      default:
+        break;
+      }
+
+      return Promise.reject(error);
+    } catch (e) {
+      return Promise.reject(error);
     }
-
-    return Promise.reject(error);
-  }
+  };
 
   setUnauthorizedCallback(callback) {
     this.unauthorizedCallback = callback;
