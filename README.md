@@ -52,3 +52,41 @@ The whole application is wrapped in `InAppNotificationProvider` which, as props 
 ## **Going to production**
 
 ...
+
+# Fastlane
+
+First create application on iTunes and choose some identifier for it.
+
+In order to store certificates for building app, you need to run inside ios folder:
+
+```
+APP_IDENTIFIER= APPLE_ID= DEVELOPER_TEAM_ID= CI_KEYCHAIN_NAME= CI_KEYCHAIN_PASSWORD= GIT_REPO_URL= fastlane match appstore
+```
+
+On github you need to define secrets, they can be defined in repository settings:
+
+```
+GIT_REPO_URL - https://{your_account_token}@github.com/vivifyideas-internal/{repo_with_certs}
+CI_KEYCHAIN_NAME - Name of your keychain
+CI_KEYCHAIN_PASSWORD - Password of your keychain
+APPLE_ID - email for your Apple Account
+APP_STORE_TEAM_ID - teamID on Apple Account
+DEVELOPER_TEAM_ID - Developer Team ID On Apple Account
+APP_IDENTIFIER - Example: com.vivifyideas.{some_name}
+FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD - Password for Fastlane to login to Apple Account
+APPLICATION_ID - unique app id (Apple ID in App Information)
+MATCH_PASSWORD - Password for fastlane match, which persist encypted certificates
+APP_PROVISIONING_PROFILE_NAME - Specify same name that's on https://developer.apple.com/account/resources/certificates/list if you don't have your provisioning profile then create it and choose certificates
+PROJECT_NAME - Example: myprojectname - same project name as file for xcode (take a look at .xcodeproj and copy name of that one without extension)
+```
+
+If you are using same certificates for multiple projects then you can create provisioning profile and running, you would be able to import existing certificates to new repository:
+
+```
+fastlane match import \
+    --username {EMAIL_FOR_ITUNES} \
+    --git_url {GITHUB_URL_TO_STORE_CERTS} \
+    --app_identifier {APP_IDENTIFIER} \
+    --team_name {TEAM_NAME_FROM_ITUNES} \
+    --type appstore
+```

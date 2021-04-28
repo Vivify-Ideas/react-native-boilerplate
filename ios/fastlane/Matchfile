@@ -1,0 +1,7 @@
+git_url(ENV["GIT_REPO_URL"])
+
+storage_mode("git")
+
+app_identifier(ENV["APP_IDENTIFIER"])
+
+username(ENV["APPLE_ID"])

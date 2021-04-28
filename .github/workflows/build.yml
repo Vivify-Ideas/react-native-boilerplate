@@ -1,0 +1,75 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  build:
+    runs-on: self-hosted-mac
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Generate .env
+        run: chmod +x ./build-commands/generate-env.sh && ./build-commands/generate-env.sh ${GITHUB_REF##*/}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Install pods
+        run: cd ios && pod install --repo-update
+
+      - name: Build App
+        run: cd ios && fastlane ios beta
+        env:
+          APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APP_STORE_TEAM_ID: ${{ secrets.APP_STORE_TEAM_ID }}
+          DEVELOPER_TEAM_ID: ${{ secrets.DEVELOPER_TEAM_ID }}
+          GIT_REPO_URL: ${{ secrets.GIT_REPO_URL }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          CI_KEYCHAIN_NAME: ${{ secrets.CI_KEYCHAIN_NAME }}
+          CI_KEYCHAIN_PASSWORD: ${{ secrets.CI_KEYCHAIN_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          APP_PROVISIONING_PROFILE_NAME: ${{ secrets.APP_PROVISIONING_PROFILE_NAME }}
+          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Increase build version
+          file_pattern: ios/*.xcodeproj
+
+      # Decode keystore from the secrets
+      # Encode keystore with base64 base64 -i release.jks > release.jks.b64
+      # - name: Decode release.keystore
+      #   run: base64 -d -i ${ANDROID_KEYSTORE_BASE64} > android/app/release.jks
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11.0.3'
+          java-package: jdk
+
+      - uses: malinskiy/action-android/install-sdk@release/0.1.1
+
+      - name: Build android assets
+        run: chmod +x ./build-commands/build-android.sh && ./build-commands/build-android.sh
+
+      - name: Pack android app into .apk
+        run: cd android && fastlane android beta
+
+      - name: Upload .apk
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/
+          retention-days: 1
