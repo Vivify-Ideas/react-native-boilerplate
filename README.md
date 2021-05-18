@@ -80,7 +80,7 @@ APP_PROVISIONING_PROFILE_NAME - Specify same name that's on https://developer.ap
 PROJECT_NAME - Example: myprojectname - same project name as file for xcode (take a look at .xcodeproj and copy name of that one without extension)
 ```
 
-If you are using same certificates for multiple projects then you can create provisioning profile and running, you would be able to import existing certificates to new repository:
+Setup certificates on git repo using https://docs.fastlane.tools/actions/match/. If you are using same certificates for multiple projects then you can create provisioning profile and running, you would be able to import existing certificates to new repository:
 
 ```
 fastlane match import \
