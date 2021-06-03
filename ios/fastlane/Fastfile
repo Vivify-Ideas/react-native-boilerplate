@@ -64,6 +64,7 @@ platform :ios do
     update_code_signing_settings(
       use_automatic_signing: false,
       path: XCODE_PROJECT,
+      team_id: ENV["DEVELOPER_TEAM_ID"],
       code_sign_identity: code_sign_identity,
       bundle_identifier: MY_APP_ID,
       profile_name: MY_PROFILE
