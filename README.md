@@ -82,6 +82,7 @@ PROJECT_NAME - Example: myprojectname - same project name as file for xcode (tak
 
 Setup certificates on git repo using https://docs.fastlane.tools/actions/match/. If you are using same certificates for multiple projects then you can create provisioning profile and running, you would be able to import existing certificates to new repository:
 
+Before executing following command, execute "export MATCH_PASSWORD=".
 ```
 fastlane match import \
     --username {EMAIL_FOR_ITUNES} \
@@ -90,3 +91,4 @@ fastlane match import \
     --team_name {TEAM_NAME_FROM_ITUNES} \
     --type appstore
 ```
+After this command you'll be asked to enter absolute path to .cer, .p12 and .mobileprovision files. Use .cer and .p12 that has no password.

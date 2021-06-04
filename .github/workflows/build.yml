@@ -21,6 +21,12 @@ jobs:
       - name: Generate .env
         run: chmod +x ./build-commands/generate-env.sh && ./build-commands/generate-env.sh ${GITHUB_REF##*/}
 
+      - name: Generate gradle.properties
+        run: chmod +x ./build-commands/gradle/generate-gradle-properties.sh && ./build-commands/gradle/generate-gradle-properties.sh
+        env:
+          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}
+          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}
+
       - name: Install dependencies
         run: yarn install
 
@@ -49,20 +55,12 @@ jobs:
           commit_message: Increase build version
           file_pattern: ios/*.xcodeproj
 
-      # Decode keystore from the secrets
-      # Encode keystore with base64 base64 -i release.jks > release.jks.b64
-      # - name: Decode release.keystore
-      #   run: base64 -d -i ${ANDROID_KEYSTORE_BASE64} > android/app/release.jks
-
       - uses: actions/setup-java@v1
         with:
           java-version: '11.0.3'
           java-package: jdk
 
       - uses: malinskiy/action-android/install-sdk@release/0.1.1
-
-      - name: Build android assets
-        run: chmod +x ./build-commands/build-android.sh && ./build-commands/build-android.sh
 
       - name: Pack android app into .apk
         run: cd android && fastlane android beta
