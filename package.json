@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .ts --ext .tsx",
     "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "husky": {
@@ -19,6 +19,16 @@
     "*.js": [
       "prettier --write --print-width 100 --single-quote",
       "eslint --fix",
+      "git add"
+    ],
+    "*.ts": [
+      "prettier --write --print-width 100 --single-quote",
+      "eslint . --ext .ts --fix",
+      "git add"
+    ],
+    "*.tsx": [
+      "prettier --write --print-width 100 --single-quote",
+      "eslint . --ext .tsx --fix",
       "git add"
     ]
   },
@@ -43,6 +53,7 @@
     "expo-web-browser": "^9.1.0",
     "formik": "^2.2.6",
     "i18n-js": "^3.8.0",
+    "prettier": "^2.3.1",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-hook-form": "^7.1.1",
@@ -65,19 +76,26 @@
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@testing-library/react-native": "^5.0.3",
+    "@types/jest": "^26.0.23",
+    "@types/react": "^17.0.11",
+    "@types/react-native": "^0.64.10",
+    "@types/react-test-renderer": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
     "axios-mock-adapter": "^1.17.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^26.3.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-preset-expo": "8.3.0",
-    "eslint": "^7.7.0",
+    "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-react-native": "^3.8.1",
     "husky": "^1.1.2",
     "jest-expo": "^40.0.0",
     "lint-staged": "^7.3.0",
-    "prettier": "1.14.3",
-    "react-native-dotenv": "^0.2.0"
+    "react-native-dotenv": "^0.2.0",
+    "typescript": "^4.3.2"
   },
   "jest": {
     "preset": "react-native"
