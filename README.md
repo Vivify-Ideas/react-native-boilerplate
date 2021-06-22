@@ -4,6 +4,8 @@
 
 - React query
 - Formik & Yup
+- Typescript
+- React Navigation
 - Sign in
 - Sign up
 - Facebook sign in
