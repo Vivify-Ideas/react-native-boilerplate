@@ -12,7 +12,7 @@ type PictureProps = {
 };
 
 const Picture = ({ source, uri, style }: PictureProps) => {
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState<boolean>(true);
 
   const getSourceForImage = (): ImageSourcePropType => {
     if (source) {

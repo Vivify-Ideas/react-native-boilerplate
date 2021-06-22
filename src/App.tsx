@@ -31,7 +31,7 @@ type AppProps = {
 };
 
 const App = ({ skipLoadingScreen }: AppProps) => {
-  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  const [isLoadingComplete, setIsLoadingComplete] = useState<boolean>(false);
   const navigationRef = useRef(null);
 
   const handleLoadingError = (error: object): void => {

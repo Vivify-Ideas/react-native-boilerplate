@@ -18,7 +18,7 @@ const HomeScreen = () => {
 
   const { user } = useContext(UserContext);
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const signOutAsync = async () => {
     handleLogout();
