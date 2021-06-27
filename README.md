@@ -1,6 +1,6 @@
 # **_VivifyIdeas React Native boilerplate_**
 
-## **Built in functions**
+## **Features**
 
 - React query
 - Formik & Yup
@@ -16,12 +16,23 @@
 - Global Error Modal ( Something went wrong )
 - Edit profile
 - Change password
-- Push and inapp notifications
+- Push and in-app notifications
 
-## **TBD**
+### **TBD**
 
 - Sockets
 - Chat
+
+## **Start**
+After cloning the repo to run the application in development mode you should execute:
+```sh
+$ # install dependencies
+$ yarn
+$ # run android
+$ yarn android
+$ # or ios
+$ yarn ios
+```
 
 ## **Code structure and technologies**
 
