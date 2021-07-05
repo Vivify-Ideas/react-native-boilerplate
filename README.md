@@ -23,16 +23,39 @@
 - Sockets
 - Chat
 
-## **Start**
-After cloning the repo to run the application in development mode you should execute:
+## **Running application**
+After cloning the repo to run the application in development mode you should install dependencies & create `.env` file:
 ```sh
 $ # install dependencies
 $ yarn
+$ # inside the root of the project
+$ cp .env.example .env
+$ # pod install for ios
+$ cd ios && pod install
+```
+Start Metro bundler and targeted application platform
+```sh
+$ # run metro bundler
+$ yarn start
 $ # run android
 $ yarn android
 $ # or ios
 $ yarn ios
 ```
+
+For more details check the official documentation: https://reactnative.dev/docs/environment-setup#running-your-react-native-application
+
+### Renaming application
+
+Check out the package for more details: https://www.npmjs.com/package/react-native-rename
+
+```sh
+$ npx react-native-rename <newName> -b <bundleIdentifier>
+```
+
+### Preparing Application Icons
+
+https://appicon.co/
 
 ## **Code structure and technologies**
 
