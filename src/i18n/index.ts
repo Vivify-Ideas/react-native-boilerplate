@@ -1,9 +1,6 @@
-// @ts-ignore
 import i18n from 'i18n-js';
 import * as Localization from 'expo-localization';
-
-// @ts-ignore
-import en from './locale/en';
+import en from './locale/en.json';
 
 i18n.fallbacks = true;
 

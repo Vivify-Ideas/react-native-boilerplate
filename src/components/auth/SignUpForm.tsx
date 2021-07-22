@@ -8,7 +8,7 @@ import { TextInputField } from '../shared/FormFields';
 import ErrorText from '../shared/Text/ErrorText';
 
 type SignUpFormProps = {
-  onSubmit: (data: object) => void;
+  onSubmit: (data: any) => void;
   signUpErrors: { email: string };
 };
 

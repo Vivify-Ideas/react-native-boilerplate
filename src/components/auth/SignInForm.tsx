@@ -8,8 +8,8 @@ import ErrorText from '../shared/Text/ErrorText';
 import { TextInputField } from '../shared/FormFields';
 
 type SignInFormProps = {
-  onSubmit: (data: object) => void;
-  signInError: string;
+  onSubmit: (data: any) => void;
+  signInError: boolean;
 };
 
 export const SignInForm = ({ onSubmit, signInError }: SignInFormProps) => (

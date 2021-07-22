@@ -9,7 +9,6 @@ import { BottomTabParamList, RootDrawerParamList } from 'types/navigation';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-// @ts-ignore
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator>

@@ -1,4 +1,3 @@
-// @ts-ignore
 import {
   ANDROID_GOOGLE_CLIENT_ID,
   API_BASE_URL,

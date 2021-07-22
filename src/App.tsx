@@ -9,7 +9,6 @@ import * as Sentry from '@sentry/react-native';
 import AppLoading from 'expo-app-loading';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-// @ts-ignore
 import { InAppNotificationProvider } from 'react-native-in-app-notification';
 import UserContextProvider from 'contexts/UserContext';
 import AuthLoading from 'navigation/AuthLoading';

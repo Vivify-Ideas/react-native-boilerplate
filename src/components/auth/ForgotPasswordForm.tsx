@@ -8,8 +8,8 @@ import { TextInputField } from '../shared/FormFields';
 import ErrorText from '../shared/Text/ErrorText';
 
 type ForgotPasswordFormProps = {
-  onSubmit: (data: object) => void;
-  forgotPasswordError: string;
+  onSubmit: (data: any) => void;
+  forgotPasswordError: boolean;
 };
 
 export const ForgotPasswordForm = ({ onSubmit, forgotPasswordError }: ForgotPasswordFormProps) => (

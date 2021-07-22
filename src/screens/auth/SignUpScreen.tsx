@@ -3,15 +3,15 @@ import { StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import $t from 'i18n';
 import { SignUpForm } from 'components/auth/SignUpForm';
-import { useRegister } from 'queries/auth';
+import { useRegisterMutation } from 'queries/auth';
 
 const SignUpScreen = () => {
-  const { mutate, error } = useRegister();
+  const { mutate, error } = useRegisterMutation();
 
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView enableOnAndroid>
-        <SignUpForm onSubmit={mutate} signUpErrors={error} />
+        <SignUpForm onSubmit={mutate} signUpErrors={{ email: error?.message || '' }} />
       </KeyboardAwareScrollView>
     </View>
   );

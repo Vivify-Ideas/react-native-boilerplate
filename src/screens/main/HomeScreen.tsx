@@ -11,10 +11,11 @@ import {
 } from 'react-native';
 import $t from 'i18n';
 import { UserContext } from 'contexts/UserContext';
-import { useLogout } from 'queries/auth';
+import { useLogoutMutation } from 'queries/auth';
+import { Alert } from 'react-native';
 
 const HomeScreen = () => {
-  const { mutate: handleLogout } = useLogout();
+  const { mutate: handleLogout } = useLogoutMutation();
 
   const { user } = useContext(UserContext);
 
@@ -49,8 +50,7 @@ const HomeScreen = () => {
           transparent={false}
           visible={modalVisible}
           onRequestClose={() => {
-            // @ts-ignore
-            alert('Modal has been closed.');
+            Alert.alert('Modal has been closed.');
           }}
         >
           <SafeAreaView style={styles.container}>

@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/react-native';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import asyncStorageService from '../AsyncStorageService';
 
@@ -21,15 +21,13 @@ class HttpService {
     headerKeys.forEach((key) => delete this.client.defaults.headers[key]);
   }
 
-  //@ts-ignore
-  handleSuccessResponse(response) {
+  handleSuccessResponse(response: AxiosResponse) {
     return response;
   }
 
-  // @ts-ignore
-  handleErrorResponse = async (error) => {
+  handleErrorResponse = async (error: AxiosError) => {
     try {
-      const { status } = error.response;
+      const { status } = error.response!;
 
       Sentry.captureException(error);
 

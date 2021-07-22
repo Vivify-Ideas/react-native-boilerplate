@@ -3,8 +3,7 @@
 // import notificationService from './NotificationService';
 import { Platform } from 'react-native';
 import config from 'config';
-// @ts-ignore
-import { OS_TYPES } from 'constants';
+import { OS_TYPES } from '../../constants';
 import ApiService from './ApiService';
 import asyncStorageService from '../AsyncStorageService';
 
@@ -28,8 +27,8 @@ class AuthService extends ApiService {
   }
 
   init = async (): Promise<void> => {
-    const token = this.getAccessToken();
-    const user = this.getUser();
+    const token = await this.getAccessToken();
+    const user = await this.getUser();
 
     if (token && user) {
       await this.setAuthorizationHeader();

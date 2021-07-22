@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, StyleSheet } from 'react-native';
 
-// @ts-ignore
-const MonoText = (props) => <Text {...props} style={[props.style, styles.text]} />;
+type MonoTextProps = {
+  style: Record<string, unknown>;
+};
+const MonoText = (props: MonoTextProps) => <Text {...props} style={[props.style, styles.text]} />;
 
 MonoText.propTypes = {
   style: PropTypes.object,
