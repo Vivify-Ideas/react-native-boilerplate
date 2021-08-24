@@ -1,9 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { useGetUser } from 'queries/user';
-import { UserI } from 'types';
+import { useGetUserQuery } from 'queries/user';
+import { User } from 'types/backend';
 
 type UserContextProps = {
-  user?: UserI;
+  user?: User;
   refetch: () => void;
   isLoading: boolean;
 };
@@ -25,7 +25,7 @@ const UserContextProvider = ({ children }: UserContextProviderProps) => {
     data,
     refetch,
     isLoading: queryIsLoading,
-  } = useGetUser(
+  } = useGetUserQuery(
     () => {
       setIsLoading(false);
     },

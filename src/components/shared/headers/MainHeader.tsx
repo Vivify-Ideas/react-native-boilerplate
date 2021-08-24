@@ -2,8 +2,11 @@
 import * as Icon from '@expo/vector-icons';
 import React from 'react';
 
-// @ts-ignore
-function MainHeader({ navigation }) {
+type MainHeaderProps = {
+  navigation: any;
+};
+
+function MainHeader({ navigation }: MainHeaderProps) {
   const styles = {
     menuIcon: {
       marginLeft: 10,

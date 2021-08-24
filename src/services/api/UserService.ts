@@ -1,4 +1,4 @@
-import { UserI } from 'types';
+import { User } from 'types/backend';
 import ApiService from './ApiService';
 
 const ENDPOINTS = {
@@ -8,7 +8,7 @@ const ENDPOINTS = {
 };
 
 class UserService extends ApiService {
-  me = async (): Promise<UserI> => {
+  me = async (): Promise<User> => {
     const { data } = await this.apiClient.get(ENDPOINTS.ME);
     return data;
   };
@@ -17,7 +17,7 @@ class UserService extends ApiService {
     avatar: { uri: string };
     firstName: string;
     lastName: string;
-  }): Promise<UserI> => {
+  }): Promise<User> => {
     const formData = new FormData();
     if (data.avatar) {
       const { uri } = data.avatar;

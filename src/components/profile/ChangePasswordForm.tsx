@@ -9,7 +9,7 @@ import ErrorText from '../shared/Text/ErrorText';
 
 type ChangePasswordFormProps = {
   onSubmit: (passwordData: object) => void;
-  invalidOldPasswordError: string;
+  invalidOldPasswordError: boolean;
 };
 
 export const ChangePasswordForm = ({

@@ -1,7 +1,6 @@
 import { AppState } from 'react-native';
 import * as Notifications from 'expo-notifications';
-// @ts-ignore
-import { APP_STATE } from 'constants';
+import { APP_STATE } from '../constants';
 import ApiService from './api/ApiService';
 
 interface NotificationObject {

@@ -8,15 +8,13 @@ import { UpdateProfileForm } from 'components/profile/UpdateProfileForm';
 import ImagePickerModal from 'components/shared/modal/ImagePickerModal';
 import NoPermissionsForCameraModal from 'components/shared/modal/NoPermissionsForCameraModal';
 import Picture from 'components/shared/Picture';
-// @ts-ignore
-import { PERMISSIONS_STATUS } from 'constants';
+import { PERMISSIONS_STATUS } from '../../../constants';
 import { UserContext } from 'contexts/UserContext';
-import { useUpdateUser } from 'queries/user';
-// @ts-ignore
+import { useUpdateUserMutation } from 'queries/user';
 import defaultAvatar from 'assets/images/robot-dev.png';
 
 const EditProfile = () => {
-  const { mutate: handleUserUpdate } = useUpdateUser();
+  const { mutate: handleUserUpdate } = useUpdateUserMutation();
   const { user } = useContext(UserContext);
 
   const [image, setImage] = useState<any>(null);

@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import $t from 'i18n';
 import { SignInForm } from 'components/auth/SignInForm';
 import SCREENS from 'constants/screens';
-import { useLogin } from 'queries/auth';
+import { useLoginMutation } from 'queries/auth';
 import { SignUpScreenNavigationProp } from 'types/navigation';
 
 type SingInScreen = {
@@ -13,7 +13,7 @@ type SingInScreen = {
 };
 
 const SignInScreen = ({ navigation }: SingInScreen) => {
-  const { mutate, error } = useLogin();
+  const { mutate, error } = useLoginMutation();
 
   const handleFacebookLogin = () => console.log('fb login');
   const handleGoogleLogin = () => console.log('google login');

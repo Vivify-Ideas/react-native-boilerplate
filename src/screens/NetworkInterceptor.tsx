@@ -27,7 +27,6 @@ const NetworkInterceptor = ({ showNotification, children }: NetworkInterceptorPr
     setUrlEventListener();
 
     if (Platform.OS === OS_TYPES.ANDROID) {
-      // @ts-ignore
       Notifications.createChannelAndroidAsync(DEFAULT, {
         name: NOTIFICATION,
         sound: true,
@@ -57,13 +56,11 @@ const NetworkInterceptor = ({ showNotification, children }: NetworkInterceptorPr
 
     //If app is not open
     Linking.getInitialURL().then((url) => {
-      //@ts-ignore
       const { queryParams } = Linking.parse(url);
       processUrlEvent(queryParams);
     });
   };
 
-  // @ts-ignore
   const processUrlEvent = async (queryParams) => {
     const accessToken = await authService.getAccessToken();
     if (queryParams.forgot_password_token) {

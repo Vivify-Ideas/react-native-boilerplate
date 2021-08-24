@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { ForgotPasswordForm } from 'components/auth/ForgotPasswordForm';
-import { useForgotPassword } from 'queries/auth';
+import { useForgotPasswordMutation } from 'queries/auth';
 
 const ForgotPasswordScreen = () => {
-  const { error, mutate } = useForgotPassword();
+  const { error, mutate } = useForgotPasswordMutation();
 
   return (
     <View style={styles.container}>

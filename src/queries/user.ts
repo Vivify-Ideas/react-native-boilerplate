@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import asyncStorageService from 'services/AsyncStorageService';
 import userService from 'services/api/UserService';
-import { UserI } from 'types';
+import { User } from 'types/backend';
 
-export const useGetUser = (
+export const useGetUserQuery = (
   successCallback: () => void = () => {},
   errorCallback: () => void = () => {}
 ) => {
@@ -27,7 +27,7 @@ export const useGetUser = (
     refetch: queryRefetch,
     isLoading: isLoadingUser,
     ...restQueryProps
-  } = useQuery<UserI, Error>('getUser', userService.me, {
+  } = useQuery<User, Error>('getUser', userService.me, {
     enabled: !!token,
     cacheTime: 0,
     onSuccess: successCallback,
@@ -50,11 +50,11 @@ export const useGetUser = (
   };
 };
 
-export const useUpdateUser = () => {
+export const useUpdateUserMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation<
-    UserI,
+    User,
     Error,
     {
       avatar: { uri: string };
@@ -62,11 +62,11 @@ export const useUpdateUser = () => {
       lastName: string;
     }
   >(userService.edit, {
-    onSuccess: (data: UserI) => {
+    onSuccess: (data: User) => {
       queryClient.setQueryData('getUser', data);
     },
   });
 };
 
-export const useUpdatePassword = () =>
+export const useUpdatePasswordMutation = () =>
   useMutation<void, Error, object>(userService.changePassword, {});

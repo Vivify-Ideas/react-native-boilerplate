@@ -2,14 +2,14 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { ResetPasswordForm } from 'components/auth/ResetPasswordForm';
-import { useResetPassword } from 'queries/auth';
+import { useResetPasswordMutation } from 'queries/auth';
 import { ResetPasswordRouteProp } from 'types/navigation';
 
 type ResetPasswordScreenProps = {
   route: ResetPasswordRouteProp;
 };
 const ResetPasswordScreen = ({ route }: ResetPasswordScreenProps) => {
-  const { error, mutate } = useResetPassword();
+  const { error, mutate } = useResetPasswordMutation();
   const { forgot_password_token } = route.params;
 
   const handleSubmit = (resetPasswordData: any): void => {

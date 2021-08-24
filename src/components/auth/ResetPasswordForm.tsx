@@ -9,7 +9,7 @@ import { TextInputField } from '../shared/FormFields';
 
 type ResetPasswordFormProps = {
   onSubmit: (data: object) => void;
-  resetPasswordError: string;
+  resetPasswordError: boolean;
 };
 
 export const ResetPasswordForm = ({ onSubmit, resetPasswordError }: ResetPasswordFormProps) => (
