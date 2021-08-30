@@ -5,7 +5,11 @@ import SCREENS from 'constants/screens';
 import { UserContext } from 'contexts/UserContext';
 
 type AuthLoadingScreenProps = {
-  children: ({ isAuthenticated }: { isAuthenticated: boolean }) => React.ReactNode;
+  children: ({
+    isAuthenticated,
+  }: {
+    isAuthenticated: boolean;
+  }) => React.ReactNode;
 };
 
 type StackRendersValues = 'MainStack' | 'AuthStack' | null;
@@ -42,7 +46,9 @@ const AuthLoadingScreen = ({ children }: AuthLoadingScreenProps) => {
 
   // Render any loading content that you like here
   return stackRender ? (
-    <>{children({ isAuthenticated: stackRender !== SCREENS.AUTH_STACK.INDEX })}</>
+    <>
+      {children({ isAuthenticated: stackRender !== SCREENS.AUTH_STACK.INDEX })}
+    </>
   ) : (
     <View>
       <ActivityIndicator style={styles.loading} />

@@ -12,12 +12,19 @@ export type RootDrawerParamList = {
   ProxyMainTab: undefined;
 };
 
-export type BottomTabNavigationProp = StackNavigationProp<RootDrawerParamList, 'ProxyMainTab'>;
+export type BottomTabNavigationProp = StackNavigationProp<
+  RootDrawerParamList,
+  'ProxyMainTab'
+>;
 
 // Bottom Stack
 export type BottomTabParamList = {
-  [SCREENS.MAIN_STACK.HOME_STACK]: NavigatorScreenParams<HomeStackParamsList> | undefined;
-  [SCREENS.MAIN_STACK.SETTINGS_STACK]: NavigatorScreenParams<SettingsStackParamsList> | undefined;
+  [SCREENS.MAIN_STACK.HOME_STACK]:
+    | NavigatorScreenParams<HomeStackParamsList>
+    | undefined;
+  [SCREENS.MAIN_STACK.SETTINGS_STACK]:
+    | NavigatorScreenParams<SettingsStackParamsList>
+    | undefined;
 };
 
 // Settings Stack
@@ -25,7 +32,10 @@ export type SettingsStackParamsList = {
   [SCREENS.SETTINGS_STACK.SETTINGS]: { userId: string };
 };
 
-export type SettingsStackNavigationProp = StackNavigationProp<BottomTabParamList, 'SettingsStack'>;
+export type SettingsStackNavigationProp = StackNavigationProp<
+  BottomTabParamList,
+  'SettingsStack'
+>;
 
 // Settings Screen
 export type SettingsScreenNavigationProp = CompositeNavigationProp<
@@ -33,10 +43,16 @@ export type SettingsScreenNavigationProp = CompositeNavigationProp<
   HomeStackNavigationProp
 >;
 
-export type SettingsScreenRouteProp = RouteProp<SettingsStackParamsList, 'Settings'>;
+export type SettingsScreenRouteProp = RouteProp<
+  SettingsStackParamsList,
+  'Settings'
+>;
 
 // Home Stack
-export type HomeStackNavigationProp = StackNavigationProp<BottomTabParamList, 'HomeStack'>;
+export type HomeStackNavigationProp = StackNavigationProp<
+  BottomTabParamList,
+  'HomeStack'
+>;
 
 export type HomeStackParamsList = {
   [SCREENS.HOME_STACK.CHANGE_PASSWORD]: undefined;
@@ -57,7 +73,10 @@ export type AuthStackParamsList = {
 };
 
 // SignUp Screen
-export type SignUpScreenNavigationProp = StackNavigationProp<AuthStackParamsList, 'SignIn'>;
+export type SignUpScreenNavigationProp = StackNavigationProp<
+  AuthStackParamsList,
+  'SignIn'
+>;
 
 // Reset Password Success Screen
 export type ResetPasswordSuccessScreenNavigationProp = StackNavigationProp<
@@ -66,7 +85,10 @@ export type ResetPasswordSuccessScreenNavigationProp = StackNavigationProp<
 >;
 
 // Reset Password Screen
-export type ResetPasswordRouteProp = RouteProp<AuthStackParamsList, 'ResetPassword'>;
+export type ResetPasswordRouteProp = RouteProp<
+  AuthStackParamsList,
+  'ResetPassword'
+>;
 
 // Forgot Password Success Screen
 export type ForgotPasswordSuccessNavigationProp = StackNavigationProp<

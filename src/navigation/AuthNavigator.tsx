@@ -1,5 +1,8 @@
 import React from 'react';
-import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from '@react-navigation/stack';
 
 import { AuthStackParamsList } from 'types/navigation';
 import SCREENS from 'constants/screens';
@@ -19,8 +22,14 @@ const noHeaderOptions: StackNavigationOptions = {
 const AuthStackNavigator = () => {
   return (
     <StackNavigator.Navigator>
-      <StackNavigator.Screen name={SCREENS.AUTH_STACK.SIGN_IN} component={SignInScreen} />
-      <StackNavigator.Screen name={SCREENS.AUTH_STACK.SIGN_UP} component={SignUpScreen} />
+      <StackNavigator.Screen
+        name={SCREENS.AUTH_STACK.SIGN_IN}
+        component={SignInScreen}
+      />
+      <StackNavigator.Screen
+        name={SCREENS.AUTH_STACK.SIGN_UP}
+        component={SignUpScreen}
+      />
       <StackNavigator.Screen
         name={SCREENS.AUTH_STACK.FORGOT_PASSWORD}
         options={{ title: 'Forgot Password' }}

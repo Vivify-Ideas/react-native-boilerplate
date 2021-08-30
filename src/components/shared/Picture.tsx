@@ -1,5 +1,10 @@
 import React, { useState, Fragment } from 'react';
-import { Image, ActivityIndicator, StyleSheet, ImageSourcePropType } from 'react-native';
+import {
+  Image,
+  ActivityIndicator,
+  StyleSheet,
+  ImageSourcePropType,
+} from 'react-native';
 
 import config from 'config';
 
@@ -28,8 +33,18 @@ const Picture = ({ source, uri, style }: PictureProps) => {
 
   return (
     <Fragment>
-      <Image style={getStyle()} source={getSourceForImage()} onLoadEnd={() => setLoader(false)} />
-      {loader && <ActivityIndicator style={styles.loading} animating={loader} size="large" />}
+      <Image
+        style={getStyle()}
+        source={getSourceForImage()}
+        onLoadEnd={() => setLoader(false)}
+      />
+      {loader && (
+        <ActivityIndicator
+          style={styles.loading}
+          animating={loader}
+          size="large"
+        />
+      )}
     </Fragment>
   );
 };

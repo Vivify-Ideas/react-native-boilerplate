@@ -9,7 +9,10 @@ type SocialLoginErrorModalProps = {
   closeModal: () => void;
 };
 
-const SocialLoginErrorModal = ({ error, closeModal }: SocialLoginErrorModalProps) => {
+const SocialLoginErrorModal = ({
+  error,
+  closeModal,
+}: SocialLoginErrorModalProps) => {
   return (
     <Modal isVisible={!!error} closeModal={closeModal}>
       <ModalHeader>

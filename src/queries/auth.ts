@@ -8,12 +8,15 @@ import NavigationService from 'services/NavigationService';
 export const useLoginMutation = () => {
   const { refetch } = useContext(UserContext);
 
-  return useMutation<object, Error, { username: string; password: string }>(authService.login, {
-    retry: false,
-    onSuccess: async () => {
-      refetch();
-    },
-  });
+  return useMutation<object, Error, { username: string; password: string }>(
+    authService.login,
+    {
+      retry: false,
+      onSuccess: async () => {
+        refetch();
+      },
+    }
+  );
 };
 
 export const useRegisterMutation = () => {
@@ -30,15 +33,23 @@ export const useRegisterMutation = () => {
 };
 
 export const useForgotPasswordMutation = () => {
-  return useMutation<null, Error, { email: string }>(authService.forgotPassword);
+  return useMutation<null, Error, { email: string }>(
+    authService.forgotPassword
+  );
 };
 
 export const useResetPasswordMutation = () => {
-  return useMutation<null, Error, { newPassword: string }>(authService.resetPassword, {
-    onSuccess: () => {
-      setTimeout(() => NavigationService.navigate(SCREENS.AUTH_STACK.INDEX), 5000);
-    },
-  });
+  return useMutation<null, Error, { newPassword: string }>(
+    authService.resetPassword,
+    {
+      onSuccess: () => {
+        setTimeout(
+          () => NavigationService.navigate(SCREENS.AUTH_STACK.INDEX),
+          5000
+        );
+      },
+    }
+  );
 };
 
 export const useLogoutMutation = () => {

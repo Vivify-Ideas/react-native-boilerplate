@@ -6,7 +6,12 @@ import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
 import { withInAppNotification } from 'react-native-in-app-notification';
 import OfflineWarning from 'components/shared/OfflineWarning';
-import { DEFAULT, NOTIFICATION, NOTIFICATION_ORIGIN, OS_TYPES } from 'constants';
+import {
+  DEFAULT,
+  NOTIFICATION,
+  NOTIFICATION_ORIGIN,
+  OS_TYPES,
+} from 'constants';
 import SCREENS from 'constants/screens';
 import authService from 'services/api/AuthService';
 import NavigationService from 'services/NavigationService';
@@ -17,7 +22,10 @@ type NetworkInterceptorProps = {
   children: any;
 };
 
-const NetworkInterceptor = ({ showNotification, children }: NetworkInterceptorProps) => {
+const NetworkInterceptor = ({
+  showNotification,
+  children,
+}: NetworkInterceptorProps) => {
   useEffect(() => {
     addNotificationListener();
   }, []);

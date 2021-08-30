@@ -9,7 +9,8 @@ const ENDPOINTS = {
 };
 
 class NotificationService extends ApiService {
-  getNotifications = (): Promise<object> => this.apiClient.get(ENDPOINTS.NOTIFICATIONS);
+  getNotifications = (): Promise<object> =>
+    this.apiClient.get(ENDPOINTS.NOTIFICATIONS);
 
   getNotificationSettings = (): Promise<object> =>
     this.apiClient.get(ENDPOINTS.NOTIFICATION_SETTINGS);

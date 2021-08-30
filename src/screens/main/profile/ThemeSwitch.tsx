@@ -12,8 +12,6 @@ export const ThemeSwitch = () => {
   const toggleDarkMode = async () => {
     toggleColorMode();
     const darkMode = isChecked ? false : true;
-    console.log(colorMode);
-
     handleThemeUpdate({ ...user, darkMode: darkMode });
     setisChecked(darkMode);
   };

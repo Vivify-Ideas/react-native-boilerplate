@@ -7,9 +7,18 @@ type ModalWrapperProps = {
   children: any;
 };
 
-const ModalWrapper = ({ isVisible, closeModal, children }: ModalWrapperProps) => {
+const ModalWrapper = ({
+  isVisible,
+  closeModal,
+  children,
+}: ModalWrapperProps) => {
   return (
-    <Modal visible={isVisible} animationType="slide" onRequestClose={closeModal} transparent>
+    <Modal
+      visible={isVisible}
+      animationType="slide"
+      onRequestClose={closeModal}
+      transparent
+    >
       <View style={styles.container}>
         <View style={styles.modalWrap}>{children}</View>
       </View>

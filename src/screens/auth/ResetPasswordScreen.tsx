@@ -22,7 +22,10 @@ const ResetPasswordScreen = ({ route }: ResetPasswordScreenProps) => {
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView enableOnAndroid>
-        <ResetPasswordForm onSubmit={handleSubmit} resetPasswordError={!!error} />
+        <ResetPasswordForm
+          onSubmit={handleSubmit}
+          resetPasswordError={!!error}
+        />
       </KeyboardAwareScrollView>
     </View>
   );

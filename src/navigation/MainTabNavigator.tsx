@@ -12,8 +12,14 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator>
-      <BottomTab.Screen name={SCREENS.MAIN_STACK.HOME_STACK} component={HomeStack} />
-      <BottomTab.Screen name={SCREENS.MAIN_STACK.SETTINGS_STACK} component={SettingsStack} />
+      <BottomTab.Screen
+        name={SCREENS.MAIN_STACK.HOME_STACK}
+        component={HomeStack}
+      />
+      <BottomTab.Screen
+        name={SCREENS.MAIN_STACK.SETTINGS_STACK}
+        component={SettingsStack}
+      />
     </BottomTab.Navigator>
   );
 }

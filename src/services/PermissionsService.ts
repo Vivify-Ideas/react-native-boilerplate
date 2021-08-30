@@ -2,7 +2,9 @@ import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
 
 export async function askForNotificationsPermission(): Promise<object | null> {
-  const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
   let finalStatus = existingStatus;
 
   // only ask if permissions have not already been determined, because

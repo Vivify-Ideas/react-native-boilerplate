@@ -14,7 +14,9 @@ const ForgotPasswordSuccess = ({ navigation }: ForgotPasswordSuccessProps) => {
     <View style={styles.container}>
       <KeyboardAwareScrollView enableOnAndroid>
         <Text>{$t('auth.forgotPasswordSuccess')}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate(SCREENS.AUTH_STACK.SIGN_IN)}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(SCREENS.AUTH_STACK.SIGN_IN)}
+        >
           <Text>{$t('common.ok')}</Text>
         </TouchableOpacity>
       </KeyboardAwareScrollView>

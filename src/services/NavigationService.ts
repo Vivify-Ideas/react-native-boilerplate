@@ -1,9 +1,14 @@
-import { CommonActions, NavigationContainerRef } from '@react-navigation/native';
+import {
+  CommonActions,
+  NavigationContainerRef,
+} from '@react-navigation/native';
 import SCREENS from 'constants/screens';
 
 let _navigator: NavigationContainerRef | null;
 
-export const setTopLevelNavigator = (navigatorRef: NavigationContainerRef | null): void => {
+export const setTopLevelNavigator = (
+  navigatorRef: NavigationContainerRef | null
+): void => {
   _navigator = navigatorRef;
 };
 

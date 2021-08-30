@@ -11,7 +11,10 @@ const SignUpScreen = () => {
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView enableOnAndroid>
-        <SignUpForm onSubmit={mutate} signUpErrors={{ email: error?.message || '' }} />
+        <SignUpForm
+          onSubmit={mutate}
+          signUpErrors={{ email: error?.message || '' }}
+        />
       </KeyboardAwareScrollView>
     </View>
   );

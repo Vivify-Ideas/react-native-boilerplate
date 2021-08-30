@@ -9,7 +9,10 @@ type PasswordChangedModalProps = {
   closeModal: () => void;
 };
 
-const PasswordChangedModal = ({ isVisible, closeModal }: PasswordChangedModalProps) => {
+const PasswordChangedModal = ({
+  isVisible,
+  closeModal,
+}: PasswordChangedModalProps) => {
   return (
     <Modal isVisible={isVisible} closeModal={closeModal}>
       <ModalBody>

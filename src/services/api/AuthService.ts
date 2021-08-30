@@ -7,7 +7,12 @@ import { OS_TYPES } from '../../constants';
 import ApiService from './ApiService';
 import asyncStorageService from '../AsyncStorageService';
 
-const { ANDROID_GOOGLE_CLIENT_ID, IOS_GOOGLE_CLIENT_ID, FACEBOOK_APP_ID, CLIENT_ID } = config;
+const {
+  ANDROID_GOOGLE_CLIENT_ID,
+  IOS_GOOGLE_CLIENT_ID,
+  FACEBOOK_APP_ID,
+  CLIENT_ID,
+} = config;
 
 const ENDPOINTS = {
   LOGIN: '/auth/login',
@@ -65,7 +70,10 @@ class AuthService extends ApiService {
     this.api.removeHeaders(['Authorization']);
   };
 
-  login = async (credentials: { username: string; password: string }): Promise<object> => {
+  login = async (credentials: {
+    username: string;
+    password: string;
+  }): Promise<object> => {
     const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, credentials);
     this.createSession(data);
 
@@ -91,7 +99,10 @@ class AuthService extends ApiService {
     return await this.googleLogin(
       // @ts-ignore
       Google.logInAsync({
-        clientId: Platform.OS == OS_TYPES.IOS ? IOS_GOOGLE_CLIENT_ID : ANDROID_GOOGLE_CLIENT_ID,
+        clientId:
+          Platform.OS == OS_TYPES.IOS
+            ? IOS_GOOGLE_CLIENT_ID
+            : ANDROID_GOOGLE_CLIENT_ID,
         scopes: ['profile', 'email'],
       })
     );
@@ -138,7 +149,10 @@ class AuthService extends ApiService {
     return null;
   };
 
-  signup = async (signupData: { email: string; password: string }): Promise<object> => {
+  signup = async (signupData: {
+    email: string;
+    password: string;
+  }): Promise<object> => {
     await this.apiClient.post(ENDPOINTS.SIGN_UP, signupData);
     const { email, password } = signupData;
     return this.login({ username: email, password });
@@ -162,8 +176,14 @@ class AuthService extends ApiService {
     asyncStorageService.setItem('user', JSON.stringify(jsonUser));
   };
 
-  refreshToken = async (payload: { JwtToken: string; JwtRefreshToken: string }): Promise<null> => {
-    const { data } = await this.apiClient.post(ENDPOINTS.REFRESH_TOKEN, payload);
+  refreshToken = async (payload: {
+    JwtToken: string;
+    JwtRefreshToken: string;
+  }): Promise<null> => {
+    const { data } = await this.apiClient.post(
+      ENDPOINTS.REFRESH_TOKEN,
+      payload
+    );
 
     await this.createSession(data);
 

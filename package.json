@@ -49,6 +49,8 @@
     "@react-navigation/stack": "^5.14.4",
     "@sentry/react-native": "^2.4.0",
     "axios": "^0.21.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
     "expo-app-loading": "^1.0.3",
     "expo-font": "^9.1.0",
     "expo-image-picker": "^10.1.4",
