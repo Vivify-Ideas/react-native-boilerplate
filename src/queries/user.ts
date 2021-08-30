@@ -1,26 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import asyncStorageService from 'services/AsyncStorageService';
-import userService from 'services/api/UserService';
-import { User } from 'types/backend';
+import { useEffect, useState } from 'react'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import asyncStorageService from 'services/AsyncStorageService'
+import userService from 'services/api/UserService'
+import { User } from 'types/backend'
 
 export const useGetUserQuery = (
   successCallback: () => void = () => {},
   errorCallback: () => void = () => {}
 ) => {
-  const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [token, setToken] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const getToken = async (): Promise<void> => {
-    const tokenAsync = await asyncStorageService.getItem('token');
+    const tokenAsync = await asyncStorageService.getItem('token')
 
-    setToken(tokenAsync);
-    setIsLoading(false);
-  };
+    setToken(tokenAsync)
+    setIsLoading(false)
+  }
 
   useEffect(() => {
-    getToken();
-  }, []);
+    getToken()
+  }, [])
 
   const {
     data,
@@ -31,42 +31,42 @@ export const useGetUserQuery = (
     enabled: !!token,
     cacheTime: 0,
     onSuccess: successCallback,
-    onError: errorCallback,
-  });
+    onError: errorCallback
+  })
 
   useEffect(() => {
-    !!token && queryRefetch();
-  }, [token]);
+    !!token && queryRefetch()
+  }, [token])
 
   const refetch = (): void => {
-    getToken();
-  };
+    getToken()
+  }
 
   return {
     isLoading: isLoadingUser || isLoading,
     ...restQueryProps,
     data,
-    refetch,
-  };
-};
+    refetch
+  }
+}
 
 export const useUpdateUserMutation = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   return useMutation<
     User,
     Error,
     {
-      avatar: { uri: string };
-      firstName: string;
-      lastName: string;
+      avatar: { uri: string }
+      firstName: string
+      lastName: string
     }
   >(userService.edit, {
     onSuccess: (data: User) => {
-      queryClient.setQueryData('getUser', data);
-    },
-  });
-};
+      queryClient.setQueryData('getUser', data)
+    }
+  })
+}
 
 export const useUpdatePasswordMutation = () =>
-  useMutation<void, Error, object>(userService.changePassword, {});
+  useMutation<void, Error, object>(userService.changePassword, {})

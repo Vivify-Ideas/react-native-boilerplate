@@ -1,62 +1,65 @@
-import * as Sentry from '@sentry/react-native';
-import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import config from 'config';
-import asyncStorageService from '../AsyncStorageService';
+import * as Sentry from '@sentry/react-native'
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
+import config from 'config'
+import asyncStorageService from '../AsyncStorageService'
 
 class HttpService {
-  client: AxiosInstance;
-  unauthorizedCallback: () => void;
+  client: AxiosInstance
+  unauthorizedCallback: () => void
 
   constructor(options = {}) {
-    this.client = axios.create(options);
-    this.client.interceptors.response.use(this.handleSuccessResponse, this.handleErrorResponse);
-    this.unauthorizedCallback = () => {};
+    this.client = axios.create(options)
+    this.client.interceptors.response.use(
+      this.handleSuccessResponse,
+      this.handleErrorResponse
+    )
+    this.unauthorizedCallback = () => {}
   }
 
   attachHeaders(headers: object): void {
-    Object.assign(this.client.defaults.headers, headers);
+    Object.assign(this.client.defaults.headers, headers)
   }
 
   removeHeaders(headerKeys: string[]): void {
-    headerKeys.forEach((key) => delete this.client.defaults.headers[key]);
+    headerKeys.forEach(key => delete this.client.defaults.headers[key])
   }
 
   handleSuccessResponse(response: AxiosResponse) {
-    return response;
+    return response
   }
 
   handleErrorResponse = async (error: AxiosError) => {
     try {
-      const { status } = error.response!;
+      const { status } = error.response!
 
-      Sentry.captureException(error);
+      Sentry.captureException(error)
 
       switch (status) {
         case 401:
-          await asyncStorageService.clear();
-          this.unauthorizedCallback();
+          await asyncStorageService.clear()
+          this.unauthorizedCallback()
 
-          break;
+          break
         default:
-          break;
+          break
       }
 
-      return Promise.reject(error);
+      return Promise.reject(error)
     } catch (e) {
-      return Promise.reject(error);
+      return Promise.reject(error)
     }
-  };
+  }
 
   setUnauthorizedCallback(callback: () => void) {
-    this.unauthorizedCallback = callback;
+    this.unauthorizedCallback = callback
   }
 }
 
 const options = {
-  baseURL: config.API_BASE_URL,
-};
+  baseURL: config.API_BASE_URL
+}
 
-const httpService = new HttpService(options);
+const httpService = new HttpService(options)
 
-export { HttpService };
-export default httpService;
+export { HttpService }
+export default httpService

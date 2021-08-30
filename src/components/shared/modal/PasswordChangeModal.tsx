@@ -1,15 +1,18 @@
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import React from 'react'
+import { TouchableOpacity, Text } from 'react-native'
 
-import $t from 'i18n';
-import { Modal, ModalBody, ModalFooter } from './baseModal';
+import $t from 'i18n'
+import { Modal, ModalBody, ModalFooter } from './baseModal'
 
 type PasswordChangedModalProps = {
-  isVisible: boolean;
-  closeModal: () => void;
-};
+  isVisible: boolean
+  closeModal: () => void
+}
 
-const PasswordChangedModal = ({ isVisible, closeModal }: PasswordChangedModalProps) => {
+const PasswordChangedModal = ({
+  isVisible,
+  closeModal
+}: PasswordChangedModalProps) => {
   return (
     <Modal isVisible={isVisible} closeModal={closeModal}>
       <ModalBody>
@@ -21,7 +24,7 @@ const PasswordChangedModal = ({ isVisible, closeModal }: PasswordChangedModalPro
         </TouchableOpacity>
       </ModalFooter>
     </Modal>
-  );
-};
+  )
+}
 
-export default PasswordChangedModal;
+export default PasswordChangedModal

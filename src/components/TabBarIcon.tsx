@@ -1,12 +1,12 @@
-import * as Icon from '@expo/vector-icons';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import Colors from '../constants/colors';
+import * as Icon from '@expo/vector-icons'
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import Colors from '../constants/colors'
 
 type TabBarIconProps = {
-  name: any;
-  focused: boolean;
-};
+  name: any
+  focused: boolean
+}
 
 const TabBarIcon = ({ name, focused }: TabBarIconProps) => {
   return (
@@ -16,15 +16,15 @@ const TabBarIcon = ({ name, focused }: TabBarIconProps) => {
       style={styles.icon}
       color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
     />
-  );
-};
+  )
+}
 
-TabBarIcon.displayName = 'TabBarIcon';
+TabBarIcon.displayName = 'TabBarIcon'
 
-export default TabBarIcon;
+export default TabBarIcon
 
 const styles = StyleSheet.create({
   icon: {
-    marginBottom: -3,
-  },
-});
+    marginBottom: -3
+  }
+})

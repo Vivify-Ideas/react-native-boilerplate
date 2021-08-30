@@ -1,12 +1,11 @@
-import React from 'react';
-import { TextInput, View, Text } from 'react-native';
-
-import { ErrorMessage, FieldProps } from 'formik';
+import React from 'react'
+import { View, Text, Input } from 'native-base'
+import { ErrorMessage, FieldProps } from 'formik'
 
 export const TextInputField = ({ field, form, ...props }: FieldProps) => {
   return (
     <View>
-      <TextInput
+      <Input
         value={field.value}
         onChangeText={form.handleChange(field.name)}
         onBlur={form.handleBlur(field.name)}
@@ -14,5 +13,5 @@ export const TextInputField = ({ field, form, ...props }: FieldProps) => {
       />
       <ErrorMessage name={field.name} component={Text} />
     </View>
-  );
-};
+  )
+}

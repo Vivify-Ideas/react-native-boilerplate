@@ -1,14 +1,14 @@
-import { AxiosInstance } from 'axios';
-import httpService, { HttpService } from './HttpService';
+import { AxiosInstance } from 'axios'
+import httpService, { HttpService } from './HttpService'
 
 class ApiService {
-  api: HttpService;
-  apiClient: AxiosInstance;
+  api: HttpService
+  apiClient: AxiosInstance
 
   constructor() {
-    this.api = httpService;
-    this.apiClient = this.api.client;
+    this.api = httpService
+    this.apiClient = this.api.client
   }
 }
 
-export default ApiService;
+export default ApiService

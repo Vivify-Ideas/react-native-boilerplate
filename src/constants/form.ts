@@ -3,5 +3,5 @@ export const textInputStyle = {
   borderColor: 'gray',
   borderWidth: 1,
   margin: 10,
-  padding: 5,
-};
+  padding: 5
+}

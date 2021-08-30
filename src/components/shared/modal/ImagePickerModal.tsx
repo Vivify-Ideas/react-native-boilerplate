@@ -1,42 +1,38 @@
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import React from 'react'
+import $t from 'i18n'
 
-import $t from 'i18n';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from './baseModal';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from './baseModal'
+import { Button, Text } from 'native-base'
 
 type ImagePickerModalProps = {
-  isVisible: boolean;
-  closeModal: () => void;
-  galleryImport: () => void;
-  openCamera: () => void;
-};
+  isVisible: boolean
+  closeModal: () => void
+  galleryImport: () => void
+  openCamera: () => void
+}
 
 const ImagePickerModal = ({
   isVisible,
   closeModal,
   galleryImport,
-  openCamera,
+  openCamera
 }: ImagePickerModalProps) => {
   return (
     <Modal isVisible={isVisible} closeModal={closeModal}>
-      <ModalHeader>
-        <Text>{$t('profile.updateUser.importImage')}</Text>
-      </ModalHeader>
+      <ModalHeader>{$t('profile.updateUser.importImage')}</ModalHeader>
       <ModalBody>
-        <TouchableOpacity onPress={openCamera}>
-          <Text>{$t('profile.updateUser.takePicture')}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={galleryImport}>
-          <Text>{$t('profile.updateUser.importFromGallery')}</Text>
-        </TouchableOpacity>
+        <Button onPress={openCamera}>
+          {$t('profile.updateUser.takePicture')}
+        </Button>
+        <Button onPress={galleryImport}>
+          {$t('profile.updateUser.importFromGallery')}
+        </Button>
       </ModalBody>
       <ModalFooter>
-        <TouchableOpacity onPress={closeModal}>
-          <Text>{$t('common.cancel')}</Text>
-        </TouchableOpacity>
+        <Button onPress={closeModal}>{$t('common.cancel')}</Button>
       </ModalFooter>
     </Modal>
-  );
-};
+  )
+}
 
-export default ImagePickerModal;
+export default ImagePickerModal

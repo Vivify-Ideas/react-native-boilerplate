@@ -1,17 +1,17 @@
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import React from 'react'
+import { TouchableOpacity, Text } from 'react-native'
 
-import $t from 'i18n';
-import { Modal, ModalBody, ModalFooter } from './baseModal';
+import $t from 'i18n'
+import { Modal, ModalBody, ModalFooter } from './baseModal'
 
 type NoPermissionsForCameraModalProps = {
-  isVisible: boolean;
-  closeModal: () => void;
-};
+  isVisible: boolean
+  closeModal: () => void
+}
 
 const NoPermissionsForCameraModal = ({
   isVisible,
-  closeModal,
+  closeModal
 }: NoPermissionsForCameraModalProps) => {
   return (
     <Modal isVisible={isVisible} closeModal={closeModal}>
@@ -24,7 +24,7 @@ const NoPermissionsForCameraModal = ({
         </TouchableOpacity>
       </ModalFooter>
     </Modal>
-  );
-};
+  )
+}
 
-export default NoPermissionsForCameraModal;
+export default NoPermissionsForCameraModal

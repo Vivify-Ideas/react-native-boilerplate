@@ -1,10 +1,10 @@
-const path = require('path');
-const { getDefaultConfig } = require('metro-config');
+const path = require('path')
+const { getDefaultConfig } = require('metro-config')
 
 module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts }
-  } = await getDefaultConfig();
+  } = await getDefaultConfig()
   return {
     watchFolders: [path.resolve(__dirname, './')],
     transformer: {
@@ -20,5 +20,5 @@ module.exports = (async () => {
       assetExts: assetExts.filter(ext => ext !== 'svg'),
       sourceExts: [...sourceExts, 'svg']
     }
-  };
-})();
+  }
+})()

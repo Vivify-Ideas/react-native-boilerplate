@@ -1,16 +1,16 @@
-import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
-import { Formik, Field } from 'formik';
+import React from 'react'
+import { Button, View } from 'native-base'
+import { Formik, Field } from 'formik'
 
-import $t from 'i18n';
-import { signInValidationRules } from 'validation/auth';
-import ErrorText from '../shared/Text/ErrorText';
-import { TextInputField } from '../shared/FormFields';
+import $t from 'i18n'
+import { signInValidationRules } from 'validation/auth'
+import ErrorText from '../shared/Text/ErrorText'
+import { TextInputField } from '../shared/FormFields'
 
 type SignInFormProps = {
-  onSubmit: (data: any) => void;
-  signInError: boolean;
-};
+  onSubmit: (data: any) => void
+  signInError: boolean
+}
 
 export const SignInForm = ({ onSubmit, signInError }: SignInFormProps) => (
   <Formik
@@ -20,18 +20,23 @@ export const SignInForm = ({ onSubmit, signInError }: SignInFormProps) => (
   >
     {({ handleSubmit }) => (
       <View>
-        <Field name="email" component={TextInputField} placeholder={$t('auth.enterEmail')} />
+        <Field
+          name="email"
+          component={TextInputField}
+          placeholder={$t('auth.enterEmail')}
+        />
         <Field
           name="password"
           component={TextInputField}
           secureTextEntry
           placeholder={$t('auth.enterPassword')}
         />
-        <ErrorText error={!!signInError} message={$t('auth.invalidCredentials')} />
-        <TouchableOpacity onPress={handleSubmit}>
-          <Text>{$t('auth.signIn')}</Text>
-        </TouchableOpacity>
+        <ErrorText
+          error={!!signInError}
+          message={$t('auth.invalidCredentials')}
+        />
+        <Button onPress={handleSubmit}>{$t('auth.signIn')}</Button>
       </View>
     )}
   </Formik>
-);
+)

@@ -1,19 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { createStackNavigator } from '@react-navigation/stack';
-import MainHeader from 'components/shared/headers/MainHeader';
-import SCREENS from 'constants/screens';
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import MainHeader from 'components/shared/headers/MainHeader'
+import SCREENS from 'constants/screens'
 
-import HomeScreen from 'screens/main/HomeScreen';
-import ChangePasswordScreen from 'screens/main/profile/ChangePassword';
-import EditProfileScreen from 'screens/main/profile/EditProfile';
-import { HomeStackNavigationProp } from 'types/navigation';
+import HomeScreen from 'screens/main/HomeScreen'
+import ChangePasswordScreen from 'screens/main/profile/ChangePassword'
+import EditProfileScreen from 'screens/main/profile/EditProfile'
+import { HomeStackNavigationProp } from 'types/navigation'
 
-const StackNavigator = createStackNavigator();
+const StackNavigator = createStackNavigator()
 
 type Props = {
-  navigation: HomeStackNavigationProp;
-};
+  navigation: HomeStackNavigationProp
+}
 
 const HomeStack = ({ navigation }: Props) => {
   return (
@@ -34,7 +33,7 @@ const HomeStack = ({ navigation }: Props) => {
         options={() => MainHeader({ navigation })}
       />
     </StackNavigator.Navigator>
-  );
-};
+  )
+}
 
-export default HomeStack;
+export default HomeStack

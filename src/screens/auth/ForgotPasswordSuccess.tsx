@@ -1,32 +1,25 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import $t from 'i18n';
-import SCREENS from 'constants/screens';
-import { ForgotPasswordSuccessNavigationProp } from 'types/navigation';
+import React from 'react'
+import { Button, Text, View } from 'native-base'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import $t from 'i18n'
+import SCREENS from 'constants/screens'
+import { ForgotPasswordSuccessNavigationProp } from 'types/navigation'
 
 type ForgotPasswordSuccessProps = {
-  navigation: ForgotPasswordSuccessNavigationProp;
-};
+  navigation: ForgotPasswordSuccessNavigationProp
+}
 
 const ForgotPasswordSuccess = ({ navigation }: ForgotPasswordSuccessProps) => {
   return (
-    <View style={styles.container}>
+    <View>
       <KeyboardAwareScrollView enableOnAndroid>
         <Text>{$t('auth.forgotPasswordSuccess')}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate(SCREENS.AUTH_STACK.SIGN_IN)}>
-          <Text>{$t('common.ok')}</Text>
-        </TouchableOpacity>
+        <Button onPress={() => navigation.navigate(SCREENS.AUTH_STACK.SIGN_IN)}>
+          {$t('common.ok')}
+        </Button>
       </KeyboardAwareScrollView>
     </View>
-  );
-};
+  )
+}
 
-export default ForgotPasswordSuccess;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-  },
-});
+export default ForgotPasswordSuccess
