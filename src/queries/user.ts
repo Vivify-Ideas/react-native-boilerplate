@@ -70,3 +70,6 @@ export const useUpdateUserMutation = () => {
 
 export const useUpdatePasswordMutation = () =>
   useMutation<void, Error, object>(userService.changePassword, {});
+
+export const useUserPrefrencesMutation = () =>
+  useMutation<void, Error, object>(userService.userPrefrencesUpdate, {});

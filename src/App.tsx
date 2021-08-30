@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useRef, useState } from 'react';
-import { Platform, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, Text, TextInput } from 'react-native';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import * as Icon from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/react-native';
 import AppLoading from 'expo-app-loading';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
+import { NativeBaseProvider, extendTheme, View } from 'native-base';
 import { InAppNotificationProvider } from 'react-native-in-app-notification';
 import UserContextProvider from 'contexts/UserContext';
 import AuthLoading from 'navigation/AuthLoading';
@@ -60,6 +61,28 @@ const App = ({ skipLoadingScreen }: AppProps) => {
     ]);
   };
 
+  const theme = extendTheme({
+    // This is for the Dark theme that the user chooses
+    components: {
+      Text: {
+        // For all the Text components
+        baseStyle: ({ colorMode }) => {
+          return {
+            color: colorMode === 'light' ? '#333' : '#fff',
+          };
+        },
+      },
+      View: {
+        baseStyle: ({ colorMode }: any) => {
+          return {
+            flex: 1,
+            bg: colorMode === 'light' ? '#fff' : '#333',
+          };
+        },
+      },
+    },
+  });
+
   const disableFontScaling = (): void => {
     // @ts-ignore
     Text.defaultProps = {
@@ -96,26 +119,28 @@ const App = ({ skipLoadingScreen }: AppProps) => {
         <NavigationContainer ref={navigationRef}>
           <UserContextProvider>
             <NetworkInterceptor>
-              <View style={styles.container}>
-                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                <AuthLoading>
-                  {({ isAuthenticated }) => (
-                    <StackNavigator.Navigator headerMode="none">
-                      {isAuthenticated ? (
-                        <StackNavigator.Screen
-                          name={SCREENS.MAIN_STACK.INDEX}
-                          component={MainTabNavigator}
-                        />
-                      ) : (
-                        <StackNavigator.Screen
-                          name={SCREENS.AUTH_STACK.INDEX}
-                          component={AuthStackNavigator}
-                        />
-                      )}
-                    </StackNavigator.Navigator>
-                  )}
-                </AuthLoading>
-              </View>
+              <NativeBaseProvider theme={theme}>
+                <View style={styles.container}>
+                  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                  <AuthLoading>
+                    {({ isAuthenticated }) => (
+                      <StackNavigator.Navigator headerMode="none">
+                        {isAuthenticated ? (
+                          <StackNavigator.Screen
+                            name={SCREENS.MAIN_STACK.INDEX}
+                            component={MainTabNavigator}
+                          />
+                        ) : (
+                          <StackNavigator.Screen
+                            name={SCREENS.AUTH_STACK.INDEX}
+                            component={AuthStackNavigator}
+                          />
+                        )}
+                      </StackNavigator.Navigator>
+                    )}
+                  </AuthLoading>
+                </View>
+              </NativeBaseProvider>
             </NetworkInterceptor>
           </UserContextProvider>
         </NavigationContainer>

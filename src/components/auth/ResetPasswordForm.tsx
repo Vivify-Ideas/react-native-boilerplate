@@ -1,7 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Formik, Field } from 'formik';
-
+import { View, Text } from 'native-base';
 import $t from 'i18n';
 import { resetPasswordValidationRules } from 'validation/auth';
 import ErrorText from '../shared/Text/ErrorText';
@@ -12,7 +12,10 @@ type ResetPasswordFormProps = {
   resetPasswordError: boolean;
 };
 
-export const ResetPasswordForm = ({ onSubmit, resetPasswordError }: ResetPasswordFormProps) => (
+export const ResetPasswordForm = ({
+  onSubmit,
+  resetPasswordError,
+}: ResetPasswordFormProps) => (
   <Formik
     initialValues={{ password: '', password_confirmation: '' }}
     onSubmit={onSubmit}
@@ -32,7 +35,10 @@ export const ResetPasswordForm = ({ onSubmit, resetPasswordError }: ResetPasswor
           secureTextEntry
           placeholder={$t('auth.confirmPassword')}
         />
-        <ErrorText error={!!resetPasswordError} message={$t('auth.invalidToken')} />
+        <ErrorText
+          error={!!resetPasswordError}
+          message={$t('auth.invalidToken')}
+        />
         <TouchableOpacity onPress={handleSubmit}>
           <Text>{$t('auth.resetPassword')}</Text>
         </TouchableOpacity>

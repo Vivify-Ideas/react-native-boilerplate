@@ -5,6 +5,7 @@ const ENDPOINTS = {
   ME: '/api/auth/me',
   CHANGE_PASSWORD: '/user/change-password',
   USER: '/api/user/update',
+  USER_PREFRENCES: '/api/user/prefrences',
 };
 
 class UserService extends ApiService {
@@ -29,13 +30,20 @@ class UserService extends ApiService {
     formData.append('first_name', data.firstName);
     formData.append('last_name', data.lastName);
 
-    const { data: responseData } = await this.apiClient.post(ENDPOINTS.USER, formData);
+    const { data: responseData } = await this.apiClient.post(
+      ENDPOINTS.USER,
+      formData
+    );
 
     return responseData;
   };
 
   changePassword = async (data: object): Promise<void> => {
     this.apiClient.post(ENDPOINTS.CHANGE_PASSWORD, data);
+  };
+
+  userPrefrencesUpdate = async (data: object): Promise<void> => {
+    this.apiClient.post(ENDPOINTS.USER_PREFRENCES, data);
   };
 }
 

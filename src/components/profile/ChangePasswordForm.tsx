@@ -1,5 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text } from 'native-base';
 import { Formik, Field } from 'formik';
 
 import $t from 'i18n';
@@ -28,6 +29,7 @@ export const ChangePasswordForm = ({
     {({ handleSubmit }) => (
       <View>
         <Field
+          style={styles.formInput}
           name="current_password"
           component={TextInputField}
           secureTextEntry
@@ -38,12 +40,14 @@ export const ChangePasswordForm = ({
           message={$t('profile.changePassword.invalidOldPassword')}
         />
         <Field
+          style={styles.formInput}
           name="new_password"
           component={TextInputField}
           secureTextEntry
           placeholder={$t('profile.changePassword.newPassword')}
         />
         <Field
+          style={styles.formInput}
           name="new_password_confirmation"
           component={TextInputField}
           secureTextEntry
@@ -56,3 +60,8 @@ export const ChangePasswordForm = ({
     )}
   </Formik>
 );
+const styles = StyleSheet.create({
+  formInput: {
+    backgroundColor: '#fff',
+  },
+});

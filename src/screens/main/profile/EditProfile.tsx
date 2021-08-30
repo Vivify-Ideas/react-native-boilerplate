@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { View } from 'native-base';
 // @ts-ignore
 import { ImagePicker } from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
@@ -19,17 +20,22 @@ const EditProfile = () => {
 
   const [image, setImage] = useState<any>(null);
   const [imagePickerModalVisible, toggleImagePicker] = useState<boolean>(false);
-  const [permissionsModalVisible, togglePermissionsModal] = useState<boolean>(false);
+  const [permissionsModalVisible, togglePermissionsModal] =
+    useState<boolean>(false);
 
   const handleSubmit = (updateUserData: any): void => {
     handleUserUpdate({ ...updateUserData, avatar: image });
   };
 
   const openImagePickerModal = async (): Promise<void> => {
-    const cameraRollPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    const hasCameraRollPermission = cameraRollPermissions.status === PERMISSIONS_STATUS.GRANTED;
+    const cameraRollPermissions = await Permissions.askAsync(
+      Permissions.CAMERA_ROLL
+    );
+    const hasCameraRollPermission =
+      cameraRollPermissions.status === PERMISSIONS_STATUS.GRANTED;
     const cameraPermissions = await Permissions.askAsync(Permissions.CAMERA);
-    const hasCameraPermission = cameraPermissions.status === PERMISSIONS_STATUS.GRANTED;
+    const hasCameraPermission =
+      cameraPermissions.status === PERMISSIONS_STATUS.GRANTED;
 
     toggleImagePicker(hasCameraPermission && hasCameraRollPermission);
     togglePermissionsModal(!(hasCameraPermission && hasCameraRollPermission));
@@ -63,7 +69,7 @@ const EditProfile = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity onPress={openImagePickerModal}>
         {image !== '' || !!user?.avatar ? (
           <Picture source={image} uri={user?.avatar} />
@@ -89,10 +95,3 @@ const EditProfile = () => {
 };
 
 export default EditProfile;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-  },
-});

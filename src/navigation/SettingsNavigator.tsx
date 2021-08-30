@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { View, Text, Button } from 'native-base';
 import {
   SettingsStackNavigationProp,
   SettingsStackParamsList,
@@ -10,6 +9,7 @@ import {
 } from 'types/navigation';
 import MainHeader from '../components/shared/headers/MainHeader';
 import SCREENS from 'constants/screens';
+import { ThemeSwitch } from 'screens/main/profile/ThemeSwitch';
 
 const StackNavigator = createStackNavigator<SettingsStackParamsList>();
 
@@ -35,14 +35,18 @@ const SettingsStack = ({ navigation }: SettingsStackProp) => {
           return (
             <View>
               <Text>Settings {userId}</Text>
-              <Button
-                title="Navigate to user profile"
-                onPress={() => {
-                  navigation.navigate(SCREENS.MAIN_STACK.HOME_STACK, {
-                    screen: SCREENS.HOME_STACK.HOME,
-                  });
-                }}
-              />
+              <ThemeSwitch />
+              <View>
+                <Button
+                  onPress={() => {
+                    navigation.navigate(SCREENS.MAIN_STACK.HOME_STACK, {
+                      screen: SCREENS.HOME_STACK.HOME,
+                    });
+                  }}
+                >
+                  Navigate to user profile
+                </Button>
+              </View>
             </View>
           );
         }}

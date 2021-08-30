@@ -1,14 +1,12 @@
 import React, { useContext, useState } from 'react';
 import {
-  Button,
   Image,
   Modal,
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
-  View,
 } from 'react-native';
+import { Button, View, Text } from 'native-base';
 import $t from 'i18n';
 import { UserContext } from 'contexts/UserContext';
 import { useLogoutMutation } from 'queries/auth';
@@ -27,7 +25,10 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         <View style={styles.welcomeContainer}>
           <Text>{$t('helloWorld')}</Text>
           {user && <Text>{user.email}</Text>}
@@ -41,9 +42,9 @@ const HomeScreen = () => {
           />
         </View>
 
-        <Button title="Actually, sign me out :)" onPress={signOutAsync} />
+        <Button onPress={signOutAsync}>Actually, sign me out :)</Button>
 
-        <Button onPress={() => setModalVisible(true)} title="Show Modal" />
+        <Button onPress={() => setModalVisible(true)}>Show Modal</Button>
 
         <Modal
           animationType="slide"
@@ -57,7 +58,9 @@ const HomeScreen = () => {
             <View>
               <Text>{$t('helloWorld')}</Text>
 
-              <Button onPress={() => setModalVisible(!modalVisible)} title="Hide Modal" />
+              <Button onPress={() => setModalVisible(!modalVisible)}>
+                Hide Modal
+              </Button>
             </View>
           </SafeAreaView>
         </Modal>
@@ -70,7 +73,6 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     flex: 1,
   },
   contentContainer: {

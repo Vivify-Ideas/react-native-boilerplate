@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import $t from 'i18n';
 import { SignInForm } from 'components/auth/SignInForm';

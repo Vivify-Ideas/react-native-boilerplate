@@ -1,7 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Formik, Field } from 'formik';
-
+import { View, Text } from 'native-base';
 import $t from 'i18n';
 import { updateProfileValidationRules } from 'validation/profile';
 import { TextInputField } from '../shared/FormFields';
@@ -11,7 +11,10 @@ type UpdateProfileFormProps = {
   onSubmit: (userData: object) => void;
 };
 
-export const UpdateProfileForm = ({ user, onSubmit }: UpdateProfileFormProps) => (
+export const UpdateProfileForm = ({
+  user,
+  onSubmit,
+}: UpdateProfileFormProps) => (
   <Formik
     initialValues={{
       firstName: user?.firstName,
@@ -23,11 +26,13 @@ export const UpdateProfileForm = ({ user, onSubmit }: UpdateProfileFormProps) =>
     {({ handleSubmit }) => (
       <View>
         <Field
+          style={styles.formInput}
           name="firstName"
           component={TextInputField}
           placeholder={$t('profile.updateUser.firstName')}
         />
         <Field
+          style={styles.formInput}
           name="lastName"
           component={TextInputField}
           placeholder={$t('profile.updateUser.lastName')}
@@ -39,3 +44,8 @@ export const UpdateProfileForm = ({ user, onSubmit }: UpdateProfileFormProps) =>
     )}
   </Formik>
 );
+const styles = StyleSheet.create({
+  formInput: {
+    backgroundColor: '#fff',
+  },
+});

@@ -15,6 +15,12 @@
       "pre-commit": "lint-staged"
     }
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/",
+      "./assets/images/"
+    ]
+  },
   "lint-staged": {
     "*.js": [
       "prettier --write --print-width 100 --single-quote",
@@ -53,6 +59,7 @@
     "expo-web-browser": "^9.1.0",
     "formik": "^2.2.6",
     "i18n-js": "^3.8.0",
+    "native-base": "^3.1.0",
     "prettier": "^2.3.1",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
@@ -62,13 +69,14 @@
     "react-native-in-app-notification": "^3.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
     "react-native-reanimated": "^2.1.0",
-    "react-native-safe-area-context": "^3.2.0",
+    "react-native-safe-area-context": "^3.3.0",
     "react-native-screens": "^3.1.1",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-unimodules": "^0.13.3",
     "react-query": "^3.13.10",
-    "styled-components": "^5.2.3",
+    "styled-components": "^5.3.1",
+    "styled-system": "^5.1.5",
     "yup": "^0.32.9"
   },
   "devDependencies": {
