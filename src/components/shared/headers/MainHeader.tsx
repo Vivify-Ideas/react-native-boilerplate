@@ -1,18 +1,18 @@
 /* eslint-disable  react/display-name */
-import * as Icon from '@expo/vector-icons';
-import React from 'react';
+import * as Icon from '@expo/vector-icons'
+import React from 'react'
 
 type MainHeaderProps = {
-  navigation: any;
-};
+  navigation: any
+}
 
 function MainHeader({ navigation }: MainHeaderProps) {
   const styles = {
     menuIcon: {
       marginLeft: 10,
-      marginTop: 10,
-    },
-  };
+      marginTop: 10
+    }
+  }
 
   return {
     headerLeft: () => (
@@ -20,12 +20,12 @@ function MainHeader({ navigation }: MainHeaderProps) {
         name="ios-menu"
         size={24}
         onPress={() => {
-          navigation.toggleDrawer();
+          navigation.toggleDrawer()
         }}
         style={styles.menuIcon}
       />
-    ),
-  };
+    )
+  }
 }
 
-export default MainHeader;
+export default MainHeader

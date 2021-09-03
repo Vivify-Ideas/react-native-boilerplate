@@ -1,16 +1,16 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Field, Formik } from 'formik';
+import React from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { Field, Formik } from 'formik'
 
-import $t from 'i18n';
-import { signUpValidationRules } from 'validation/auth';
-import { TextInputField } from '../shared/FormFields';
-import ErrorText from '../shared/Text/ErrorText';
+import $t from 'i18n'
+import { signUpValidationRules } from 'validation/auth'
+import { TextInputField } from '../shared/FormFields'
+import ErrorText from '../shared/Text/ErrorText'
 
 type SignUpFormProps = {
-  onSubmit: (data: any) => void;
-  signUpErrors: { email: string };
-};
+  onSubmit: (data: any) => void
+  signUpErrors: { email: string }
+}
 
 export const SignUpForm = ({ onSubmit, signUpErrors }: SignUpFormProps) => (
   <Formik
@@ -19,7 +19,7 @@ export const SignUpForm = ({ onSubmit, signUpErrors }: SignUpFormProps) => (
       last_name: '',
       email: '',
       password: '',
-      confirm_password: '',
+      confirm_password: ''
     }}
     onSubmit={onSubmit}
     validationSchema={signUpValidationRules}
@@ -31,9 +31,20 @@ export const SignUpForm = ({ onSubmit, signUpErrors }: SignUpFormProps) => (
           component={TextInputField}
           placeholder={$t('auth.enterFirstName')}
         />
-        <Field name="last_name" component={TextInputField} placeholder={$t('auth.enterLastName')} />
-        <Field name="email" component={TextInputField} placeholder={$t('auth.enterEmail')} />
-        <ErrorText error={!!signUpErrors?.email} message={signUpErrors?.email} />
+        <Field
+          name="last_name"
+          component={TextInputField}
+          placeholder={$t('auth.enterLastName')}
+        />
+        <Field
+          name="email"
+          component={TextInputField}
+          placeholder={$t('auth.enterEmail')}
+        />
+        <ErrorText
+          error={!!signUpErrors?.email}
+          message={signUpErrors?.email}
+        />
         <Field
           name="password"
           component={TextInputField}
@@ -52,4 +63,4 @@ export const SignUpForm = ({ onSubmit, signUpErrors }: SignUpFormProps) => (
       </View>
     )}
   </Formik>
-);
+)

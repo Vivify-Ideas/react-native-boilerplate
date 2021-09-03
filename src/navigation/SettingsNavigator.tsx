@@ -1,26 +1,27 @@
-import React from 'react';
-import { Button, Text, View } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import { View, Text, Button } from 'native-base'
 import {
   SettingsStackNavigationProp,
   SettingsStackParamsList,
   SettingsScreenRouteProp,
-  SettingsScreenNavigationProp,
-} from 'types/navigation';
-import MainHeader from '../components/shared/headers/MainHeader';
-import SCREENS from 'constants/screens';
+  SettingsScreenNavigationProp
+} from 'types/navigation'
+import MainHeader from '../components/shared/headers/MainHeader'
+import SCREENS from 'constants/screens'
+import $t from 'i18n'
+import { ThemeSwitch } from 'components/shared/ThemeSwitch'
 
-const StackNavigator = createStackNavigator<SettingsStackParamsList>();
+const StackNavigator = createStackNavigator<SettingsStackParamsList>()
 
 type SettingsStackProp = {
-  navigation: SettingsStackNavigationProp;
-};
+  navigation: SettingsStackNavigationProp
+}
 
 type SettingsScreenProp = {
-  navigation: SettingsScreenNavigationProp;
-  route: SettingsScreenRouteProp;
-};
+  navigation: SettingsScreenNavigationProp
+  route: SettingsScreenRouteProp
+}
 
 const SettingsStack = ({ navigation }: SettingsStackProp) => {
   return (
@@ -31,24 +32,30 @@ const SettingsStack = ({ navigation }: SettingsStackProp) => {
         initialParams={{ userId: 'User1' }}
       >
         {({ navigation, route }: SettingsScreenProp) => {
-          const { userId = 'Unknown' } = route.params;
+          const { userId = 'Unknown' } = route.params
           return (
             <View>
-              <Text>Settings {userId}</Text>
-              <Button
-                title="Navigate to user profile"
-                onPress={() => {
-                  navigation.navigate(SCREENS.MAIN_STACK.HOME_STACK, {
-                    screen: SCREENS.HOME_STACK.HOME,
-                  });
-                }}
-              />
+              <Text>
+                {$t('profile.settings.settings')} {userId}
+              </Text>
+              <ThemeSwitch text={$t('profile.settings.darkMode')} />
+              <View>
+                <Button
+                  onPress={() => {
+                    navigation.navigate(SCREENS.MAIN_STACK.HOME_STACK, {
+                      screen: SCREENS.HOME_STACK.HOME
+                    })
+                  }}
+                >
+                  {$t('profile.settings.toUserProfile')}
+                </Button>
+              </View>
             </View>
-          );
+          )
         }}
       </StackNavigator.Screen>
     </StackNavigator.Navigator>
-  );
-};
+  )
+}
 
-export default SettingsStack;
+export default SettingsStack

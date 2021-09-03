@@ -5,11 +5,20 @@
     "success": "success",
     "send": "Send",
     "cancel": "Cancel",
-    "offline": "Please check your Internet connection"
+    "offline": "Please check your Internet connection",
+    "loading": "Loading"
+  },
+  "home": {
+    "hideModal": "Hide Modal",
+    "showModal": "Show Modal",
+    "signMeOut": "Actually, sign me out :)"
   },
   "auth": {
     "signUp": "Sign up",
     "signIn": "Sign in",
+    "signInFacebook": "Sign in with Facebook!",
+    "signInGoogle": "Sign in with Google!",
+    "forgotPassword": "Forogt Password",
     "enterFirstName": "Enter your first name",
     "enterLastName": "Enter your last name",
     "enterEmail": "Enter your email",
@@ -56,6 +65,7 @@
     "close": "Close"
   },
   "profile": {
+    "closeMe": "Close me",
     "changePassword": {
       "changePassword": "Change password",
       "currentPassword": "Current password",
@@ -75,6 +85,11 @@
       "importFromGallery": "Import from gallery",
       "takePicture": "Take picture",
       "noPermissions": "No permissions"
+    },
+    "settings": {
+      "settings": "Settings",
+      "darkMode": "Dark Mode",
+      "toUserProfile": "Navigate to user profile"
     }
   }
 }

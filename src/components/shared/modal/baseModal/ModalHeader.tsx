@@ -1,12 +1,12 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
+import { Modal } from 'native-base'
 
 type ModalHeaderProps = {
-  children: any;
-};
+  children: React.ReactNode
+}
 
 const ModalHeader = ({ children }: ModalHeaderProps) => {
-  return <View>{children}</View>;
-};
+  return <Modal.Header>{children}</Modal.Header>
+}
 
-export default ModalHeader;
+export default ModalHeader

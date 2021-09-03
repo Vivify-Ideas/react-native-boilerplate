@@ -1,5 +1,5 @@
-import * as Yup from 'yup';
-import $t from 'i18n';
+import * as Yup from 'yup'
+import $t from 'i18n'
 
 export const signInValidationRules = Yup.object().shape({
   email: Yup.string()
@@ -7,8 +7,8 @@ export const signInValidationRules = Yup.object().shape({
     .email($t('validation.mustBeValidEmail')),
   password: Yup.string()
     .required($t('validation.passwordIsRequired'))
-    .min(8, $t('validation.passwordMinCharacters')),
-});
+    .min(8, $t('validation.passwordMinCharacters'))
+})
 
 export const signUpValidationRules = Yup.object().shape({
   first_name: Yup.string().required($t('validation.firstNameIsRequired')),
@@ -22,14 +22,14 @@ export const signUpValidationRules = Yup.object().shape({
   confirm_password: Yup.string()
     .required($t('validation.confirmPasswordIsRequired'))
     .min(8, $t('validation.confirmPasswordMinCharacters'))
-    .oneOf([Yup.ref('password'), null], $t('auth.passwordsMustMatch')),
-});
+    .oneOf([Yup.ref('password'), null], $t('auth.passwordsMustMatch'))
+})
 
 export const forgotPasswordValidationRules = Yup.object().shape({
   email: Yup.string()
     .required($t('validation.emailIsRequired'))
-    .email($t('validation.mustBeValidEmail')),
-});
+    .email($t('validation.mustBeValidEmail'))
+})
 
 export const resetPasswordValidationRules = Yup.object().shape({
   password: Yup.string()
@@ -38,5 +38,5 @@ export const resetPasswordValidationRules = Yup.object().shape({
   password_confirmation: Yup.string()
     .required($t('validation.confirmPasswordIsRequired'))
     .min(8, $t('validation.confirmPasswordMinCharacters'))
-    .oneOf([Yup.ref('password'), null], $t('auth.passwordsMustMatch')),
-});
+    .oneOf([Yup.ref('password'), null], $t('auth.passwordsMustMatch'))
+})

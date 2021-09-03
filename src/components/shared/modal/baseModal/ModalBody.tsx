@@ -1,12 +1,12 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
+import { Modal } from 'native-base'
 
 type ModalBodyProps = {
-  children: any;
-};
+  children: React.ReactNode
+}
 
 const ModalBody = ({ children }: ModalBodyProps) => {
-  return <View>{children}</View>;
-};
+  return <Modal.Body>{children}</Modal.Body>
+}
 
-export default ModalBody;
+export default ModalBody

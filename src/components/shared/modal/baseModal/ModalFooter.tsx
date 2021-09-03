@@ -1,12 +1,12 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
+import { Modal } from 'native-base'
 
 type ModalFooterProps = {
-  children: any;
-};
+  children: React.ReactNode
+}
 
 const ModalFooter = ({ children }: ModalFooterProps) => {
-  return <View>{children}</View>;
-};
+  return <Modal.Footer>{children}</Modal.Footer>
+}
 
-export default ModalFooter;
+export default ModalFooter

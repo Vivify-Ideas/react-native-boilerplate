@@ -1,54 +1,54 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { useGetUserQuery } from 'queries/user';
-import { User } from 'types/backend';
+import React, { createContext, useEffect, useState } from 'react'
+import { useGetUserQuery } from 'queries/user'
+import { User } from 'types/backend'
 
 type UserContextProps = {
-  user?: User;
-  refetch: () => void;
-  isLoading: boolean;
-};
+  user?: User
+  refetch: () => void
+  isLoading: boolean
+}
 
 export const UserContext = createContext<UserContextProps>({
   user: undefined,
   refetch: () => {},
-  isLoading: false,
-});
+  isLoading: false
+})
 
 type UserContextProviderProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const {
     data,
     refetch,
-    isLoading: queryIsLoading,
+    isLoading: queryIsLoading
   } = useGetUserQuery(
     () => {
-      setIsLoading(false);
+      setIsLoading(false)
     },
     () => {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  );
+  )
 
   useEffect(() => {
-    setIsLoading(false);
-  }, [data]);
+    setIsLoading(false)
+  }, [data])
 
   return (
     <UserContext.Provider
       value={{
         user: data,
         refetch,
-        isLoading: queryIsLoading || isLoading,
+        isLoading: queryIsLoading || isLoading
       }}
     >
       {children}
     </UserContext.Provider>
-  );
-};
+  )
+}
 
-export default UserContextProvider;
+export default UserContextProvider

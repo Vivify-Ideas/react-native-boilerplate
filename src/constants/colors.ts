@@ -1,14 +1,19 @@
-const tintColor = '#2f95dc';
+import { theme } from 'native-base'
+
+const tintColor = theme.colors.blue['600']
+const white = theme.colors.white
 
 export default {
-  tintColor,
-  tabIconDefault: '#ccc',
+  darkMode: theme.colors.dark['100'],
+  tabIconDefault: theme.colors.trueGray['600'],
+  tabBar: theme.colors.trueGray['50'],
+  errorBackground: theme.colors.red['600'],
+  warningBackground: theme.colors.yellow['300'],
+  warningText: theme.colors.lime['900'],
+  tintColor: tintColor,
   tabIconSelected: tintColor,
-  tabBar: '#fefefe',
-  errorBackground: 'red',
-  errorText: '#fff',
-  warningBackground: '#EAEB5E',
-  warningText: '#666804',
   noticeBackground: tintColor,
-  noticeText: '#fff',
-};
+  errorText: white,
+  noticeText: white,
+  lightMode: white
+}

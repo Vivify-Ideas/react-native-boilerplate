@@ -5,23 +5,15 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react",
-    "lib": [
-      "es6"
-    ],
+    "lib": ["es6"],
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "src/*"
-      ],
-      "tests": [
-        "tests/*"
-      ],
-      "constants": [
-        "src/constants/*"
-      ]
+      "*": ["src/*"],
+      "tests": ["tests/*"],
+      "constants": ["src/constants/*"]
     },
     "resolveJsonModule": true
   },

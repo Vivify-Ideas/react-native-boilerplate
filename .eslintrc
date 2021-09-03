@@ -1,45 +1,19 @@
 {
-  "env": {
-    "react-native/react-native": true,
-    "es6": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-native/all",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "plugins": ["react", "react-native", "react-hooks", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "modules": true,
-      "jsx": true
-    }
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "rules": {
-    "no-dupe-else-if": "off",
-    "no-import-assign": "off",
-    "no-setter-return": "off",
-    "react-native/no-unused-styles": 2,
-    "react/jsx-uses-vars": 2,
-    "react-native/no-color-literals": [0],
-    "react/forbid-prop-types": [0],
-    "react/require-default-props": [0],
-    "global-require": [0],
-    "no-underscore-dangle": [0],
-    "indent": [0],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-    "max-len": [
-      "error",
-      { "code": 100, "ignorePattern": "^import\\s.+\\sfrom\\s.+;$" }
-    ],
+    "import/extensions": "off",
+    "prettier/prettier": "warn",
     "@typescript-eslint/ban-ts-comment": [1],
+    "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/explicit-module-boundary-types": [0],
     "@typescript-eslint/ban-types": [
       "error",
@@ -50,9 +24,11 @@
         "extendDefaults": true
       }
     ],
-    "@typescript-eslint/no-empty-function": [0],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-filename-extension": [0, { "allow": "as-needed" }]
+    "@typescript-eslint/no-empty-function": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
