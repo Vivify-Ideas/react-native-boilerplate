@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Button, View } from 'native-base'
 import { Field, Formik } from 'formik'
 
 import $t from 'i18n'
@@ -57,9 +57,7 @@ export const SignUpForm = ({ onSubmit, signUpErrors }: SignUpFormProps) => (
           secureTextEntry
           placeholder={$t('auth.confirmPassword')}
         />
-        <TouchableOpacity onPress={handleSubmit}>
-          <Text>{$t('auth.signUp')}</Text>
-        </TouchableOpacity>
+        <Button onPress={handleSubmit}>{$t('auth.signUp')}</Button>
       </View>
     )}
   </Formik>

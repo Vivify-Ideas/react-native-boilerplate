@@ -4,6 +4,7 @@ const tintColor = theme.colors.blue['600']
 const white = theme.colors.white
 
 export default {
+  buttonPress: theme.colors.lightBlue['200'],
   darkMode: theme.colors.dark['100'],
   tabIconDefault: theme.colors.trueGray['600'],
   tabBar: theme.colors.trueGray['50'],
@@ -15,5 +16,6 @@ export default {
   noticeBackground: tintColor,
   errorText: white,
   noticeText: white,
-  lightMode: white
+  lightMode: white,
+  white: white
 }

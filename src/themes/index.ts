@@ -7,6 +7,11 @@ export const theme = extendTheme({
     Button: {
       baseStyle: (props: any) => {
         return {
+          _pressed: {
+            _text: {
+              color: Colors.white
+            }
+          },
           _text: {
             color: themeTools.mode(Colors.darkMode, Colors.lightMode)(props)
           },
@@ -17,6 +22,9 @@ export const theme = extendTheme({
         }
       },
       defaultProps: {
+        _pressed: {
+          bgColor: Colors.buttonPress
+        },
         bg: 'white'
       }
     },
