@@ -1,14 +1,24 @@
-import i18n from 'i18n-js'
-import * as Localization from 'expo-localization'
-import en from './locale/en.json'
+import i18n from 'i18next'
+import translationEn from './locale/en.json'
+import config from 'config'
 
-i18n.fallbacks = true
+export const DEAFULT_LOCALE = 'en'
 
-i18n.translations = {
-  en
+const resources = {
+  en: {
+    translation: translationEn
+  }
 }
 
-i18n.locale = Localization.locale
+i18n.init({
+  lng: DEAFULT_LOCALE,
+  fallbackLng: DEAFULT_LOCALE,
+  debug: config.APP_ENV === 'local',
+  interpolation: {
+    escapeValue: false
+  },
+  resources
+})
 
 export default function $t(key: string, params = {}): string {
   return i18n.t(key, params)

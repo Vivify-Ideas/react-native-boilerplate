@@ -6,12 +6,14 @@ type UserContextProps = {
   user?: User
   refetch: () => void
   isLoading: boolean
+  isFetched: boolean
 }
 
 export const UserContext = createContext<UserContextProps>({
   user: undefined,
   refetch: () => {},
-  isLoading: false
+  isLoading: false,
+  isFetched: false
 })
 
 type UserContextProviderProps = {
@@ -24,6 +26,7 @@ const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const {
     data,
     refetch,
+    isFetched,
     isLoading: queryIsLoading
   } = useGetUserQuery(
     () => {
@@ -43,6 +46,7 @@ const UserContextProvider = ({ children }: UserContextProviderProps) => {
       value={{
         user: data,
         refetch,
+        isFetched,
         isLoading: queryIsLoading || isLoading
       }}
     >

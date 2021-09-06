@@ -1,6 +1,7 @@
-/* eslint-disable  react/display-name */
-import * as Icon from '@expo/vector-icons'
 import React from 'react'
+/* eslint-disable  react/display-name */
+import { Ionicons } from '@expo/vector-icons'
+import { Icon } from 'native-base'
 
 type MainHeaderProps = {
   navigation: any
@@ -16,9 +17,10 @@ function MainHeader({ navigation }: MainHeaderProps) {
 
   return {
     headerLeft: () => (
-      <Icon.Ionicons
+      <Icon
+        as={Ionicons}
         name="ios-menu"
-        size={24}
+        size={10}
         onPress={() => {
           navigation.toggleDrawer()
         }}

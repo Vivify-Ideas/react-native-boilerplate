@@ -2,13 +2,9 @@ import 'react-native-gesture-handler'
 import React, { useEffect, useRef, useState } from 'react'
 import { Platform, StatusBar, Text, TextInput } from 'react-native'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import * as Icon from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as Sentry from '@sentry/react-native'
-import AppLoading from 'expo-app-loading'
-import { Asset } from 'expo-asset'
-import * as Font from 'expo-font'
 import { NativeBaseProvider, View } from 'native-base'
 import { theme } from './themes'
 import { InAppNotificationProvider } from 'react-native-in-app-notification'
@@ -43,25 +39,6 @@ const App = ({ skipLoadingScreen }: AppProps) => {
     setIsLoadingComplete(true)
   }
 
-  const loadResourcesAsync = async (): Promise<any> => {
-    return Promise.all([
-      Asset.loadAsync([
-        require('assets/images/robot-dev.png'),
-        require('assets/images/robot-prod.png')
-      ]),
-      Font.loadAsync({
-        // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
-        'space-mono': require('assets/fonts/SpaceMono-Regular.ttf'),
-        'montserrat-bold': require('assets/fonts/Montserrat-Bold.ttf'),
-        'montserrat-italic': require('assets/fonts/Montserrat-Italic.ttf'),
-        'montserrat-regular': require('assets/fonts/Montserrat-Regular.ttf')
-      })
-    ])
-  }
-
   const disableFontScaling = (): void => {
     // @ts-expect-error Property 'defaultProps' does not exist on type 'typeof Text'
     Text.defaultProps = {
@@ -81,16 +58,6 @@ const App = ({ skipLoadingScreen }: AppProps) => {
   useEffect(() => {
     NavigationService.setTopLevelNavigator(navigationRef.current)
   }, [navigationRef])
-
-  if (!isLoadingComplete && !skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={handleFinishLoading}
-      />
-    )
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
