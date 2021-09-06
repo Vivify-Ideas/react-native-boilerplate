@@ -33,7 +33,7 @@ $ cp .env.example .env
 $ # pod install for ios
 $ cd ios && pod install
 $ # if you have the MacBookPro M1 and you have problems with cocoapods you might need to look at this:
-$ # https://stackoverflow.com/questions/64901180/running-cocoapods-on-apple-silicon-m1 
+$ # https://stackoverflow.com/questions/64901180/running-cocoapods-on-apple-silicon-m1 -> sudo arch -x86_64 gem install ffi -> arch -x86_64 pod install
 ```
 Start Metro bundler and targeted application platform
 ```sh

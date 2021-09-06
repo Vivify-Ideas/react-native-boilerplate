@@ -2,15 +2,14 @@ import React, { useContext, useState } from 'react'
 import { Button, Image, View } from 'native-base'
 // @ts-expect-error Module '"expo-image-picker"' has no exported member 'ImagePicker'
 import { ImagePicker } from 'expo-image-picker'
-import * as Permissions from 'expo-permissions'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { UpdateProfileForm } from 'components/profile/UpdateProfileForm'
 import ImagePickerModal from 'components/shared/modal/ImagePickerModal'
 import NoPermissionsForCameraModal from 'components/shared/modal/NoPermissionsForCameraModal'
-import { PERMISSIONS_STATUS } from '../../../constants'
 import { UserContext } from 'contexts/UserContext'
 import { useUpdateUserMutation } from 'queries/user'
 import defaultAvatar from 'assets/images/robot-dev.png'
+import { askForPermission } from 'services/PermissionServiceNative'
 
 const EditProfile = () => {
   const { mutate: handleUserUpdate } = useUpdateUserMutation()
@@ -26,17 +25,9 @@ const EditProfile = () => {
   }
 
   const openImagePickerModal = async (): Promise<void> => {
-    const cameraRollPermissions = await Permissions.askAsync(
-      Permissions.CAMERA_ROLL
-    )
-    const hasCameraRollPermission =
-      cameraRollPermissions.status === PERMISSIONS_STATUS.GRANTED
-    const cameraPermissions = await Permissions.askAsync(Permissions.CAMERA)
-    const hasCameraPermission =
-      cameraPermissions.status === PERMISSIONS_STATUS.GRANTED
-
-    toggleImagePicker(hasCameraPermission && hasCameraRollPermission)
-    togglePermissionsModal(!(hasCameraPermission && hasCameraRollPermission))
+    const cameraPermissions = await askForPermission('CAMERA')
+    const photoLibraryPermissions = await askForPermission('PHOTO_LIBRARY')
+    togglePermissionsModal(!(photoLibraryPermissions && cameraPermissions))
   }
 
   const openCamera = async (): Promise<void> => {

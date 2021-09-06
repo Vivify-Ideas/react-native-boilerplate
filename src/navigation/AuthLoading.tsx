@@ -4,6 +4,7 @@ import { Spinner, View } from 'native-base'
 import $t from 'i18n'
 import SCREENS from 'constants/screens'
 import { UserContext } from 'contexts/UserContext'
+import SplashScreen from 'react-native-splash-screen'
 
 type AuthLoadingScreenProps = {
   children: ({
@@ -16,7 +17,7 @@ type AuthLoadingScreenProps = {
 type StackRendersValues = 'MainStack' | 'AuthStack' | null
 
 const AuthLoadingScreen = ({ children }: AuthLoadingScreenProps) => {
-  const { user, isLoading } = useContext(UserContext)
+  const { user, isLoading, isFetched } = useContext(UserContext)
   const [stackRender, setStackRender] = useState<StackRendersValues>(null)
 
   useEffect(() => {
@@ -24,12 +25,15 @@ const AuthLoadingScreen = ({ children }: AuthLoadingScreenProps) => {
   }, [])
 
   useEffect(() => {
+    // if (isFetched) {
+    SplashScreen.hide()
+    // }
     if (user?.id && !isLoading) {
       setStackRender(SCREENS.MAIN_STACK.INDEX)
     } else if (!user?.id && !isLoading) {
       setStackRender(SCREENS.AUTH_STACK.INDEX)
     }
-  }, [user?.id, isLoading])
+  }, [user?.id, isLoading, isFetched])
 
   // Fetch the token from storage then navigate to our appropriate place
   const bootstrapAsync = async () => {

@@ -7,4 +7,5 @@ declare module 'react-native-dotenv' {
   export const IMAGE_BASE_URL: string
   export const IOS_GOOGLE_CLIENT_ID: string
   export const CLIENT_ID: string
+  export const APP_ENV: string
 }

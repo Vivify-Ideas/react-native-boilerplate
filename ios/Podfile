@@ -14,10 +14,20 @@ target 'ReactNativeBoilerplate' do
     :hermes_enabled => false
   )
 
+  pod 'RNSentry', :path => '../node_modules/@sentry/react-native'
+
   target 'ReactNativeBoilerplateTests' do
     inherit! :complete
     # Pods for testing
   end
+
+  # Getting the required permissions from the user, currently we just need:
+  # CAMERA, NOTIFICATIONS, CAMERA ROLL (Photo library)
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
+  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
 
   # Enables Flipper.
   #

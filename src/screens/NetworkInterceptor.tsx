@@ -1,10 +1,7 @@
 //@ts-nocheck
 import React, { useEffect } from 'react'
-import { Platform } from 'react-native'
+import { Linking } from 'react-native'
 import { View } from 'native-base'
-import * as Linking from 'expo-linking'
-import * as Notifications from 'expo-notifications'
-import * as Permissions from 'expo-permissions'
 import { withInAppNotification } from 'react-native-in-app-notification'
 import OfflineWarning from 'components/shared/OfflineWarning'
 import { DEFAULT, NOTIFICATION, NOTIFICATION_ORIGIN, OS_TYPES } from 'constants'
@@ -12,6 +9,7 @@ import SCREENS from 'constants/screens'
 import authService from 'services/api/AuthService'
 import NavigationService from 'services/NavigationService'
 import { notificationHandleService } from 'services/NotificationHandleService'
+import { askForNotificationsPermission } from 'services/PermissionServiceNative'
 
 type NetworkInterceptorProps = {
   showNotification: (notification: object) => void
@@ -27,16 +25,7 @@ const NetworkInterceptor = ({
   }, [])
 
   const addNotificationListener = async (): Promise<void> => {
-    await Permissions.askAsync(Permissions.NOTIFICATIONS)
-    setUrlEventListener()
-
-    if (Platform.OS === OS_TYPES.ANDROID) {
-      Notifications.createChannelAndroidAsync(DEFAULT, {
-        name: NOTIFICATION,
-        sound: true
-      })
-    }
-    Notifications.addNotificationReceivedListener(handleNotification)
+    askForNotificationsPermission()
   }
 
   const handleNotification = (notification: any): void => {
@@ -52,17 +41,25 @@ const NetworkInterceptor = ({
   }
 
   const setUrlEventListener = () => {
-    //If app is in background
-    Linking.addEventListener('url', event => {
-      const { queryParams } = Linking.parse(event.url)
-      processUrlEvent(queryParams)
-    })
+    const handlePress = useCallback(async () => {
+      // Checking if the link is supported for links with custom URL scheme.
+      const supported = await Linking.canOpenURL(url)
 
-    //If app is not open
-    Linking.getInitialURL().then(url => {
-      const { queryParams } = Linking.parse(url)
-      processUrlEvent(queryParams)
-    })
+      if (supported) {
+        Linking.addEventListener('url', event => {
+          const { queryParams } = Linking.parse(event.url)
+          processUrlEvent(queryParams)
+        })
+
+        //If app is not open
+        Linking.getInitialURL().then(url => {
+          const { queryParams } = Linking.parse(url)
+          processUrlEvent(queryParams)
+        })
+      } else {
+        Alert.alert(`Don't know how to open this URL: ${url}`)
+      }
+    }, [url])
   }
 
   const processUrlEvent = async queryParams => {
