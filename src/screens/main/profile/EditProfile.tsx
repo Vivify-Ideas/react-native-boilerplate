@@ -27,7 +27,9 @@ const EditProfile = () => {
   const openImagePickerModal = async (): Promise<void> => {
     const cameraPermissions = await askForPermission('CAMERA')
     const photoLibraryPermissions = await askForPermission('PHOTO_LIBRARY')
-    togglePermissionsModal(!(photoLibraryPermissions && cameraPermissions))
+    togglePermissionsModal(
+      photoLibraryPermissions === 'granted' && cameraPermissions === 'granted'
+    )
   }
 
   const openCamera = async (): Promise<void> => {

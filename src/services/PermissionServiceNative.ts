@@ -3,10 +3,10 @@ import {
   check,
   requestNotifications,
   PERMISSIONS,
-  RESULTS,
   Permission
 } from 'react-native-permissions'
 import { Platform } from 'react-native'
+import { OS_TYPES } from '../constants'
 // type used in usage examples
 type PermissionStatus =
   | 'unavailable'
@@ -25,59 +25,36 @@ export async function askForNotificationsPermission(): Promise<PermissionStatus>
 
 export async function askForPermission(
   permissionToGet: any
-): Promise<object | boolean> {
+): Promise<PermissionStatus> {
   const permissionsArray = ['CAMERA', 'PHOTO_LIBRARY']
 
-  if (permissionsArray.indexOf(permissionToGet) == -1) {
-    return false
+  if (permissionsArray.indexOf(permissionToGet) > 0) {
+    return null
   }
 
-  const theOS = Platform.OS.toUpperCase()
-
-  let typeOfPermission: Permission
+  let typeOfPermission: Permission | undefined = PERMISSIONS.IOS.CAMERA
   if (permissionToGet == 'CAMERA') {
     typeOfPermission =
-      theOS == 'ANDROID' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA
+      Platform.OS === OS_TYPES.ANDROID
+        ? PERMISSIONS.ANDROID.CAMERA
+        : PERMISSIONS.IOS.CAMERA
   } else if (permissionToGet == 'PHOTO_LIBRARY') {
     typeOfPermission =
-      theOS == 'ANDROID'
+      Platform.OS === OS_TYPES.ANDROID
         ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE
         : PERMISSIONS.IOS.PHOTO_LIBRARY
   }
 
-  // @ts-expect-error waiting for this to be assigned
-  check(typeOfPermission)
-    .then(result => {
-      switch (result) {
-        case RESULTS.UNAVAILABLE:
-          console.log(
-            'This feature is not available (on this device / in this context)'
-          )
-          break
-        case RESULTS.DENIED:
-          console.log(
-            'The permission has not been requested / is denied but requestable'
-          )
-          break
-        case RESULTS.LIMITED:
-          console.log('The permission is limited: some actions are possible')
-          break
-        case RESULTS.GRANTED:
-          console.log('The permission is granted')
-          return true
-          break
-        case RESULTS.BLOCKED:
-          console.log('The permission is denied and not requestable anymore')
-          break
-      }
-    })
-    .catch(error => {
-      console.log(error)
-    })
+  const permissionStatus = await check(typeOfPermission).then(result => {
+    return result
+  })
+  if (permissionStatus !== 'denied') {
+    // if it is denied that means there is still a chance that the user will confirm
+    return permissionStatus
+  }
 
-  // @ts-expect-error waiting for this to be assigned
   request(typeOfPermission).then(result => {
     return result
   })
-  return false
+  return null
 }

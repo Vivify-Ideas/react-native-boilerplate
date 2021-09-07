@@ -25,9 +25,9 @@ const AuthLoadingScreen = ({ children }: AuthLoadingScreenProps) => {
   }, [])
 
   useEffect(() => {
-    // if (isFetched) {
-    SplashScreen.hide()
-    // }
+    if (isFetched || !isLoading) {
+      SplashScreen.hide()
+    }
     if (user?.id && !isLoading) {
       setStackRender(SCREENS.MAIN_STACK.INDEX)
     } else if (!user?.id && !isLoading) {

@@ -160,8 +160,9 @@ class AuthService extends ApiService {
 
   getAccessToken = async (): Promise<string | undefined> => {
     const user = await asyncStorageService.getItem('user')
+    const jsonUser = JSON.parse(user)
 
-    return user ? user.accessToken : undefined
+    return user ? jsonUser.accessToken : undefined
   }
 
   getUser = async (): Promise<object> => {

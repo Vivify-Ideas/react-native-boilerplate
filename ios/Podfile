@@ -14,7 +14,6 @@ target 'ReactNativeBoilerplate' do
     :hermes_enabled => false
   )
 
-  pod 'RNSentry', :path => '../node_modules/@sentry/react-native'
 
   target 'ReactNativeBoilerplateTests' do
     inherit! :complete
@@ -28,6 +27,7 @@ target 'ReactNativeBoilerplate' do
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
   pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   # Enables Flipper.
   #

@@ -13,9 +13,11 @@ public class BasePackageList {
         new expo.modules.font.FontLoaderPackage(),
         new expo.modules.imageloader.ImageLoaderPackage(),
         new expo.modules.imagepicker.ImagePickerPackage(),
+        new expo.modules.localization.LocalizationPackage(),
         new expo.modules.notifications.NotificationsPackage(),
         new expo.modules.permissions.PermissionsPackage(),
-        new expo.modules.splashscreen.SplashScreenPackage()
+        new expo.modules.splashscreen.SplashScreenPackage(),
+        new expo.modules.webbrowser.WebBrowserPackage()
     );
   }
 }
