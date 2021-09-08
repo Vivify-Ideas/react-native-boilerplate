@@ -24,14 +24,8 @@ export async function askForNotificationsPermission(): Promise<PermissionStatus>
 }
 
 export async function askForPermission(
-  permissionToGet: any
+  permissionToGet: 'CAMERA' | 'PHOTO_LIBRARY'
 ): Promise<PermissionStatus> {
-  const permissionsArray = ['CAMERA', 'PHOTO_LIBRARY']
-
-  if (permissionsArray.indexOf(permissionToGet) > 0) {
-    return null
-  }
-
   let typeOfPermission: Permission | undefined = PERMISSIONS.IOS.CAMERA
   if (permissionToGet == 'CAMERA') {
     typeOfPermission =
