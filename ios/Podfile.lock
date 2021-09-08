@@ -1,9 +1,9 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
-  - EXApplication (3.1.2):
+  - EXApplication (3.2.0):
     - UMCore
-  - EXConstants (11.0.2):
+  - EXConstants (11.0.1):
     - ExpoModulesCore
     - UMCore
   - EXFileSystem (11.0.2):
@@ -20,11 +20,9 @@ PODS:
     - UMCore
     - UMFileSystemInterface
     - UMPermissionsInterface
-  - EXLocalization (10.2.0):
+  - EXNotifications (0.12.3):
+    - ExpoModulesCore
     - UMCore
-  - EXNotifications (0.11.6):
-    - UMCore
-    - UMPermissionsInterface
   - EXPermissions (12.0.1):
     - UMCore
     - UMPermissionsInterface
@@ -36,11 +34,6 @@ PODS:
     - UMCore
   - ExpoModulesCore/Interfaces (0.2.0):
     - ExpoModulesCore/Core
-    - UMCore
-  - EXSplashScreen (0.11.4):
-    - React-Core
-    - UMCore
-  - EXWebBrowser (9.2.0):
     - UMCore
   - FBLazyVector (0.64.2)
   - FBReactNativeSpec (0.64.2):
@@ -397,17 +390,14 @@ PODS:
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXApplication (from `../node_modules/expo-application/ios`)
-  - EXConstants (from `../node_modules/expo-linking/node_modules/expo-constants/ios`)
+  - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
   - EXImagePicker (from `../node_modules/expo-image-picker/ios`)
-  - EXLocalization (from `../node_modules/expo-localization/ios`)
   - EXNotifications (from `../node_modules/expo-notifications/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core/ios`)
-  - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
-  - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -477,7 +467,7 @@ EXTERNAL SOURCES:
   EXApplication:
     :path: "../node_modules/expo-application/ios"
   EXConstants:
-    :path: "../node_modules/expo-linking/node_modules/expo-constants/ios"
+    :path: "../node_modules/expo-constants/ios"
   EXFileSystem:
     :path: "../node_modules/expo-file-system/ios"
   EXFont:
@@ -486,18 +476,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-image-loader/ios"
   EXImagePicker:
     :path: "../node_modules/expo-image-picker/ios"
-  EXLocalization:
-    :path: "../node_modules/expo-localization/ios"
   EXNotifications:
     :path: "../node_modules/expo-notifications/ios"
   EXPermissions:
     :path: "../node_modules/expo-permissions/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core/ios"
-  EXSplashScreen:
-    :path: "../node_modules/expo-splash-screen/ios"
-  EXWebBrowser:
-    :path: "../node_modules/expo-web-browser/ios"
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
@@ -612,18 +596,15 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
-  EXApplication: 4797b8b37f0b0470f587fdccf6407f44b50d18b5
-  EXConstants: 4cb52b6d8f636c767104a44bf7db3873e9c01a6f
+  EXApplication: 9ff2a206009d6e55bca6c20b3f33d07986b51ef3
+  EXConstants: 3babb61f8f4bb7dffe85b8b7d6eaa31d903e4d7e
   EXFileSystem: dcf2273f49431e5037347c733a2dc5d08e0d0a9e
   EXFont: 9846ba1bb6f5f5aed44e20eea3ac70693323832d
   EXImageLoader: da941c9399e01ec28f2d5b270bdd21f2c8ca596c
   EXImagePicker: dd05b8a5cb782c79d07d1d72e5850c6acc2b9a37
-  EXLocalization: 356f4e16a606cec21a77d6250528fde526152b45
-  EXNotifications: c13e078d83ce01c7aeb8e3f44a48c13f50099291
+  EXNotifications: 171ccaf17643811673c78f4c4830560d6e5a92aa
   EXPermissions: 8f8c1c05580c4e02d4ee2c8dd74bfe173ff6a723
   ExpoModulesCore: 2734852616127a6c1fc23012197890a6f3763dc7
-  EXSplashScreen: 847e0d8026731c1090bf269ede3e15ac87d88958
-  EXWebBrowser: 76783ba5dcb8699237746ecf41a9643d428a4cc5
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
   FBReactNativeSpec: 2c7313f9efb70b156af5ee3fce9114f40681e3a8
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
