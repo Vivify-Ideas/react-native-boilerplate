@@ -7,8 +7,13 @@ import { signInValidationRules } from 'validation/auth'
 import ErrorText from '../shared/Text/ErrorText'
 import { TextInputField } from '../shared/FormFields'
 
+type SignInFormData = {
+  email: string
+  password: string
+}
+
 type SignInFormProps = {
-  onSubmit: (data: any) => void
+  onSubmit: (data: SignInFormData) => void
   signInError: boolean
 }
 

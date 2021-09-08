@@ -25,6 +25,49 @@ const ENDPOINTS = {
   REFRESH_TOKEN: '/auth/refresh'
 }
 
+type userCredentialsProp = {
+  data: {
+    firstName: string
+    lastName: string
+    avatar: string
+    id: string
+    token: string
+  }
+}
+
+type forgotPasswordProp = {
+  email: string
+}
+
+type newPasswordProp = {
+  newPassword: string
+}
+
+type loginCredentials = {
+  email: string
+  password: string
+}
+
+type registerCredentials = {
+  email: string
+  password: string
+}
+
+type googleLoginCredentials = {
+  type: string
+  accessToken: string
+}
+
+type facebookLoginCredentials = {
+  type: string
+  token: string
+}
+
+type refreshTokenProp = {
+  JwtToken: string
+  JwtRefreshToken: string
+}
+
 class AuthService extends ApiService {
   constructor() {
     super()
@@ -54,7 +97,7 @@ class AuthService extends ApiService {
     })
   }
 
-  createSession = async (user: object): Promise<void> => {
+  createSession = async (user: userCredentialsProp): Promise<void> => {
     await asyncStorageService.setItem('user', JSON.stringify(user))
     await this.setAuthorizationHeader()
     // const expoPushToken = await askForNotificationsPermissio();
@@ -70,10 +113,9 @@ class AuthService extends ApiService {
     this.api.removeHeaders(['Authorization'])
   }
 
-  login = async (credentials: {
-    username: string
-    password: string
-  }): Promise<object> => {
+  login = async (
+    credentials: loginCredentials
+  ): Promise<userCredentialsProp> => {
     const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, credentials)
     this.createSession(data)
 
@@ -81,8 +123,8 @@ class AuthService extends ApiService {
   }
 
   googleLogin = async (
-    loginPromise: Promise<{ type: string; accessToken: string }>
-  ): Promise<object> => {
+    loginPromise: Promise<googleLoginCredentials>
+  ): Promise<userCredentialsProp> => {
     const result = await loginPromise
     if (result.type !== 'success') {
       throw new Error(result.type)
@@ -109,8 +151,8 @@ class AuthService extends ApiService {
   }
 
   facebookLogin = async (
-    loginPromise: Promise<{ type: string; token: string }>
-  ): Promise<object> => {
+    loginPromise: Promise<facebookLoginCredentials>
+  ): Promise<userCredentialsProp> => {
     const result = await loginPromise
     if (result.type !== 'success') {
       throw new Error(result.type)
@@ -138,36 +180,36 @@ class AuthService extends ApiService {
     return null
   }
 
-  forgotPassword = async ({ email }: { email: string }): Promise<null> => {
+  forgotPassword = async ({ email }: forgotPasswordProp): Promise<null> => {
     await this.apiClient.post(ENDPOINTS.FORGOT_PASSWORD, { email })
 
     return null
   }
 
-  resetPassword = async (data: { newPassword: string }): Promise<null> => {
+  resetPassword = async (data: newPasswordProp): Promise<null> => {
     await this.apiClient.post(ENDPOINTS.RESET_PASSWORD, data)
     return null
   }
 
-  signup = async (signupData: {
-    email: string
-    password: string
-  }): Promise<object> => {
+  signup = async (
+    signupData: registerCredentials
+  ): Promise<userCredentialsProp> => {
     await this.apiClient.post(ENDPOINTS.SIGN_UP, signupData)
     const { email, password } = signupData
-    return this.login({ username: email, password })
+    return this.login({ email, password })
   }
 
-  getAccessToken = async (): Promise<string | undefined> => {
+  getAccessToken = async (): Promise<string | undefined | null> => {
     const user = await asyncStorageService.getItem('user')
     const jsonUser = JSON.parse(user)
 
     return user ? jsonUser.accessToken : undefined
   }
 
-  getUser = async (): Promise<object> => {
+  getUser = async (): Promise<userCredentialsProp> => {
     const user = await asyncStorageService.getItem('user')
-    return JSON.parse(user)
+    const data = JSON.parse(user)
+    return data
   }
 
   updateUserInStorage = async (property: object): Promise<void> => {
@@ -177,10 +219,7 @@ class AuthService extends ApiService {
     asyncStorageService.setItem('user', JSON.stringify(jsonUser))
   }
 
-  refreshToken = async (payload: {
-    JwtToken: string
-    JwtRefreshToken: string
-  }): Promise<null> => {
+  refreshToken = async (payload: refreshTokenProp): Promise<null> => {
     const { data } = await this.apiClient.post(ENDPOINTS.REFRESH_TOKEN, payload)
 
     await this.createSession(data)

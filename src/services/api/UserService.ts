@@ -7,17 +7,25 @@ const ENDPOINTS = {
   USER: '/api/user/update'
 }
 
+type changePasswordProp = {
+  current_password: string
+  new_password: string
+  new_password_confirmation: string
+}
+
+type editProfileProp = {
+  avatar: { uri: string }
+  firstName: string
+  lastName: string
+}
+
 class UserService extends ApiService {
   me = async (): Promise<User> => {
     const { data } = await this.apiClient.get(ENDPOINTS.ME)
     return data
   }
 
-  edit = async (data: {
-    avatar: { uri: string }
-    firstName: string
-    lastName: string
-  }): Promise<User> => {
+  edit = async (data: editProfileProp): Promise<User> => {
     const formData = new FormData()
     if (data.avatar) {
       const { uri } = data.avatar

@@ -11,7 +11,7 @@ class AsyncStorageService {
     return null
   }
 
-  async setItem(key: string, value: any): Promise<void> {
+  async setItem(key: string, value: string): Promise<void> {
     await AsyncStorage.setItem(key, JSON.stringify(value))
   }
 

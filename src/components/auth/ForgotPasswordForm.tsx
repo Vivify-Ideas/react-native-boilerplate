@@ -7,8 +7,12 @@ import { forgotPasswordValidationRules } from 'validation/auth'
 import { TextInputField } from '../shared/FormFields'
 import ErrorText from '../shared/Text/ErrorText'
 
+type ForgotPasswordFormData = {
+  email: string
+}
+
 type ForgotPasswordFormProps = {
-  onSubmit: (data: any) => void
+  onSubmit: (data: ForgotPasswordFormData) => void
   forgotPasswordError: boolean
 }
 

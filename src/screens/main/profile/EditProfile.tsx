@@ -9,7 +9,15 @@ import NoPermissionsForCameraModal from 'components/shared/modal/NoPermissionsFo
 import { UserContext } from 'contexts/UserContext'
 import { useUpdateUserMutation } from 'queries/user'
 import defaultAvatar from 'assets/images/robot-dev.png'
-import { askForPermission } from 'services/PermissionServiceNative'
+import { askForPermission } from '../../../services/PermissionServiceNative'
+
+type updateUserData = {
+  lastName: string
+  firstName: string
+  avatar: {
+    uri: string
+  }
+}
 
 const EditProfile = () => {
   const { mutate: handleUserUpdate } = useUpdateUserMutation()
@@ -20,16 +28,20 @@ const EditProfile = () => {
   const [permissionsModalVisible, togglePermissionsModal] =
     useState<boolean>(false)
 
-  const handleSubmit = (updateUserData: any): void => {
+  const handleSubmit = (updateUserData: updateUserData): void => {
     handleUserUpdate({ ...updateUserData, avatar: image })
   }
 
   const openImagePickerModal = async (): Promise<void> => {
     const cameraPermissions = await askForPermission('CAMERA')
     const photoLibraryPermissions = await askForPermission('PHOTO_LIBRARY')
-    togglePermissionsModal(
-      photoLibraryPermissions === 'granted' && cameraPermissions === 'granted'
-    )
+
+    const imagePicker =
+      photoLibraryPermissions === 'granted' ||
+      photoLibraryPermissions === 'limited'
+    const cameraPermissionsRes = cameraPermissions === 'granted'
+    togglePermissionsModal(!(imagePicker && cameraPermissionsRes))
+    toggleImagePicker(imagePicker)
   }
 
   const openCamera = async (): Promise<void> => {
@@ -69,7 +81,7 @@ const EditProfile = () => {
         )}
       </Button>
       <KeyboardAwareScrollView enableOnAndroid>
-        <UpdateProfileForm onSubmit={handleSubmit} user={user} />
+        <UpdateProfileForm onSubmit={() => handleSubmit} user={user} />
       </KeyboardAwareScrollView>
       <NoPermissionsForCameraModal
         isVisible={permissionsModalVisible}

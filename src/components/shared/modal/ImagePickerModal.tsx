@@ -2,7 +2,7 @@ import React from 'react'
 import $t from 'i18n'
 
 import { Modal, ModalHeader, ModalBody, ModalFooter } from './baseModal'
-import { Button, Text } from 'native-base'
+import { Button } from 'native-base'
 
 type ImagePickerModalProps = {
   isVisible: boolean
