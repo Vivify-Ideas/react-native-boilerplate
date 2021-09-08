@@ -3,6 +3,11 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 import config from 'config'
 import asyncStorageService from '../AsyncStorageService'
 
+type headersProp = {
+  Authorization?: string
+  clientId?: string
+}
+
 class HttpService {
   client: AxiosInstance
   unauthorizedCallback: () => void
@@ -16,7 +21,7 @@ class HttpService {
     this.unauthorizedCallback = () => {}
   }
 
-  attachHeaders(headers: object): void {
+  attachHeaders(headers: headersProp): void {
     Object.assign(this.client.defaults.headers, headers)
   }
 

@@ -6,12 +6,12 @@ import SCREENS from 'constants/screens'
 import HomeScreen from 'screens/main/HomeScreen'
 import ChangePasswordScreen from 'screens/main/profile/ChangePassword'
 import EditProfileScreen from 'screens/main/profile/EditProfile'
-import { HomeStackNavigationProp } from 'types/navigation'
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 
 const StackNavigator = createStackNavigator()
 
 type Props = {
-  navigation: HomeStackNavigationProp
+  navigation: DrawerNavigationHelpers
 }
 
 const HomeStack = ({ navigation }: Props) => {

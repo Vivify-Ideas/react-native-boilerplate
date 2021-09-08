@@ -1,19 +1,19 @@
-import * as Icon from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
+import { Icon } from 'native-base'
 import React from 'react'
-import { StyleSheet } from 'react-native'
 import Colors from '../constants/colors'
 
 type TabBarIconProps = {
-  name: any
+  name: string
   focused: boolean
 }
 
 const TabBarIcon = ({ name, focused }: TabBarIconProps) => {
   return (
-    <Icon.Ionicons
+    <Icon
+      as={Ionicons}
       name={name}
-      size={26}
-      style={styles.icon}
+      size={15}
       color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
     />
   )
@@ -22,9 +22,3 @@ const TabBarIcon = ({ name, focused }: TabBarIconProps) => {
 TabBarIcon.displayName = 'TabBarIcon'
 
 export default TabBarIcon
-
-const styles = StyleSheet.create({
-  icon: {
-    marginBottom: -3
-  }
-})

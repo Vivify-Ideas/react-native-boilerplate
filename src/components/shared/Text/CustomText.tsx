@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, TextStyle } from 'react-native'
 
 const FONT_FAMILY = {
   REGULAR: { fontFamily: 'montserrat-regular' },
@@ -10,7 +10,7 @@ const FONT_FAMILY = {
 type CustomTextProps = {
   bold?: boolean
   italic?: boolean
-  style?: any
+  style?: TextStyle
   children?: React.ReactChild
 }
 

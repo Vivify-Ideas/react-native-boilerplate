@@ -7,8 +7,16 @@ import { signUpValidationRules } from 'validation/auth'
 import { TextInputField } from '../shared/FormFields'
 import ErrorText from '../shared/Text/ErrorText'
 
+type SignUpFormData = {
+  first_name: string
+  last_name: string
+  email: string
+  password: string
+  confirm_password: string
+}
+
 type SignUpFormProps = {
-  onSubmit: (data: any) => void
+  onSubmit: (data: SignUpFormData) => void
   signUpErrors: { email: string }
 }
 
