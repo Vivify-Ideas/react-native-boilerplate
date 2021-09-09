@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Switch, HStack, Text, useColorMode, theme } from 'native-base'
+import React from 'react'
+import { Switch, HStack, Text, useColorMode } from 'native-base'
 import asyncStorageService from 'services/AsyncStorageService'
 
 type ThemeSwitchProps = {

@@ -6,3 +6,8 @@ export interface User {
   id: string
   avatar: string
 }
+
+export interface CredentialsLogin {
+  email: string
+  password: string
+}

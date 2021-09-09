@@ -5,7 +5,7 @@ export const theme = extendTheme({
   // This is for the Dark theme that the user chooses
   components: {
     Button: {
-      baseStyle: (props: any) => {
+      baseStyle: ({ colorMode }) => {
         return {
           _pressed: {
             _text: {
@@ -13,12 +13,10 @@ export const theme = extendTheme({
             }
           },
           _text: {
-            color: themeTools.mode(Colors.darkMode, Colors.lightMode)(props)
+            color: colorMode === 'light' ? Colors.darkMode : Colors.lightMode
           },
-          backgroundColor: themeTools.mode(
-            Colors.lightMode,
-            Colors.darkMode
-          )(props)
+          backgroundColor:
+            colorMode === 'light' ? Colors.lightMode : Colors.darkMode
         }
       },
       defaultProps: {
@@ -35,17 +33,17 @@ export const theme = extendTheme({
     },
     Text: {
       // For all the Text components
-      baseStyle: (props: any) => {
+      baseStyle: ({ colorMode }) => {
         return {
-          color: themeTools.mode(Colors.darkMode, Colors.lightMode)(props)
+          color: colorMode === 'light' ? Colors.darkMode : Colors.lightMode
         }
       }
     },
     View: {
-      baseStyle: (props: any) => {
+      baseStyle: ({ colorMode }: { colorMode: string }) => {
         return {
           flex: 1,
-          bg: themeTools.mode(Colors.lightMode, Colors.darkMode)(props)
+          bg: colorMode === 'light' ? Colors.lightMode : Colors.darkMode
         }
       },
       defaultProps: {

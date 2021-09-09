@@ -11,15 +11,16 @@ import MainHeader from '../components/shared/headers/MainHeader'
 import SCREENS from 'constants/screens'
 import $t from 'i18n'
 import { ThemeSwitch } from 'components/shared/ThemeSwitch'
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 
 const StackNavigator = createStackNavigator<SettingsStackParamsList>()
 
 type SettingsStackProp = {
-  navigation: SettingsStackNavigationProp
+  navigation: DrawerNavigationHelpers
 }
 
 type SettingsScreenProp = {
-  navigation: SettingsScreenNavigationProp
+  navigation: DrawerNavigationHelpers
   route: SettingsScreenRouteProp
 }
 

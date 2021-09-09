@@ -7,13 +7,13 @@ const ENDPOINTS = {
   USER: '/api/user/update'
 }
 
-type changePasswordProp = {
+type ChangePasswordProp = {
   current_password: string
   new_password: string
   new_password_confirmation: string
 }
 
-type editProfileProp = {
+type EditProfileProp = {
   avatar: { uri: string }
   firstName: string
   lastName: string
@@ -25,7 +25,7 @@ class UserService extends ApiService {
     return data
   }
 
-  edit = async (data: editProfileProp): Promise<User> => {
+  edit = async (data: EditProfileProp): Promise<User> => {
     const formData = new FormData()
     if (data.avatar) {
       const { uri } = data.avatar
