@@ -1,33 +1,32 @@
-import { Ionicons } from '@expo/vector-icons'
-import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
-import { Icon } from 'native-base'
+/* eslint-disable  react/display-name */
 import React from 'react'
+import { Ionicons } from '@expo/vector-icons'
+import { Icon } from 'native-base'
 
 type MainHeaderProps = {
-  navigation: DrawerNavigationHelpers
+  navigation: any
 }
 
-const styles = {
-  menuIcon: {
-    marginLeft: 10,
-    marginTop: 10
+function MainHeader({ navigation }: MainHeaderProps) {
+  const styles = {
+    menuIcon: {
+      marginLeft: 10,
+      marginTop: 10
+    }
+  }
+  return {
+    headerLeft: () => (
+      <Icon
+        as={Ionicons}
+        name="ios-menu"
+        size={10}
+        onPress={() => {
+          navigation.toggleDrawer()
+        }}
+        style={styles.menuIcon}
+      />
+    )
   }
 }
-
-const MainHeader = ({ navigation }: MainHeaderProps) => {
-  return (
-    <Icon
-      as={Ionicons}
-      name="ios-menu"
-      size={10}
-      onPress={() => {
-        navigation.toggleDrawer()
-      }}
-      style={styles.menuIcon}
-    />
-  )
-}
-
-MainHeader.displayName = 'MainHeader'
 
 export default MainHeader
