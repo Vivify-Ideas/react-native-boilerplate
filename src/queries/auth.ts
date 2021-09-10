@@ -4,36 +4,29 @@ import SCREENS from 'constants/screens'
 import { UserContext } from 'contexts/UserContext'
 import authService from 'services/api/AuthService'
 import NavigationService from 'services/NavigationService'
+import { CredentialsLogin, ForgotPasswordProp } from 'types/auth'
 
 export const useLoginMutation = () => {
   const { refetch } = useContext(UserContext)
 
-  return useMutation<object, Error, { username: string; password: string }>(
-    authService.login,
-    {
-      retry: false,
-      onSuccess: async () => {
-        refetch()
-      }
+  return useMutation<object, Error, CredentialsLogin>(authService.login, {
+    retry: false,
+    onSuccess: async () => {
+      refetch()
     }
-  )
+  })
 }
 
 export const useRegisterMutation = () => {
-  return useMutation<
-    object,
-    Error,
-    {
-      email: string
-      password: string
-    }
-  >(authService.signup, {
+  return useMutation<object, Error, CredentialsLogin>(authService.signup, {
     onSuccess: () => NavigationService.navigate(SCREENS.AUTH_STACK.INDEX)
   })
 }
 
 export const useForgotPasswordMutation = () => {
-  return useMutation<null, Error, { email: string }>(authService.forgotPassword)
+  return useMutation<null, Error, ForgotPasswordProp>(
+    authService.forgotPassword
+  )
 }
 
 export const useResetPasswordMutation = () => {

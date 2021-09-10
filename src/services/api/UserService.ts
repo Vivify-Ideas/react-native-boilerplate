@@ -45,7 +45,7 @@ class UserService extends ApiService {
     return responseData
   }
 
-  changePassword = async (data: object): Promise<void> => {
+  changePassword = async (data: ChangePasswordProp): Promise<void> => {
     this.apiClient.post(ENDPOINTS.CHANGE_PASSWORD, data)
   }
 }

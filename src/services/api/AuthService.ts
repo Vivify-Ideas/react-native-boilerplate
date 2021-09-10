@@ -6,7 +6,16 @@ import config from 'config'
 import { OS_TYPES } from '../../constants'
 import ApiService from './ApiService'
 import asyncStorageService from '../AsyncStorageService'
-import { CredentialsLogin, User } from 'types/backend'
+import { User } from 'types/backend'
+import {
+  CredentialsLogin,
+  FacebookLoginCredentials,
+  ForgotPasswordProp,
+  GoogleLoginCredentials,
+  NewPasswordProp,
+  RefreshTokenProp,
+  UserCredentialsProp
+} from 'types/auth'
 
 const {
   ANDROID_GOOGLE_CLIENT_ID,
@@ -26,32 +35,6 @@ const ENDPOINTS = {
   REFRESH_TOKEN: '/auth/refresh'
 }
 
-type UserCredentialsProp = Pick<
-  User,
-  'firstName' | 'lastName' | 'email' | 'id' | 'avatar'
->
-
-type ForgotPasswordProp = Pick<User, 'email'>
-
-type NewPasswordProp = {
-  newPassword: string
-}
-
-type GoogleLoginCredentials = {
-  type: string
-  accessToken: string
-}
-
-type FacebookLoginCredentials = {
-  type: string
-  token: string
-}
-
-type RefreshTokenProp = {
-  JwtToken: string
-  JwtRefreshToken: string
-}
-
 class AuthService extends ApiService {
   constructor() {
     super()
@@ -60,7 +43,7 @@ class AuthService extends ApiService {
 
   init = async (): Promise<void> => {
     const token = await this.getAccessToken()
-    const user = await this.getUser()
+    const user = await this.getUserFromAsyncStorage()
 
     if (token && user) {
       await this.setAuthorizationHeader()
@@ -68,8 +51,8 @@ class AuthService extends ApiService {
     }
   }
 
-  getUserInfoFromStorage = async (): Promise<any> => {
-    return await asyncStorageService.getItem('user')
+  getUserFromAsyncStorage = async () => {
+    return (await asyncStorageService.getItem('user')) as User | null
   }
 
   setAuthorizationHeader = async (): Promise<void> => {
@@ -187,23 +170,15 @@ class AuthService extends ApiService {
     return this.login({ email, password })
   }
 
-  getAccessToken = async (): Promise<string | undefined | null> => {
-    const user = (await asyncStorageService.getItem('user')) as {
-      accessToken: string
-    } | null
+  getAccessToken = async (): Promise<string | undefined> => {
+    const user = await this.getUserFromAsyncStorage()
 
-    return user ? user.accessToken : undefined
-  }
-
-  getUser = async (): Promise<UserCredentialsProp> => {
-    const user = (await asyncStorageService.getItem('user')) as string
-    return JSON.parse(user)
+    return user?.accessToken
   }
 
   updateUserInStorage = async (property: object): Promise<void> => {
-    const user = (await asyncStorageService.getItem('user')) as string
-    let jsonUser = JSON.parse(user)
-    jsonUser = { ...jsonUser, ...property }
+    const user = await this.getUserFromAsyncStorage()
+    const jsonUser = { ...user, ...property }
     asyncStorageService.setItem('user', JSON.stringify(jsonUser))
   }
 

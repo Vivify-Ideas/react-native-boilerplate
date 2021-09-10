@@ -6,13 +6,10 @@ import $t from 'i18n'
 import { forgotPasswordValidationRules } from 'validation/auth'
 import { TextInputField } from '../shared/FormFields'
 import ErrorText from '../shared/Text/ErrorText'
-
-type ForgotPasswordFormData = {
-  email: string
-}
+import { ForgotPasswordProp } from 'types/auth'
 
 type ForgotPasswordFormProps = {
-  onSubmit: (data: ForgotPasswordFormData) => void
+  onSubmit: (data: ForgotPasswordProp) => void
   forgotPasswordError: boolean
 }
 

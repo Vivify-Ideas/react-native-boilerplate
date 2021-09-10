@@ -7,8 +7,13 @@ import { resetPasswordValidationRules } from 'validation/auth'
 import ErrorText from '../shared/Text/ErrorText'
 import { TextInputField } from '../shared/FormFields'
 
+type ResetPasswordFields = {
+  password: string
+  password_confirmation: string
+}
+
 type ResetPasswordFormProps = {
-  onSubmit: (data: object) => void
+  onSubmit: (data: ResetPasswordFields) => void
   resetPasswordError: boolean
 }
 

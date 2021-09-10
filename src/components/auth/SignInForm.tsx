@@ -6,14 +6,10 @@ import $t from 'i18n'
 import { signInValidationRules } from 'validation/auth'
 import ErrorText from '../shared/Text/ErrorText'
 import { TextInputField } from '../shared/FormFields'
-
-type SignInFormData = {
-  email: string
-  password: string
-}
+import { CredentialsLogin } from 'types/auth'
 
 type SignInFormProps = {
-  onSubmit: (data: SignInFormData) => void
+  onSubmit: (data: CredentialsLogin) => void
   signInError: boolean
 }
 
