@@ -58,7 +58,7 @@ const App = () => {
                   <AuthLoading>
                     {({ isAuthenticated }) => (
                       <StackNavigator.Navigator headerMode="none">
-                        {!isAuthenticated ? (
+                        {isAuthenticated ? (
                           <StackNavigator.Screen
                             name={SCREENS.MAIN_STACK.INDEX}
                             component={MainTabNavigator}
