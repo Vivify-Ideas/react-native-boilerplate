@@ -46,7 +46,7 @@
     "@react-native-community/netinfo": "^6.0.0",
     "@react-navigation/bottom-tabs": "^5.11.10",
     "@react-navigation/drawer": "^5.12.5",
-    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^5.14.4",
     "@sentry/react-native": "^2.4.0",
     "axios": "^0.21.1",

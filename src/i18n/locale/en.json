@@ -91,5 +91,9 @@
       "darkMode": "Dark Mode",
       "toUserProfile": "Navigate to user profile"
     }
+  },
+  "tabNavigation":{
+    "home": "Home",
+    "settings": "Settings"
   }
 }
