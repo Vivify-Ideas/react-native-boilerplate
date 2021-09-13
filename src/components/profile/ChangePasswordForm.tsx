@@ -7,8 +7,14 @@ import { changePasswordValidationRules } from 'validation/profile'
 import { TextInputField } from '../shared/FormFields'
 import ErrorText from '../shared/Text/ErrorText'
 
+type PasswordData = {
+  current_password: string
+  new_password: string
+  new_password_confirmation: string
+}
+
 type ChangePasswordFormProps = {
-  onSubmit: (passwordData: object) => void
+  onSubmit: (passwordData: PasswordData) => void
   invalidOldPasswordError: boolean
 }
 

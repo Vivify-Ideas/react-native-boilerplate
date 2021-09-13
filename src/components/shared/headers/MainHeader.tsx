@@ -1,5 +1,5 @@
-import React from 'react'
 /* eslint-disable  react/display-name */
+import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { Icon } from 'native-base'
 
@@ -14,7 +14,6 @@ function MainHeader({ navigation }: MainHeaderProps) {
       marginTop: 10
     }
   }
-
   return {
     headerLeft: () => (
       <Icon

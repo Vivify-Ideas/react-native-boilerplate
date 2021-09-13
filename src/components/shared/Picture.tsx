@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { Image, ImageSourcePropType } from 'react-native'
+import { Image, ImageSourcePropType, ImageStyle } from 'react-native'
 import $t from 'i18n'
 import config from 'config'
 import { Spinner } from 'native-base'
@@ -9,7 +9,7 @@ const { IMAGE_BASE_URL } = config
 type PictureProps = {
   source: ImageSourcePropType
   uri?: string
-  style?: any
+  style?: ImageStyle
 }
 
 const Picture = ({ source, uri, style }: PictureProps) => {

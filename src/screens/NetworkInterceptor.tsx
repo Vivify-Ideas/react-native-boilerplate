@@ -12,7 +12,7 @@ import { notificationHandleService } from 'services/NotificationHandleService'
 import { askForNotificationsPermission } from 'services/PermissionServiceNative'
 
 type NetworkInterceptorProps = {
-  showNotification: (notification: object) => void
+  showNotification: (notification: NotificationObject) => void
   children: React.ReactNode
 }
 
@@ -28,7 +28,7 @@ const NetworkInterceptor = ({
     askForNotificationsPermission()
   }
 
-  const handleNotification = (notification: any): void => {
+  const handleNotification = (notification: NotificationObject): void => {
     if (notification.origin === NOTIFICATION_ORIGIN.SELECTED) {
       notificationHandleService.handleOnClick(notification)
     } else {
