@@ -4,10 +4,11 @@ import { View, Button } from 'native-base'
 import $t from 'i18n'
 import { updateProfileValidationRules } from 'validation/profile'
 import { TextInputField } from '../shared/FormFields'
+import { User } from 'types/backend'
 
 type UpdateProfileFormProps = {
   user?: { firstName: string; lastName: string }
-  onSubmit: (userData: object) => void
+  onSubmit: (userData: Partial<User>) => void
 }
 
 export const UpdateProfileForm = ({

@@ -1,15 +1,18 @@
-import React, { useContext, useState } from 'react'
-import { Button, Image, View } from 'native-base'
-// @ts-expect-error Module '"expo-image-picker"' has no exported member 'ImagePicker'
-import { ImagePicker } from 'expo-image-picker'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import defaultAvatar from 'assets/images/robot-dev.png'
 import { UpdateProfileForm } from 'components/profile/UpdateProfileForm'
 import ImagePickerModal from 'components/shared/modal/ImagePickerModal'
 import NoPermissionsForCameraModal from 'components/shared/modal/NoPermissionsForCameraModal'
 import { UserContext } from 'contexts/UserContext'
+// @ts-expect-error Module '"expo-image-picker"' has no exported member 'ImagePicker'
+import { ImagePicker } from 'expo-image-picker'
+import { ExpandImagePickerResult } from 'expo-image-picker/build/ImagePicker.types'
+import { Button, Image, View } from 'native-base'
 import { useUpdateUserMutation } from 'queries/user'
-import defaultAvatar from 'assets/images/robot-dev.png'
+import React, { useContext, useState } from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { askForPermission } from '../../../services/PermissionServiceNative'
+
+type ImageResult = ExpandImagePickerResult<{ allowsMultipleSelection: false }>
 
 type updateUserData = {
   lastName: string
@@ -23,13 +26,13 @@ const EditProfile = () => {
   const { mutate: handleUserUpdate } = useUpdateUserMutation()
   const { user } = useContext(UserContext)
 
-  const [image, setImage] = useState<any>(null)
+  const [image, setImage] = useState<{ uri: string }>()
   const [imagePickerModalVisible, toggleImagePicker] = useState<boolean>(false)
   const [permissionsModalVisible, togglePermissionsModal] =
     useState<boolean>(false)
 
   const handleSubmit = (updateUserData: updateUserData): void => {
-    handleUserUpdate({ ...updateUserData, avatar: image })
+    image && handleUserUpdate({ ...updateUserData, avatar: image })
   }
 
   const openImagePickerModal = async (): Promise<void> => {
@@ -45,7 +48,7 @@ const EditProfile = () => {
   }
 
   const openCamera = async (): Promise<void> => {
-    const result = await ImagePicker.launchCameraAsync({
+    const result: ImageResult = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 4]
@@ -55,7 +58,9 @@ const EditProfile = () => {
   }
 
   const openImagePicker = async (): Promise<void> => {
-    const result = await ImagePicker.launchImageLibraryAsync({
+    const result: ImageResult = await ImagePicker.launchImageLibraryAsync<{
+      allowsMultipleSelection: false
+    }>({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 4]
@@ -64,9 +69,9 @@ const EditProfile = () => {
     setSelectedImage(result)
   }
 
-  const setSelectedImage = (selectedImage: any): void => {
+  const setSelectedImage = (selectedImage: ImageResult): void => {
     if (!selectedImage.cancelled) {
-      setImage(selectedImage)
+      setImage({ uri: selectedImage.uri })
       toggleImagePicker(false)
     }
   }
@@ -74,7 +79,7 @@ const EditProfile = () => {
   return (
     <View>
       <Button variant="link" onPress={openImagePickerModal}>
-        {(image !== '' && image != null) || !!user?.avatar ? (
+        {image && !!user?.avatar ? (
           <Image source={image} alt="user_avatar" />
         ) : (
           <Image source={defaultAvatar} alt="user_avatar" />

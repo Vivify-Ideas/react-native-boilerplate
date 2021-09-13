@@ -4,7 +4,11 @@ import SCREENS from 'constants/screens'
 import { UserContext } from 'contexts/UserContext'
 import authService from 'services/api/AuthService'
 import NavigationService from 'services/NavigationService'
-import { CredentialsLogin, ForgotPasswordProp } from 'types/auth'
+import {
+  CredentialsLogin,
+  ForgotPasswordProp,
+  PasswordRecoveryProps
+} from 'types/auth'
 
 export const useLoginMutation = () => {
   const { refetch } = useContext(UserContext)
@@ -30,7 +34,7 @@ export const useForgotPasswordMutation = () => {
 }
 
 export const useResetPasswordMutation = () => {
-  return useMutation<null, Error, { newPassword: string }>(
+  return useMutation<null, Error, PasswordRecoveryProps>(
     authService.resetPassword,
     {
       onSuccess: () => {

@@ -9,7 +9,10 @@ export const setTopLevelNavigator = (
   _navigator = navigatorRef
 }
 
-export const navigate = (routeName: string, params?: object): void => {
+export const navigate = (
+  routeName: string,
+  params?: Record<string, unknown>
+): void => {
   if (_navigator && routeName) {
     _navigator.navigate(routeName, params)
   }

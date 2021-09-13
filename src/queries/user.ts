@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import asyncStorageService from 'services/AsyncStorageService'
 import userService from 'services/api/UserService'
+import asyncStorageService from 'services/AsyncStorageService'
+import { ChangePasswordProps } from 'types/auth'
 import { User } from 'types/backend'
 
 export const useGetUserQuery = (
@@ -71,4 +72,4 @@ export const useUpdateUserMutation = () => {
 }
 
 export const useUpdatePasswordMutation = () =>
-  useMutation<void, Error, object>(userService.changePassword, {})
+  useMutation<void, Error, ChangePasswordProps>(userService.changePassword, {})

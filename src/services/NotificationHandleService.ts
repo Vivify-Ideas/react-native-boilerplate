@@ -19,7 +19,7 @@ class NotificationHandleService extends ApiService {
   showInApp = (
     notification: NotificationObject,
     id: string | number,
-    showNotification: (notification: object) => void
+    showNotification: (notification: unknown) => void
   ): void => {
     if (AppState.currentState === APP_STATE.BACKGROUND) {
       return

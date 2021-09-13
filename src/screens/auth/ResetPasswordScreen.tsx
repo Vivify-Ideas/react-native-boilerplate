@@ -1,8 +1,9 @@
-import React from 'react'
-import { View } from 'native-base'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ResetPasswordForm } from 'components/auth/ResetPasswordForm'
+import { View } from 'native-base'
 import { useResetPasswordMutation } from 'queries/auth'
+import React from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { PasswordRecoveryProps } from 'types/auth'
 import { ResetPasswordRouteProp } from 'types/navigation'
 
 type ResetPasswordScreenProps = {
@@ -12,7 +13,9 @@ const ResetPasswordScreen = ({ route }: ResetPasswordScreenProps) => {
   const { error, mutate } = useResetPasswordMutation()
   const { forgot_password_token } = route.params
 
-  const handleSubmit = (resetPasswordData: any): void => {
+  const handleSubmit = (
+    resetPasswordData: Omit<PasswordRecoveryProps, 'token'>
+  ): void => {
     mutate({
       ...resetPasswordData,
       token: forgot_password_token

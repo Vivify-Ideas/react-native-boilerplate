@@ -1,17 +1,15 @@
-import React from 'react'
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 import { createStackNavigator } from '@react-navigation/stack'
-import { View, Text, Button } from 'native-base'
-import {
-  SettingsStackNavigationProp,
-  SettingsStackParamsList,
-  SettingsScreenRouteProp,
-  SettingsScreenNavigationProp
-} from 'types/navigation'
-import MainHeader from '../components/shared/headers/MainHeader'
+import { ThemeSwitch } from 'components/shared/ThemeSwitch'
 import SCREENS from 'constants/screens'
 import $t from 'i18n'
-import { ThemeSwitch } from 'components/shared/ThemeSwitch'
-import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
+import { Button, Text, View } from 'native-base'
+import React from 'react'
+import {
+  SettingsScreenRouteProp,
+  SettingsStackParamsList
+} from 'types/navigation'
+import MainHeader from '../components/shared/headers/MainHeader'
 
 const StackNavigator = createStackNavigator<SettingsStackParamsList>()
 

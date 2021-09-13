@@ -9,7 +9,7 @@ import { TextInputField } from '../shared/FormFields'
 
 type ResetPasswordFields = {
   password: string
-  password_confirmation: string
+  confirmation_password: string
 }
 
 type ResetPasswordFormProps = {
@@ -22,7 +22,7 @@ export const ResetPasswordForm = ({
   resetPasswordError
 }: ResetPasswordFormProps) => (
   <Formik
-    initialValues={{ password: '', password_confirmation: '' }}
+    initialValues={{ password: '', confirmation_password: '' }}
     onSubmit={onSubmit}
     validationSchema={resetPasswordValidationRules}
   >
@@ -35,7 +35,7 @@ export const ResetPasswordForm = ({
           placeholder={$t('auth.enterPassword')}
         />
         <Field
-          name="password_confirmation"
+          name="confirmation_password"
           component={TextInputField}
           secureTextEntry
           placeholder={$t('auth.confirmPassword')}

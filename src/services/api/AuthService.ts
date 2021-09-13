@@ -2,20 +2,20 @@
 // import * as Facebook from 'expo-facebook';
 // import notificationService from './NotificationService';
 import { Platform } from 'react-native'
-import config from 'config'
-import { OS_TYPES } from '../../constants'
-import ApiService from './ApiService'
-import asyncStorageService from '../AsyncStorageService'
-import { User } from 'types/backend'
 import {
   CredentialsLogin,
   FacebookLoginCredentials,
   ForgotPasswordProp,
   GoogleLoginCredentials,
-  NewPasswordProp,
+  PasswordRecoveryProps,
   RefreshTokenProp,
   UserCredentialsProp
 } from 'types/auth'
+import { User } from 'types/backend'
+import { OS_TYPES } from '../../constants'
+import asyncStorageService from '../AsyncStorageService'
+import config from './../../config'
+import ApiService from './ApiService'
 
 const {
   ANDROID_GOOGLE_CLIENT_ID,
@@ -157,7 +157,7 @@ class AuthService extends ApiService {
     return null
   }
 
-  resetPassword = async (data: NewPasswordProp): Promise<null> => {
+  resetPassword = async (data: PasswordRecoveryProps): Promise<null> => {
     await this.apiClient.post(ENDPOINTS.RESET_PASSWORD, data)
     return null
   }
@@ -176,10 +176,9 @@ class AuthService extends ApiService {
     return user?.accessToken
   }
 
-  updateUserInStorage = async (property: object): Promise<void> => {
-    const user = await this.getUserFromAsyncStorage()
-    const jsonUser = { ...user, ...property }
-    asyncStorageService.setItem('user', JSON.stringify(jsonUser))
+  updateUserInStorage = async (data: Partial<User>): Promise<void> => {
+    const user = (await this.getUserFromAsyncStorage()) || {}
+    asyncStorageService.setItem('user', JSON.stringify({ ...user, ...data }))
   }
 
   refreshToken = async (payload: RefreshTokenProp): Promise<null> => {

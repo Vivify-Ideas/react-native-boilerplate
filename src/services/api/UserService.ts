@@ -1,3 +1,4 @@
+import { ChangePasswordProps } from 'types/auth'
 import { User } from 'types/backend'
 import ApiService from './ApiService'
 
@@ -5,12 +6,6 @@ const ENDPOINTS = {
   ME: '/api/auth/me',
   CHANGE_PASSWORD: '/user/change-password',
   USER: '/api/user/update'
-}
-
-type ChangePasswordProp = {
-  current_password: string
-  new_password: string
-  new_password_confirmation: string
 }
 
 type EditProfileProp = {
@@ -45,7 +40,7 @@ class UserService extends ApiService {
     return responseData
   }
 
-  changePassword = async (data: ChangePasswordProp): Promise<void> => {
+  changePassword = async (data: ChangePasswordProps): Promise<void> => {
     this.apiClient.post(ENDPOINTS.CHANGE_PASSWORD, data)
   }
 }

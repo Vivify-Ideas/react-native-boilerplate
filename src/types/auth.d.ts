@@ -12,8 +12,10 @@ export type UserCredentialsProp = Pick<
 
 export type ForgotPasswordProp = Pick<User, 'email'>
 
-export type NewPasswordProp = {
-  newPassword: string
+export type PasswordRecoveryProps = {
+  password: string
+  confirmation_password: string
+  token: string
 }
 
 export type GoogleLoginCredentials = {
@@ -29,4 +31,10 @@ export type FacebookLoginCredentials = {
 export type RefreshTokenProp = {
   JwtToken: string
   JwtRefreshToken: string
+}
+
+export interface ChangePasswordProps {
+  current_password: string
+  new_password: string
+  new_password_confirmation: string
 }
