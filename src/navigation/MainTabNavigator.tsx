@@ -6,6 +6,10 @@ import SCREENS from 'constants/screens'
 import HomeStack from './HomeNavigator'
 import SettingsStack from './SettingsNavigator'
 import { BottomTabParamList, RootDrawerParamList } from 'types/navigation'
+import $t from 'i18n'
+import { Icon } from 'native-base'
+import { Ionicons } from '@expo/vector-icons'
+import Colors from 'constants/colors'
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
@@ -15,10 +19,32 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name={SCREENS.MAIN_STACK.HOME_STACK}
         component={HomeStack}
+        options={{
+          tabBarLabel: $t('tabNavigation.home'),
+          tabBarIcon: function icon(props: { focused: boolean }) {
+            return (
+              <Icon
+                as={<Ionicons name="home" />}
+                color={props.focused ? Colors.activeIcon : Colors.inactiveIcon}
+              />
+            )
+          }
+        }}
       />
       <BottomTab.Screen
         name={SCREENS.MAIN_STACK.SETTINGS_STACK}
         component={SettingsStack}
+        options={{
+          tabBarLabel: $t('tabNavigation.settings'),
+          tabBarIcon: function icon(props: { focused: boolean }) {
+            return (
+              <Icon
+                as={<Ionicons name="settings" />}
+                color={props.focused ? Colors.activeIcon : Colors.inactiveIcon}
+              />
+            )
+          }
+        }}
       />
     </BottomTab.Navigator>
   )
