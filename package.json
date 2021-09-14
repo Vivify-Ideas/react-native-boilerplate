@@ -73,7 +73,7 @@
     "react-native-splash-screen": "^3.2.0",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-unimodules": "^0.13.3",
+    "react-native-unimodules": "^0.14.8",
     "react-native-vector-icons": "^8.1.0",
     "react-query": "^3.13.10",
     "styled-components": "^5.3.1",

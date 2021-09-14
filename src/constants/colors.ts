@@ -19,5 +19,5 @@ export default {
   lightMode: white,
   white: white,
   activeIcon: theme.colors.blue['700'],
-  inactiveIcon: theme.colors.lightBlue['50']
+  inactiveIcon: theme.colors.warmGray['300']
 }

@@ -9,7 +9,7 @@ import {
   SettingsScreenRouteProp,
   SettingsStackParamsList
 } from 'types/navigation'
-import MainHeader from '../components/shared/headers/MainHeader'
+import MainHeader from '../../components/shared/headers/MainHeader'
 
 const StackNavigator = createStackNavigator<SettingsStackParamsList>()
 

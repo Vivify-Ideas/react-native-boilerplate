@@ -36,19 +36,19 @@ const AuthStackNavigator = () => {
         component={ForgotPasswordScreen}
       />
       <StackNavigator.Screen
-        name={SCREENS.AUTH_STACK.FORGOT_PASSWORD_SUCCESS}
-        component={ForgotPasswordSuccessScreen}
-        options={noHeaderOptions}
-      />
-      <StackNavigator.Screen
         name={SCREENS.AUTH_STACK.RESET_PASSWORD}
         component={ResetPasswordScreen}
       />
-      <StackNavigator.Screen
-        name={SCREENS.AUTH_STACK.RESET_PASSWORD_SUCCESS}
-        component={ResetPasswordSuccessScreen}
-        options={noHeaderOptions}
-      />
+      <StackNavigator.Group screenOptions={noHeaderOptions}>
+        <StackNavigator.Screen
+          name={SCREENS.AUTH_STACK.FORGOT_PASSWORD_SUCCESS}
+          component={ForgotPasswordSuccessScreen}
+        />
+        <StackNavigator.Screen
+          name={SCREENS.AUTH_STACK.RESET_PASSWORD_SUCCESS}
+          component={ResetPasswordSuccessScreen}
+        />
+      </StackNavigator.Group>
     </StackNavigator.Navigator>
   )
 }
