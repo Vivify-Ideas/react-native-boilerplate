@@ -21,7 +21,7 @@ function BottomTabNavigator() {
         component={HomeStack}
         options={{
           tabBarLabel: $t('tabNavigation.home'),
-          tabBarIcon: function icon(props: { focused: boolean }) {
+          tabBarIcon(props: { focused: boolean }) {
             return (
               <Icon
                 as={<Ionicons name="home" />}
@@ -36,7 +36,7 @@ function BottomTabNavigator() {
         component={SettingsStack}
         options={{
           tabBarLabel: $t('tabNavigation.settings'),
-          tabBarIcon: function icon(props: { focused: boolean }) {
+          tabBarIcon(props: { focused: boolean }) {
             return (
               <Icon
                 as={<Ionicons name="settings" />}
