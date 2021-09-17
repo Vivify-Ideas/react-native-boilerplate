@@ -16,10 +16,9 @@ PODS:
     - React-Core
     - UMCore
     - UMImageLoaderInterface
-  - EXImagePicker (10.1.4):
+  - EXImagePicker (10.2.3):
+    - ExpoModulesCore
     - UMCore
-    - UMFileSystemInterface
-    - UMPermissionsInterface
   - EXNotifications (0.12.3):
     - ExpoModulesCore
     - UMCore
@@ -601,7 +600,7 @@ SPEC CHECKSUMS:
   EXFileSystem: dcf2273f49431e5037347c733a2dc5d08e0d0a9e
   EXFont: 9846ba1bb6f5f5aed44e20eea3ac70693323832d
   EXImageLoader: da941c9399e01ec28f2d5b270bdd21f2c8ca596c
-  EXImagePicker: dd05b8a5cb782c79d07d1d72e5850c6acc2b9a37
+  EXImagePicker: 414a3663910fd6604248e84c9c77a0501ae0d18b
   EXNotifications: 171ccaf17643811673c78f4c4830560d6e5a92aa
   EXPermissions: 8f8c1c05580c4e02d4ee2c8dd74bfe173ff6a723
   ExpoModulesCore: 2734852616127a6c1fc23012197890a6f3763dc7
