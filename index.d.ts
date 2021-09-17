@@ -8,4 +8,5 @@ declare module 'react-native-dotenv' {
   export const IOS_GOOGLE_CLIENT_ID: string
   export const CLIENT_ID: string
   export const APP_ENV: string
+  export const SERVER_URL: string
 }

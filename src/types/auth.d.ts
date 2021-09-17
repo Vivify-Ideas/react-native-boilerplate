@@ -1,34 +1,35 @@
 import { User } from './backend'
 
-export type CredentialsLogin = {
+export interface CredentialsLogin {
   email: string
   password: string
+  username?: string
 }
 
 export type UserCredentialsProp = Pick<
   User,
-  'firstName' | 'lastName' | 'email' | 'id' | 'avatar'
+  'first_name' | 'last_name' | 'email' | 'id' | 'avatar' | 'access'
 >
 
 export type ForgotPasswordProp = Pick<User, 'email'>
 
-export type PasswordRecoveryProps = {
+export interface PasswordRecoveryProps {
   password: string
   confirmation_password: string
   token: string
 }
 
-export type GoogleLoginCredentials = {
+export interface GoogleLoginCredentials {
   type: string
   accessToken: string
 }
 
-export type FacebookLoginCredentials = {
+export interface FacebookLoginCredentials {
   type: string
   token: string
 }
 
-export type RefreshTokenProp = {
+export interface RefreshTokenProp {
   JwtToken: string
   JwtRefreshToken: string
 }

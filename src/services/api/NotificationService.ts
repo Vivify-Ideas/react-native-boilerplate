@@ -1,10 +1,6 @@
 import ApiService from './ApiService'
 import asyncStorageService from '../AsyncStorageService'
-
-const ENDPOINTS = {
-  SEND_EXPO_TOKEN: '/exponent/devices/subscribe',
-  REMOVE_EXPO_TOKEN: '/exponent/devices/unsubscribe'
-}
+import ENDPOINTS from '../../constants/endpoints'
 
 class NotificationService extends ApiService {
   sendExpoTokenToServer = (expoPushToken: string): Promise<unknown> =>

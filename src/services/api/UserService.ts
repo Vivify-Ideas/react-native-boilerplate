@@ -1,17 +1,13 @@
 import { ChangePasswordProps } from 'types/auth'
 import { User } from 'types/backend'
+import ENDPOINTS from '../../constants/endpoints'
 import ApiService from './ApiService'
 
-const ENDPOINTS = {
-  ME: '/api/auth/me',
-  CHANGE_PASSWORD: '/user/change-password',
-  USER: '/api/user/update'
-}
-
 type EditProfileProp = {
-  avatar: { uri: string }
-  firstName: string
-  lastName: string
+  id: string
+  avatar?: { uri: string }
+  first_name: string
+  last_name: string
 }
 
 class UserService extends ApiService {
@@ -26,14 +22,14 @@ class UserService extends ApiService {
       const { uri } = data.avatar
       const name = uri.split('/').pop()
       const type = 'image/jpeg'
-      formData.append('avatar', { uri, name, type })
+      formData.append('profile_picture', { uri, name, type })
     }
 
-    formData.append('first_name', data.firstName)
-    formData.append('last_name', data.lastName)
+    formData.append('first_name', data.first_name)
+    formData.append('last_name', data.last_name)
 
-    const { data: responseData } = await this.apiClient.post(
-      ENDPOINTS.USER,
+    const { data: responseData } = await this.apiClient.put(
+      ENDPOINTS.EDIT_USER + data.id + '/',
       formData
     )
 

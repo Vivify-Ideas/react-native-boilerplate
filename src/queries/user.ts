@@ -13,11 +13,9 @@ export const useGetUserQuery = (
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const getToken = async (): Promise<void> => {
-    const tokenAsync = (await asyncStorageService.getItem('token')) as
-      | string
-      | null
-
-    setToken(tokenAsync)
+    const user = (await asyncStorageService.getItem('user')) as User
+    const token = user?.access as string
+    setToken(token)
     setIsLoading(false)
   }
 
@@ -60,9 +58,10 @@ export const useUpdateUserMutation = () => {
     User,
     Error,
     {
-      avatar: { uri: string }
-      firstName: string
-      lastName: string
+      id: string
+      avatar?: { uri: string }
+      first_name: string
+      last_name: string
     }
   >(userService.edit, {
     onSuccess: (data: User) => {

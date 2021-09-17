@@ -1,6 +1,3 @@
-// import * as Google from 'expo-google-app-auth';
-// import * as Facebook from 'expo-facebook';
-// import notificationService from './NotificationService';
 import { Platform } from 'react-native'
 import {
   CredentialsLogin,
@@ -16,6 +13,7 @@ import { OS_TYPES } from '../../constants'
 import asyncStorageService from '../AsyncStorageService'
 import config from './../../config'
 import ApiService from './ApiService'
+import ENDPOINTS from '../../constants/endpoints'
 
 const {
   ANDROID_GOOGLE_CLIENT_ID,
@@ -23,17 +21,6 @@ const {
   FACEBOOK_APP_ID,
   CLIENT_ID
 } = config
-
-const ENDPOINTS = {
-  LOGIN: '/auth/login',
-  SIGN_UP: '/auth/register',
-  LOGOUT: '/auth/logout',
-  FACEBOOK: '/auth/social/facebook',
-  GOOGLE: '/auth/social/google',
-  FORGOT_PASSWORD: '/user/forgot-password',
-  RESET_PASSWORD: '/user/reset-password',
-  REFRESH_TOKEN: '/auth/refresh'
-}
 
 class AuthService extends ApiService {
   constructor() {
@@ -87,8 +74,16 @@ class AuthService extends ApiService {
   login = async (
     credentials: CredentialsLogin
   ): Promise<UserCredentialsProp> => {
+    if (!credentials['username']) {
+      // the login page doesnt have the username input field
+      credentials['username'] = credentials['email'] // in this case the BE is expecting the username to be the email
+    }
+
     const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, credentials)
-    this.createSession(data)
+
+    const user_data = await this.apiClient.get(ENDPOINTS.ME)
+
+    this.createSession({ ...user_data['data'], ...data })
 
     return data
   }
@@ -146,8 +141,12 @@ class AuthService extends ApiService {
   }
 
   logout = async (): Promise<null> => {
-    await this.apiClient.post(ENDPOINTS.LOGOUT)
-    await this.destroySession()
+    try {
+      // await this.apiClient.post(ENDPOINTS.LOGOUT) // there is no route for logout atm
+      await this.destroySession()
+    } catch (error) {
+      console.log('Destroying session error: ', error)
+    }
     return null
   }
 
@@ -165,15 +164,18 @@ class AuthService extends ApiService {
   signup = async (
     signupData: CredentialsLogin
   ): Promise<UserCredentialsProp> => {
+    signupData['username'] = signupData['email'] // the username is the same as the email -
     await this.apiClient.post(ENDPOINTS.SIGN_UP, signupData)
-    const { email, password } = signupData
-    return this.login({ email, password })
+    const { email, password, username } = signupData
+
+    return this.login({ email, password, username })
   }
 
   getAccessToken = async (): Promise<string | undefined> => {
     const user = await this.getUserFromAsyncStorage()
+    console.log('getting the token: ', user?.access)
 
-    return user?.accessToken
+    return user?.access
   }
 
   updateUserInStorage = async (data: Partial<User>): Promise<void> => {
