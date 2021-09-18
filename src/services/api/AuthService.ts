@@ -80,10 +80,10 @@ class AuthService extends ApiService {
     }
 
     const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, credentials)
+    await asyncStorageService.setItem('token', data['access'])
+    await this.setAuthorizationHeader()
 
-    const user_data = await this.apiClient.get(ENDPOINTS.ME)
-
-    this.createSession({ ...user_data['data'], ...data })
+    this.createSession(data)
 
     return data
   }
@@ -172,10 +172,7 @@ class AuthService extends ApiService {
   }
 
   getAccessToken = async (): Promise<string | undefined> => {
-    const user = await this.getUserFromAsyncStorage()
-    console.log('getting the token: ', user?.access)
-
-    return user?.access
+    return (await asyncStorageService.getItem('token')) as string
   }
 
   updateUserInStorage = async (data: Partial<User>): Promise<void> => {
