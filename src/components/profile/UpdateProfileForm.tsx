@@ -7,7 +7,7 @@ import { TextInputField } from '../shared/FormFields'
 import { User } from 'types/backend'
 
 type UpdateProfileFormProps = {
-  user: { first_name: string; last_name: string }
+  user: Pick<User, 'first_name' | 'last_name'>
   onSubmit: (userData: Pick<User, 'first_name' | 'last_name'>) => void
 }
 

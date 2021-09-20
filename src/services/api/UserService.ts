@@ -29,7 +29,7 @@ class UserService extends ApiService {
     formData.append('last_name', data.last_name)
 
     const { data: responseData } = await this.apiClient.put(
-      ENDPOINTS.EDIT_USER + data.id + '/',
+      ENDPOINTS.EDIT_USER.replace(':id', `${data.id}`),
       formData
     )
 

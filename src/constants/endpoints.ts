@@ -1,22 +1,18 @@
-import config from '../config'
-
 export default {
-  LOGIN: config.API_BASE_URL + '/api/v1/token/',
-  SIGN_UP: config.API_BASE_URL + '/api/v1/users/',
-  EDIT_USER: config.API_BASE_URL + '/api/v1/users/',
-  ME: config.API_BASE_URL + '/api/v1/users/me/',
-  LOGOUT: config.API_BASE_URL + '/auth/logout',
-  FACEBOOK: config.API_BASE_URL + '/api/v1/social/facebook',
-  GOOGLE: config.API_BASE_URL + '/api/v1/social/google',
-  REFRESH_TOKEN: config.API_BASE_URL + '/api/v1/token/refresh/',
-  START_PASSWORD_RECOVERY: config.API_BASE_URL + '/api/v1/password_reset/',
-  VALIDATE_PASSWORD_RECOVERY_TOKEN:
-    config.API_BASE_URL + '/api/v1/password_reset/validate_token/',
-  CONFIRM_PASSWORD_RECOVERY:
-    config.API_BASE_URL + '/api/v1/password_reset/confirm/',
-  FORGOT_PASSWORD: config.API_BASE_URL + '/user/forgot-password',
-  RESET_PASSWORD: config.API_BASE_URL + '/api/v1/password_reset/',
-  CHANGE_PASSWORD: config.API_BASE_URL + '',
+  LOGIN: '/api/v1/token/',
+  SIGN_UP: '/api/v1/users/',
+  EDIT_USER: '/api/v1/users/:id/',
+  ME: '/api/v1/users/me/',
+  LOGOUT: '/auth/logout',
+  FACEBOOK: '/api/v1/social/facebook',
+  GOOGLE: '/api/v1/social/google',
+  REFRESH_TOKEN: '/api/v1/token/refresh/',
+  START_PASSWORD_RECOVERY: '/api/v1/password_reset/',
+  VALIDATE_PASSWORD_RECOVERY_TOKEN: '/api/v1/password_reset/validate_token/',
+  CONFIRM_PASSWORD_RECOVERY: '/api/v1/password_reset/confirm/',
+  FORGOT_PASSWORD: '/user/forgot-password',
+  RESET_PASSWORD: '/api/v1/password_reset/',
+  CHANGE_PASSWORD: '',
   SEND_EXPO_TOKEN: '/exponent/devices/subscribe',
   REMOVE_EXPO_TOKEN: '/exponent/devices/unsubscribe'
 }

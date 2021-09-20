@@ -56,7 +56,7 @@ class AuthService extends ApiService {
   }
 
   createSession = async (user: UserCredentialsProp): Promise<void> => {
-    await asyncStorageService.setItem('user', JSON.stringify(user))
+    await asyncStorageService.setItem('user', user)
     await this.setAuthorizationHeader()
     // const expoPushToken = await askForNotificationsPermissio();
     // if (expoPushToken) {
@@ -74,13 +74,12 @@ class AuthService extends ApiService {
   login = async (
     credentials: CredentialsLogin
   ): Promise<UserCredentialsProp> => {
-    if (!credentials['username']) {
-      // the login page doesnt have the username input field
-      credentials['username'] = credentials['email'] // in this case the BE is expecting the username to be the email
-    }
+    const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, {
+      ...credentials,
+      username: credentials.email
+    })
 
-    const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, credentials)
-    await asyncStorageService.setItem('token', data['access'])
+    await asyncStorageService.setItem('token', data.access)
     await this.setAuthorizationHeader()
 
     this.createSession(data)
@@ -142,7 +141,6 @@ class AuthService extends ApiService {
 
   logout = async (): Promise<null> => {
     try {
-      // await this.apiClient.post(ENDPOINTS.LOGOUT) // there is no route for logout atm
       await this.destroySession()
     } catch (error) {
       console.log('Destroying session error: ', error)
@@ -164,8 +162,10 @@ class AuthService extends ApiService {
   signup = async (
     signupData: CredentialsLogin
   ): Promise<UserCredentialsProp> => {
-    signupData['username'] = signupData['email'] // the username is the same as the email -
-    await this.apiClient.post(ENDPOINTS.SIGN_UP, signupData)
+    await this.apiClient.post(ENDPOINTS.SIGN_UP, {
+      ...signupData,
+      username: signupData.email
+    })
     const { email, password, username } = signupData
 
     return this.login({ email, password, username })
@@ -177,7 +177,7 @@ class AuthService extends ApiService {
 
   updateUserInStorage = async (data: Partial<User>): Promise<void> => {
     const user = (await this.getUserFromAsyncStorage()) || {}
-    asyncStorageService.setItem('user', JSON.stringify({ ...user, ...data }))
+    asyncStorageService.setItem('user', { ...user, ...data })
   }
 
   refreshToken = async (payload: RefreshTokenProp): Promise<null> => {
