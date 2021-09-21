@@ -5,8 +5,5 @@ export interface User {
   email: string
   id: string
   avatar: string
-  accessToken?: string
-  access?: string
-  refresh?: string
-  token?: string
+  username: string
 }

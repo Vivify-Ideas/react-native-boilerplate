@@ -6,7 +6,8 @@ import {
   GoogleLoginCredentials,
   PasswordRecoveryProps,
   RefreshTokenProp,
-  UserCredentialsProp
+  UserProfileInformationProps,
+  AuthenticationTokensProps
 } from 'types/auth'
 import { User } from 'types/backend'
 import { OS_TYPES } from '../../constants'
@@ -55,7 +56,7 @@ class AuthService extends ApiService {
     })
   }
 
-  createSession = async (user: UserCredentialsProp): Promise<void> => {
+  createSession = async (user: UserProfileInformationProps): Promise<void> => {
     await asyncStorageService.setItem('user', user)
     await this.setAuthorizationHeader()
     // const expoPushToken = await askForNotificationsPermissio();
@@ -73,7 +74,7 @@ class AuthService extends ApiService {
 
   login = async (
     credentials: CredentialsLogin
-  ): Promise<UserCredentialsProp> => {
+  ): Promise<AuthenticationTokensProps> => {
     const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, {
       ...credentials,
       username: credentials.email
@@ -89,7 +90,7 @@ class AuthService extends ApiService {
 
   googleLogin = async (
     loginPromise: Promise<GoogleLoginCredentials>
-  ): Promise<UserCredentialsProp> => {
+  ): Promise<UserProfileInformationProps> => {
     const result = await loginPromise
     if (result.type !== 'success') {
       throw new Error(result.type)
@@ -117,7 +118,7 @@ class AuthService extends ApiService {
 
   facebookLogin = async (
     loginPromise: Promise<FacebookLoginCredentials>
-  ): Promise<UserCredentialsProp> => {
+  ): Promise<UserProfileInformationProps> => {
     const result = await loginPromise
     if (result.type !== 'success') {
       throw new Error(result.type)
@@ -149,26 +150,26 @@ class AuthService extends ApiService {
   }
 
   forgotPassword = async ({ email }: ForgotPasswordProp): Promise<null> => {
-    await this.apiClient.post(ENDPOINTS.FORGOT_PASSWORD, { email })
+    await this.apiClient.post(ENDPOINTS.START_PASSWORD_RECOVERY, { email })
 
     return null
   }
 
   resetPassword = async (data: PasswordRecoveryProps): Promise<null> => {
-    await this.apiClient.post(ENDPOINTS.RESET_PASSWORD, data)
+    await this.apiClient.post(ENDPOINTS.START_PASSWORD_RECOVERY, data)
     return null
   }
 
   signup = async (
     signupData: CredentialsLogin
-  ): Promise<UserCredentialsProp> => {
+  ): Promise<AuthenticationTokensProps> => {
     await this.apiClient.post(ENDPOINTS.SIGN_UP, {
       ...signupData,
       username: signupData.email
     })
-    const { email, password, username } = signupData
+    const { email, password } = signupData
 
-    return this.login({ email, password, username })
+    return this.login({ email, password })
   }
 
   getAccessToken = async (): Promise<string | undefined> => {

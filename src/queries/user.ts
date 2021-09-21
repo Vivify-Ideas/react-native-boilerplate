@@ -13,8 +13,7 @@ export const useGetUserQuery = (
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const getToken = async (): Promise<void> => {
-    const user = (await asyncStorageService.getItem('user')) as User
-    const token = user?.access as string
+    const token = (await asyncStorageService.getItem('token')) as string
     setToken(token)
     setIsLoading(false)
   }

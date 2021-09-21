@@ -15,7 +15,7 @@ type SignInFormProps = {
 
 export const SignInForm = ({ onSubmit, signInError }: SignInFormProps) => (
   <Formik
-    initialValues={{ email: '', password: '' }}
+    initialValues={{ email: 'd@d.com', password: 'dddddddd' }}
     onSubmit={onSubmit}
     validationSchema={signInValidationRules}
   >
