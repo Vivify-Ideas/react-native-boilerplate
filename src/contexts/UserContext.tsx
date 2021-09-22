@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useGetUserQuery } from 'queries/user'
 import { User } from 'types/backend'
+import notificationService from 'services/api/NotificationService'
 
 type UserContextProps = {
   user?: User
@@ -30,6 +31,7 @@ const UserContextProvider = ({ children }: UserContextProviderProps) => {
     isLoading: queryIsLoading
   } = useGetUserQuery(
     () => {
+      notificationService.getFCMToken(data)
       setIsLoading(false)
     },
     () => {
