@@ -1,6 +1,3 @@
-// import * as Google from 'expo-google-app-auth';
-// import * as Facebook from 'expo-facebook';
-// import notificationService from './NotificationService';
 import { Platform } from 'react-native'
 import {
   CredentialsLogin,
@@ -9,13 +6,15 @@ import {
   GoogleLoginCredentials,
   PasswordRecoveryProps,
   RefreshTokenProp,
-  UserCredentialsProp
+  UserProfileInformationProps,
+  AuthenticationTokensProps
 } from 'types/auth'
 import { User } from 'types/backend'
 import { OS_TYPES } from '../../constants'
 import asyncStorageService from '../AsyncStorageService'
 import config from './../../config'
 import ApiService from './ApiService'
+import ENDPOINTS from '../../constants/endpoints'
 
 const {
   ANDROID_GOOGLE_CLIENT_ID,
@@ -23,17 +22,6 @@ const {
   FACEBOOK_APP_ID,
   CLIENT_ID
 } = config
-
-const ENDPOINTS = {
-  LOGIN: '/auth/login',
-  SIGN_UP: '/auth/register',
-  LOGOUT: '/auth/logout',
-  FACEBOOK: '/auth/social/facebook',
-  GOOGLE: '/auth/social/google',
-  FORGOT_PASSWORD: '/user/forgot-password',
-  RESET_PASSWORD: '/user/reset-password',
-  REFRESH_TOKEN: '/auth/refresh'
-}
 
 class AuthService extends ApiService {
   constructor() {
@@ -68,8 +56,8 @@ class AuthService extends ApiService {
     })
   }
 
-  createSession = async (user: UserCredentialsProp): Promise<void> => {
-    await asyncStorageService.setItem('user', JSON.stringify(user))
+  createSession = async (user: UserProfileInformationProps): Promise<void> => {
+    await asyncStorageService.setItem('user', user)
     await this.setAuthorizationHeader()
     // const expoPushToken = await askForNotificationsPermissio();
     // if (expoPushToken) {
@@ -86,8 +74,15 @@ class AuthService extends ApiService {
 
   login = async (
     credentials: CredentialsLogin
-  ): Promise<UserCredentialsProp> => {
-    const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, credentials)
+  ): Promise<AuthenticationTokensProps> => {
+    const { data } = await this.apiClient.post(ENDPOINTS.LOGIN, {
+      ...credentials,
+      username: credentials.email
+    })
+
+    await asyncStorageService.setItem('token', data.access)
+    await this.setAuthorizationHeader()
+
     this.createSession(data)
 
     return data
@@ -95,7 +90,7 @@ class AuthService extends ApiService {
 
   googleLogin = async (
     loginPromise: Promise<GoogleLoginCredentials>
-  ): Promise<UserCredentialsProp> => {
+  ): Promise<UserProfileInformationProps> => {
     const result = await loginPromise
     if (result.type !== 'success') {
       throw new Error(result.type)
@@ -123,7 +118,7 @@ class AuthService extends ApiService {
 
   facebookLogin = async (
     loginPromise: Promise<FacebookLoginCredentials>
-  ): Promise<UserCredentialsProp> => {
+  ): Promise<UserProfileInformationProps> => {
     const result = await loginPromise
     if (result.type !== 'success') {
       throw new Error(result.type)
@@ -146,39 +141,44 @@ class AuthService extends ApiService {
   }
 
   logout = async (): Promise<null> => {
-    await this.apiClient.post(ENDPOINTS.LOGOUT)
-    await this.destroySession()
+    try {
+      await this.destroySession()
+    } catch (error) {
+      console.log('Destroying session error: ', error)
+    }
     return null
   }
 
   forgotPassword = async ({ email }: ForgotPasswordProp): Promise<null> => {
-    await this.apiClient.post(ENDPOINTS.FORGOT_PASSWORD, { email })
+    await this.apiClient.post(ENDPOINTS.START_PASSWORD_RECOVERY, { email })
 
     return null
   }
 
   resetPassword = async (data: PasswordRecoveryProps): Promise<null> => {
-    await this.apiClient.post(ENDPOINTS.RESET_PASSWORD, data)
+    await this.apiClient.post(ENDPOINTS.START_PASSWORD_RECOVERY, data)
     return null
   }
 
   signup = async (
     signupData: CredentialsLogin
-  ): Promise<UserCredentialsProp> => {
-    await this.apiClient.post(ENDPOINTS.SIGN_UP, signupData)
+  ): Promise<AuthenticationTokensProps> => {
+    await this.apiClient.post(ENDPOINTS.SIGN_UP, {
+      ...signupData,
+      username: signupData.email
+    })
     const { email, password } = signupData
+
     return this.login({ email, password })
   }
 
   getAccessToken = async (): Promise<string | undefined> => {
-    const user = await this.getUserFromAsyncStorage()
-
-    return user?.accessToken
+    return (await asyncStorageService.getItem('token')) as string
   }
 
   updateUserInStorage = async (data: Partial<User>): Promise<void> => {
     const user = (await this.getUserFromAsyncStorage()) || {}
-    asyncStorageService.setItem('user', JSON.stringify({ ...user, ...data }))
+    asyncStorageService.setItem('user', { ...user, ...data })
   }
 
   refreshToken = async (payload: RefreshTokenProp): Promise<null> => {

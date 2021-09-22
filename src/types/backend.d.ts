@@ -1,10 +1,9 @@
 export interface User {
-  firstName: string
-  lastName: string
-  profilePicture: string
+  first_name: string
+  last_name: string
+  profile_picture: string
   email: string
   id: string
   avatar: string
-  accessToken?: string
-  token?: string
+  username: string
 }

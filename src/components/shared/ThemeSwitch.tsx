@@ -12,7 +12,7 @@ export const ThemeSwitch = ({ text }: ThemeSwitchProps) => {
 
   const toggleDarkMode = async () => {
     toggleColorMode()
-    await asyncStorageService.setItem('darkMode', isChecked.toString())
+    await asyncStorageService.setItem('darkMode', isChecked)
   }
 
   return (
