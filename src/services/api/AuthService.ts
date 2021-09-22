@@ -14,7 +14,7 @@ import { OS_TYPES } from '../../constants'
 import asyncStorageService from '../AsyncStorageService'
 import config from './../../config'
 import ApiService from './ApiService'
-import ENDPOINTS from '../../constants/endpoints'
+import ENDPOINTS from './../../constants/endpoints'
 
 const {
   ANDROID_GOOGLE_CLIENT_ID,
