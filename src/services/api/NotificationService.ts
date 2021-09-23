@@ -69,7 +69,7 @@ class NotificationService {
 
       if (token) return token
     } catch (error) {
-      console.log('Firebase get token error', error) /*eslint-disable-line*/
+      console.log('Firebase get token error', error)
       return null
     }
   }
@@ -80,22 +80,11 @@ class NotificationService {
       const authorized = await messaging().hasPermission()
 
       const fcmToken = await this.getToken()
-      const enabled =
-        authorized === messaging.AuthorizationStatus.AUTHORIZED ||
-        authorized === messaging.AuthorizationStatus.PROVISIONAL
-
-      if (enabled) {
-        console.log('Authorization status:', authorized)
-      }
-
-      if (user?.id) {
-        await messaging().subscribeToTopic(`${config.APP_ENV}_team_${user.id}`)
-      }
 
       if (authorized) return fcmToken
       return null
     } catch (error) {
-      console.log('GFTE', error) /*eslint-disable-line*/
+      console.log('GFTE', error)
       return null
     }
   }

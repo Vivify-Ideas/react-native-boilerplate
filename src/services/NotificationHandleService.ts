@@ -1,3 +1,4 @@
+import { showReportDialog } from '@sentry/browser'
 import { AppState } from 'react-native'
 import { APP_STATE } from './../constants'
 import ApiService from './api/ApiService'
@@ -6,15 +7,23 @@ interface NotificationObject {
   data: { [key: string]: string }
 }
 
+interface showNotificationProps {
+  title: string
+  message: string
+  icon: string
+  onPress(): void
+  // [key: string ]: string
+}
+
 class NotificationHandleService extends ApiService {
   handleOnClick = (notification?: { [key: string]: string }): void => {
-    console.log(notification) /*eslint-disable-line*/
+    console.log(notification)
   }
 
   showInApp = (
     notification: NotificationObject,
     id: string | number,
-    showNotification: (notification: object) => void
+    showNotification: (notification: showNotificationProps) => void
   ): void => {
     if (AppState.currentState === APP_STATE.BACKGROUND) {
       return

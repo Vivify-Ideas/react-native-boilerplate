@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-apply plugin: 'com.google.gms.google-services' // <- This was added for the FireBase Messeging system
+apply plugin: 'com.google.gms.google-services' // <- This was added for the FireBase Messaging system
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
 import com.android.build.OutputFile
@@ -194,7 +194,7 @@ android {
 }
 
 dependencies {
-      // Import the Firebase BoM
+    // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     
     implementation fileTree(dir: "libs", include: ["*.jar"])
