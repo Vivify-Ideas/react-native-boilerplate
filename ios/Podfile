@@ -28,6 +28,7 @@ target 'ReactNativeBoilerplate' do
   pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  pod 'Firebase/Messaging'
 
   # Enables Flipper.
   #

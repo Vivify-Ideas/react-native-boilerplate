@@ -23,11 +23,7 @@ class AsyncStorageService {
 
   async clear(): Promise<void> {
     // iOS has a problem with clearing with AsyncStorage.clear() this is the fix: https://stackoverflow.com/questions/46736268/react-native-asyncstorage-clear-is-failing-on-ios
-    if (Platform.OS === OS_TYPES.ANDROID) {
-      await AsyncStorage.clear()
-    } else {
-      await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove)
-    }
+    await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove)
   }
 }
 
