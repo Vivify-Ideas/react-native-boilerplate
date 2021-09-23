@@ -7,12 +7,11 @@ interface NotificationObject {
   data: { [key: string]: string }
 }
 
-interface showNotificationProps {
+interface ShowNotificationProps {
   title: string
   message: string
   icon: string
   onPress(): void
-  // [key: string ]: string
 }
 
 class NotificationHandleService extends ApiService {
@@ -23,7 +22,7 @@ class NotificationHandleService extends ApiService {
   showInApp = (
     notification: NotificationObject,
     id: string | number,
-    showNotification: (notification: showNotificationProps) => void
+    showNotification: (notification: ShowNotificationProps) => void
   ): void => {
     if (AppState.currentState === APP_STATE.BACKGROUND) {
       return

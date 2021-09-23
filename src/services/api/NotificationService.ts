@@ -1,9 +1,6 @@
-import messaging, {
-  FirebaseMessagingTypes
-} from '@react-native-firebase/messaging'
+import messaging from '@react-native-firebase/messaging'
 import { User } from 'types/backend'
 import { notificationHandleService } from './../NotificationHandleService'
-import config from './../../config'
 
 interface NotificationData {
   title?: string
@@ -57,7 +54,7 @@ class NotificationService {
           onPress: () => notificationHandleService.handleOnClick(data)
         })
       } catch (e) {
-        console.log(e) /*eslint-disable-line*/
+        console.log(e)
       }
     })
   }
