@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReactNativeBoilerplate</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">DeploymentKey</string>
 </resources>
