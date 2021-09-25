@@ -3,13 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "android": "react-native run-android --variant=localrelease",
+    "android:staging": "react-native run-android --variant=stagingrelease",
+    "android:prod": "react-native run-android --variant=productionrelease",
+    "ios": "react-native run-ios --scheme 'ReactNativeBoilerplate.local'",
+    "ios:staging": "react-native run-ios --scheme 'ReactNativeBoilerplate.staging'",
+    "ios:prod": "react-native run-ios --scheme 'ReactNativeBoilerplate.production'",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .ts --ext .tsx",
     "pretty": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json}\"",
-    "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
+    "build:android": "react-native bundle --platform android  --variant=localrelease --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "build:android:staging": "react-native bundle --platform android  --variant=stagingrelease --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "build:android:prod": "react-native bundle --platform android  --variant=productionrelease --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "husky": {
     "hooks": {
@@ -64,6 +70,7 @@
     "react": "17.0.1",
     "react-hook-form": "^7.1.1",
     "react-native": "0.64.2",
+    "react-native-config": "^1.4.4",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-in-app-notification": "^3.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",

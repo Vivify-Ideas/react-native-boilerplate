@@ -29,7 +29,6 @@ const SignInScreen = ({ navigation }: SingInScreen) => {
     <View>
       <KeyboardAwareScrollView enableOnAndroid>
         <SignInForm onSubmit={mutate} signInError={!!error} />
-
         <Button onPress={handleFacebookLogin}>
           {$t('auth.signInFacebook')}
         </Button>
