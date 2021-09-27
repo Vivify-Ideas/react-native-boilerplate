@@ -3,7 +3,7 @@ import { Button, View } from 'native-base'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import $t from 'i18n'
 import { SignInForm } from 'components/auth/SignInForm'
-import SCREENS from 'constants/screens'
+import SCREENS from '../../constants/screens'
 import { useLoginMutation } from 'queries/auth'
 import { SignUpScreenNavigationProp } from 'types/navigation'
 
@@ -29,7 +29,6 @@ const SignInScreen = ({ navigation }: SingInScreen) => {
     <View>
       <KeyboardAwareScrollView enableOnAndroid>
         <SignInForm onSubmit={mutate} signInError={!!error} />
-
         <Button onPress={handleFacebookLogin}>
           {$t('auth.signInFacebook')}
         </Button>

@@ -7,8 +7,8 @@ import { TextInputField } from '../shared/FormFields'
 import { User } from 'types/backend'
 
 type UpdateProfileFormProps = {
-  user?: { firstName: string; lastName: string }
-  onSubmit: (userData: Partial<User>) => void
+  user: Pick<User, 'first_name' | 'last_name'>
+  onSubmit: (userData: Pick<User, 'first_name' | 'last_name'>) => void
 }
 
 export const UpdateProfileForm = ({
@@ -17,8 +17,8 @@ export const UpdateProfileForm = ({
 }: UpdateProfileFormProps) => (
   <Formik
     initialValues={{
-      firstName: user?.firstName,
-      lastName: user?.lastName
+      first_name: user?.first_name || '',
+      last_name: user?.last_name || ''
     }}
     onSubmit={onSubmit}
     validationSchema={updateProfileValidationRules}
@@ -26,12 +26,12 @@ export const UpdateProfileForm = ({
     {({ handleSubmit }) => (
       <View>
         <Field
-          name="firstName"
+          name="first_name"
           component={TextInputField}
           placeholder={$t('profile.updateUser.firstName')}
         />
         <Field
-          name="lastName"
+          name="last_name"
           component={TextInputField}
           placeholder={$t('profile.updateUser.lastName')}
         />

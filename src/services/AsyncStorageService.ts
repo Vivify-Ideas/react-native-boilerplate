@@ -1,4 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { OS_TYPES } from '../constants'
+import { Platform } from 'react-native'
 
 class AsyncStorageService {
   async getItem(key: string): Promise<unknown> {
@@ -11,7 +13,7 @@ class AsyncStorageService {
     return null
   }
 
-  async setItem(key: string, value: string): Promise<void> {
+  async setItem(key: string, value: unknown): Promise<void> {
     await AsyncStorage.setItem(key, JSON.stringify(value))
   }
 
@@ -20,7 +22,8 @@ class AsyncStorageService {
   }
 
   async clear(): Promise<void> {
-    await AsyncStorage.clear()
+    // iOS has a problem with clearing with AsyncStorage.clear() this is the fix: https://stackoverflow.com/questions/46736268/react-native-asyncstorage-clear-is-failing-on-ios
+    await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove)
   }
 }
 

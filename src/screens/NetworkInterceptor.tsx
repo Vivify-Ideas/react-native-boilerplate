@@ -10,6 +10,7 @@ import authService from 'services/api/AuthService'
 import NavigationService from 'services/NavigationService'
 import { notificationHandleService } from 'services/NotificationHandleService'
 import { askForNotificationsPermission } from 'services/PermissionServiceNative'
+import notificationService from './../services/api/NotificationService'
 
 type NetworkInterceptorProps = {
   showNotification: (notification: NotificationObject) => void
@@ -25,6 +26,7 @@ const NetworkInterceptor = ({
   }, [])
 
   const addNotificationListener = async (): Promise<void> => {
+    notificationService.init(showNotification)
     askForNotificationsPermission()
   }
 

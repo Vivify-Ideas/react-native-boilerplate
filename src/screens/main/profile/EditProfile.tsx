@@ -3,24 +3,16 @@ import { UpdateProfileForm } from 'components/profile/UpdateProfileForm'
 import ImagePickerModal from 'components/shared/modal/ImagePickerModal'
 import NoPermissionsForCameraModal from 'components/shared/modal/NoPermissionsForCameraModal'
 import { UserContext } from 'contexts/UserContext'
-// @ts-expect-error Module '"expo-image-picker"' has no exported member 'ImagePicker'
-import { ImagePicker } from 'expo-image-picker'
+import * as ImagePicker from 'expo-image-picker'
 import { ExpandImagePickerResult } from 'expo-image-picker/build/ImagePicker.types'
 import { Button, Image, View } from 'native-base'
 import { useUpdateUserMutation } from 'queries/user'
 import React, { useContext, useState } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { User } from 'types/backend'
 import { askForPermission } from '../../../services/PermissionServiceNative'
 
 type ImageResult = ExpandImagePickerResult<{ allowsMultipleSelection: false }>
-
-type updateUserData = {
-  lastName: string
-  firstName: string
-  avatar: {
-    uri: string
-  }
-}
 
 const EditProfile = () => {
   const { mutate: handleUserUpdate } = useUpdateUserMutation()
@@ -31,8 +23,18 @@ const EditProfile = () => {
   const [permissionsModalVisible, togglePermissionsModal] =
     useState<boolean>(false)
 
-  const handleSubmit = (updateUserData: updateUserData): void => {
-    image && handleUserUpdate({ ...updateUserData, avatar: image })
+  const handleSubmit = (
+    updateUserData: Pick<User, 'first_name' | 'last_name'>
+  ): void => {
+    if (!user) {
+      return
+    }
+
+    handleUserUpdate({
+      ...updateUserData,
+      id: user.id,
+      avatar: image
+    })
   }
 
   const openImagePickerModal = async (): Promise<void> => {
@@ -58,9 +60,8 @@ const EditProfile = () => {
   }
 
   const openImagePicker = async (): Promise<void> => {
-    const result: ImageResult = await ImagePicker.launchImageLibraryAsync<{
-      allowsMultipleSelection: false
-    }>({
+    const result: ImageResult = await ImagePicker.launchImageLibraryAsync({
+      allowsMultipleSelection: false,
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 4]
@@ -86,7 +87,7 @@ const EditProfile = () => {
         )}
       </Button>
       <KeyboardAwareScrollView enableOnAndroid>
-        <UpdateProfileForm onSubmit={() => handleSubmit} user={user} />
+        {user && <UpdateProfileForm onSubmit={handleSubmit} user={user} />}
       </KeyboardAwareScrollView>
       <NoPermissionsForCameraModal
         isVisible={permissionsModalVisible}
