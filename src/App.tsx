@@ -15,10 +15,12 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import NetworkInterceptor from 'screens/NetworkInterceptor'
 import NavigationService from './services/NavigationService'
 import { theme } from './themes'
+// import config from 'config' // <- uncomment this when Sentry is enabled
 import codePush from 'react-native-code-push'
 
 Sentry.init({
   // dsn: 'https://key.sentry',
+  // environment: config.APP_ENV,
 })
 
 const queryClient = new QueryClient()

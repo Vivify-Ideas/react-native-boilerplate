@@ -16,13 +16,6 @@ import config from './../../config'
 import ApiService from './ApiService'
 import ENDPOINTS from './../../constants/endpoints'
 
-const {
-  ANDROID_GOOGLE_CLIENT_ID,
-  IOS_GOOGLE_CLIENT_ID,
-  FACEBOOK_APP_ID,
-  CLIENT_ID
-} = config
-
 class AuthService extends ApiService {
   constructor() {
     super()
@@ -52,7 +45,7 @@ class AuthService extends ApiService {
     }
 
     this.api.attachHeaders({
-      clientId: CLIENT_ID
+      clientId: config.CLIENT_ID
     })
   }
 
@@ -109,8 +102,8 @@ class AuthService extends ApiService {
       Google.logInAsync({
         clientId:
           Platform.OS == OS_TYPES.IOS
-            ? IOS_GOOGLE_CLIENT_ID
-            : ANDROID_GOOGLE_CLIENT_ID,
+            ? config.IOS_GOOGLE_CLIENT_ID
+            : config.ANDROID_GOOGLE_CLIENT_ID,
         scopes: ['profile', 'email']
       })
     )

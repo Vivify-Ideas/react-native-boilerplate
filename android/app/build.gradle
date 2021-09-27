@@ -78,6 +78,13 @@ import com.android.build.OutputFile
  *   extraPackagerArgs: []
  * ]
  */
+project.ext.envConfigFiles = [
+  localrelease: ".env",
+  productionrelease: ".env.production",
+  stagingrelease: ".env.staging"
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle" // <- For enviroment switching
 
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
@@ -178,6 +185,13 @@ android {
             resValue "string", "CodePushDeploymentKey", "${CODEPUSH_KEY}"
         }
     }
+
+    flavorDimensions "default"
+        productFlavors {
+            production {}
+            staging {}
+            local {}
+        }
 
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
