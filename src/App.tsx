@@ -15,7 +15,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import NetworkInterceptor from 'screens/NetworkInterceptor'
 import NavigationService from './services/NavigationService'
 import { theme } from './themes'
-// import config from 'config' // <- uncomment this when Sentary is enabled
+// import config from 'config' // <- uncomment this when Sentry is enabled
 
 Sentry.init({
   // dsn: 'https://key.sentry',
