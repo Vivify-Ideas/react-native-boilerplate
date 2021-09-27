@@ -101,6 +101,9 @@ For **iOS**:
 `yarn ios:staging` -> uses `.env.staging` staging file
 `yarn ios:prod` -> uses `.env.production` staging file
 
+For releases we are using [CodePush](https://github.com/microsoft/react-native-code-push), please add seperate CodePush keys for the different types of .env enviroments
+
+
 ## **Going to production**
 
 ...
