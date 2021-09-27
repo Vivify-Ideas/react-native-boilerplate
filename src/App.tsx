@@ -15,6 +15,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import NetworkInterceptor from 'screens/NetworkInterceptor'
 import NavigationService from './services/NavigationService'
 import { theme } from './themes'
+import codePush from 'react-native-code-push'
 
 Sentry.init({
   // dsn: 'https://key.sentry',
@@ -82,4 +83,4 @@ const App = () => {
   )
 }
 
-export default App
+export default codePush(App)

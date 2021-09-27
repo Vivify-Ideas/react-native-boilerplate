@@ -88,6 +88,9 @@ All handling of notifications is done in `NotificationHandleService.js`. It has 
 The whole application is wrapped in `InAppNotificationProvider` which, as props takes styles for `In APp notifications` you can see them all [here](https://github.com/AlexSensei/react-native-in-app-notification).
 
 Since we are using Firebase for the message handling service, please add your own `GoogleService-Info.plist` for **_iOS_** in the folder `ios/`, while the `google-services.json` for **_Android_** can be added in the folder `android/app/`, all information can be found [here](https://rnfirebase.io/firestore/usage)
+
+For releases we are using [CodePush](https://github.com/microsoft/react-native-code-push), please add seperate CodePush keys for the different types of .env enviroments
+
 ## **Going to production**
 
 ...
