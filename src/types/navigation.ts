@@ -44,10 +44,13 @@ export type HomeStackParamsList = {
 // Auth Stack
 type AuthStackParams = ValueOf<typeof SCREENS.AUTH_STACK>
 
-export type AuthStackParamsList = {
-  [keys in AuthStackParams]: undefined
-} & {
-  ResetPassword: {
+export type AuthStackParamsList = Omit<
+  {
+    [keys in AuthStackParams]: undefined
+  },
+  'ResetPassword'
+> & {
+  [SCREENS.AUTH_STACK.RESET_PASSWORD]: {
     forgot_password_token: string
   }
 }

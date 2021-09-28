@@ -17,6 +17,7 @@ import NavigationService from './services/NavigationService'
 import { theme } from './themes'
 // import config from 'config' // <- uncomment this when Sentry is enabled
 import codePush from 'react-native-code-push'
+import { OS_TYPES } from './constants'
 
 Sentry.init({
   // dsn: 'https://key.sentry',
@@ -57,14 +58,19 @@ const App = () => {
             <NativeBaseProvider theme={theme}>
               <NetworkInterceptor>
                 <View>
-                  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                  {Platform.OS === OS_TYPES.IOS && (
+                    <StatusBar barStyle="default" />
+                  )}
                   <AuthLoading>
                     {({ isAuthenticated }) => (
-                      <StackNavigator.Navigator headerMode="none">
+                      <StackNavigator.Navigator
+                        screenOptions={{ headerShown: false }}
+                      >
                         {isAuthenticated ? (
                           <StackNavigator.Screen
                             name={SCREENS.MAIN_STACK.INDEX}
                             component={MainTabNavigator}
+                            options={{ headerShown: false }}
                           />
                         ) : (
                           <StackNavigator.Screen

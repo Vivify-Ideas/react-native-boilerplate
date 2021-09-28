@@ -15,7 +15,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
 function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator>
+    <BottomTab.Navigator screenOptions={{ headerShown: false }}>
       <BottomTab.Screen
         name={SCREENS.MAIN_STACK.HOME_STACK}
         component={HomeStack}
@@ -55,7 +55,11 @@ const Drawer = createDrawerNavigator<RootDrawerParamList>()
 export default function MainTabNavigator() {
   return (
     <Drawer.Navigator drawerContent={LeftSlider}>
-      <Drawer.Screen name={'ProxyMainTab'} component={BottomTabNavigator} />
+      <Drawer.Screen
+        name={'ProxyMainTab'}
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
     </Drawer.Navigator>
   )
 }

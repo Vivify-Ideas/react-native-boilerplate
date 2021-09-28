@@ -1,5 +1,6 @@
 import { CommonActions, NavigationContainerRef } from '@react-navigation/native'
 import SCREENS from 'constants/screens'
+import React from 'react'
 
 let _navigator: NavigationContainerRef | null
 
