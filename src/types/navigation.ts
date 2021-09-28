@@ -1,21 +1,14 @@
-import {
-  CompositeNavigationProp,
-  NavigatorScreenParams,
-  RouteProp
-} from '@react-navigation/native'
+import { NavigatorScreenParams, RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import SCREENS from 'constants/screens'
+
+type ValueOf<T> = T[keyof T]
 
 // Root stack
 export type RootDrawerParamList = {
   ProxyMainTab: undefined
 }
-
-export type BottomTabNavigationProp = StackNavigationProp<
-  RootDrawerParamList,
-  'ProxyMainTab'
->
 
 // Bottom Stack
 export type BottomTabParamList = {
@@ -28,20 +21,13 @@ export type BottomTabParamList = {
 }
 
 // Settings Stack
+type SettingsStackParams = ValueOf<typeof SCREENS.SETTINGS_STACK>
+
 export type SettingsStackParamsList = {
-  [SCREENS.SETTINGS_STACK.SETTINGS]: { userId: string }
+  [keys in SettingsStackParams]: unknown
+} & {
+  Settings: { userId: string }
 }
-
-export type SettingsStackNavigationProp = StackNavigationProp<
-  BottomTabParamList,
-  'SettingsStack'
->
-
-// Settings Screen
-export type SettingsScreenNavigationProp = CompositeNavigationProp<
-  StackNavigationProp<SettingsStackParamsList, 'Settings'>,
-  HomeStackNavigationProp
->
 
 export type SettingsScreenRouteProp = RouteProp<
   SettingsStackParamsList,
@@ -49,27 +35,24 @@ export type SettingsScreenRouteProp = RouteProp<
 >
 
 // Home Stack
-export type HomeStackNavigationProp = StackNavigationProp<
-  BottomTabParamList,
-  'HomeStack'
->
+type HomeStackParams = ValueOf<typeof SCREENS.HOME_STACK>
 
 export type HomeStackParamsList = {
-  [SCREENS.HOME_STACK.CHANGE_PASSWORD]: undefined
-  [SCREENS.HOME_STACK.EDIT_PROFILE]: undefined
-  [SCREENS.HOME_STACK.HOME]: undefined
+  [keys in HomeStackParams]: undefined
 }
 
 // Auth Stack
-export type AuthStackParamsList = {
-  [SCREENS.AUTH_STACK.SIGN_IN]: undefined
-  [SCREENS.AUTH_STACK.SIGN_UP]: undefined
-  [SCREENS.AUTH_STACK.FORGOT_PASSWORD]: undefined
-  [SCREENS.AUTH_STACK.FORGOT_PASSWORD_SUCCESS]: undefined
+type AuthStackParams = ValueOf<typeof SCREENS.AUTH_STACK>
+
+export type AuthStackParamsList = Omit<
+  {
+    [keys in AuthStackParams]: undefined
+  },
+  'ResetPassword'
+> & {
   [SCREENS.AUTH_STACK.RESET_PASSWORD]: {
     forgot_password_token: string
   }
-  [SCREENS.AUTH_STACK.RESET_PASSWORD_SUCCESS]: undefined
 }
 
 // SignUp Screen

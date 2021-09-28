@@ -17,21 +17,20 @@ type Props = {
 const HomeStack = ({ navigation }: Props) => {
   return (
     <StackNavigator.Navigator>
-      <StackNavigator.Screen
-        name={SCREENS.HOME_STACK.HOME}
-        component={HomeScreen}
-        options={() => MainHeader({ navigation })}
-      />
-      <StackNavigator.Screen
-        name={SCREENS.HOME_STACK.CHANGE_PASSWORD}
-        component={ChangePasswordScreen}
-        options={() => MainHeader({ navigation })}
-      />
-      <StackNavigator.Screen
-        name={SCREENS.HOME_STACK.EDIT_PROFILE}
-        component={EditProfileScreen}
-        options={() => MainHeader({ navigation })}
-      />
+      <StackNavigator.Group screenOptions={() => MainHeader({ navigation })}>
+        <StackNavigator.Screen
+          name={SCREENS.HOME_STACK.HOME}
+          component={HomeScreen}
+        />
+        <StackNavigator.Screen
+          name={SCREENS.HOME_STACK.CHANGE_PASSWORD}
+          component={ChangePasswordScreen}
+        />
+        <StackNavigator.Screen
+          name={SCREENS.HOME_STACK.EDIT_PROFILE}
+          component={EditProfileScreen}
+        />
+      </StackNavigator.Group>
     </StackNavigator.Navigator>
   )
 }

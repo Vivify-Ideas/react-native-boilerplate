@@ -4,9 +4,9 @@ import * as Sentry from '@sentry/react-native'
 import SCREENS from 'constants/screens'
 import UserContextProvider from 'contexts/UserContext'
 import { NativeBaseProvider, View } from 'native-base'
-import AuthLoading from 'navigation/AuthLoading'
-import AuthStackNavigator from 'navigation/AuthNavigator'
-import MainTabNavigator from 'navigation/MainTabNavigator'
+import AuthLoading from 'navigation/auth/AuthLoading'
+import AuthStackNavigator from 'navigation/auth/AuthNavigator'
+import MainTabNavigator from 'navigation/home/MainTabNavigator'
 import React, { useEffect, useRef } from 'react'
 import { Platform, StatusBar, Text, TextInput } from 'react-native'
 import 'react-native-gesture-handler'
@@ -17,6 +17,7 @@ import NavigationService from './services/NavigationService'
 import { theme } from './themes'
 // import config from 'config' // <- uncomment this when Sentry is enabled
 import codePush from 'react-native-code-push'
+import { OS_TYPES } from './constants'
 
 Sentry.init({
   // dsn: 'https://key.sentry',
@@ -57,14 +58,19 @@ const App = () => {
             <NativeBaseProvider theme={theme}>
               <NetworkInterceptor>
                 <View>
-                  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                  {Platform.OS === OS_TYPES.IOS && (
+                    <StatusBar barStyle="default" />
+                  )}
                   <AuthLoading>
                     {({ isAuthenticated }) => (
-                      <StackNavigator.Navigator headerMode="none">
+                      <StackNavigator.Navigator
+                        screenOptions={{ headerShown: false }}
+                      >
                         {isAuthenticated ? (
                           <StackNavigator.Screen
                             name={SCREENS.MAIN_STACK.INDEX}
                             component={MainTabNavigator}
+                            options={{ headerShown: false }}
                           />
                         ) : (
                           <StackNavigator.Screen

@@ -17,5 +17,7 @@ export default {
   errorText: white,
   noticeText: white,
   lightMode: white,
-  white: white
+  white: white,
+  activeIcon: theme.colors.blue['700'],
+  inactiveIcon: theme.colors.warmGray['300']
 }
